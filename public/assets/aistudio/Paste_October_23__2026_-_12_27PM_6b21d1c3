@@ -1,0 +1,1109 @@
+# MASTER PROMPT — MENTIFY PUBLIC WEBSITE DEVELOPMENT
+## Modern SaaS UI/UX Design System | Production-Ready Next.js Application
+
+### YOUR ROLE
+
+Act as a Senior Frontend Architect, Senior Next.js Developer, Senior UI/UX Designer, Design System Engineer, and EdTech Product Architect.
+
+Your mission is to **audit, redesign, refactor, and implement the complete Mentify public website using one unified Modern SaaS design language**.
+
+The application must look and behave like a professional, production-grade educational SaaS product.
+
+Do not create a generic educational website, an ordinary Bootstrap template, or a visually inconsistent collection of pages.
+
+The finished experience must be modern, premium, clean, highly responsive, accessible, multilingual, maintainable, and connected to the actual Mentify backend wherever supported.
+
+**Primary design direction: Modern SaaS Theme — Light-first, indigo/blue branding, clean white surfaces, subtle gradients, elegant cards, premium typography, and carefully controlled motion.**
+
+---
+
+# 1. REPOSITORY AND PROJECT CONTEXT
+
+Backend repository:
+https://github.com/SENG-34213/Mentify-backend
+
+Frontend repository:
+https://github.com/SENG-34213/frontend
+
+Primary branch: `development`
+
+Existing frontend modules:
+
+- `admin/` — Admin portal
+- `student/` — Student portal
+- `teacher/` — Teacher portal
+- `shared/` — Shared frontend functionality
+- `website/institute-website/` — Public website
+
+The current public website uses:
+
+- Next.js 16
+- React 19
+- JavaScript / JSX
+- CSS Modules
+- Next.js App Router
+- English, Tamil, and Sinhala localization
+- Resend
+- Upstash Redis
+
+**Mandatory first step:**
+
+Inspect the actual repository before changing the implementation.
+
+Analyze existing routes, layouts, components, design tokens, translations, forms, API integrations, dependencies, authentication behavior, and backend DTOs.
+
+Preserve working functionality. Do not invent endpoints, DTO properties, or repository findings.
+
+If repository access is unavailable, inspect the supplied workspace files and explicitly identify what could not be verified.
+
+# 2. PRODUCT IDENTITY AND DESIGN PHILOSOPHY
+
+Mentify is an AI-powered educational platform serving students, teachers, administrators, and public visitors.
+
+The public website is the main discovery, marketing, admissions, and educational-materials marketplace experience.
+
+It is not a fourth LMS dashboard.
+
+### Brand architecture
+
+- Main platform: Mentify
+- Institute identity: TiT Education, where applicable
+- Brand configuration must be centralized
+- Avoid hardcoded and conflicting institute or platform names
+
+### Design philosophy
+
+Create a visual experience inspired by modern SaaS products such as Linear, Stripe, Notion, and contemporary premium education platforms.
+
+Use these references for quality, visual discipline, spacing, and interaction patterns. Do not copy their layouts or branding.
+
+The visual language must communicate:
+
+- Trust
+- Academic professionalism
+- Innovation
+- Simplicity
+- Accessibility
+- Educational progress
+- Modern technology
+- Product consistency
+
+The website should feel like one cohesive digital product from homepage to marketplace, admissions, and portal access.
+
+# 3. STRICT MODERN SAAS DESIGN SYSTEM
+
+Create a centralized, reusable design system before building individual pages.
+
+## 3.1 Color palette
+
+Use the following base colors:
+
+| Token | Value | Purpose |
+|---|---|---|
+| Primary | `#4F46E5` | Primary actions and brand |
+| Primary hover | `#4338CA` | Interactive hover states |
+| Primary light | `#EEF2FF` | Selected backgrounds |
+| Secondary | `#2563EB` | Supporting blue accents |
+| Accent | `#06B6D4` | AI and educational highlights |
+| Success | `#10B981` | Successful states |
+| Warning | `#F59E0B` | Warning states |
+| Error | `#EF4444` | Validation and errors |
+| Background | `#F8FAFC` | Application background |
+| Surface | `#FFFFFF` | Cards and panels |
+| Heading | `#0F172A` | Primary text |
+| Body text | `#475569` | Secondary text |
+| Muted text | `#64748B` | Metadata |
+| Border | `#E2E8F0` | Subtle separators |
+
+Use semantic variables, for example:
+
+- `--color-primary`
+- `--color-primary-hover`
+- `--color-background`
+- `--color-surface`
+- `--color-text-primary`
+- `--color-text-secondary`
+- `--color-border`
+- `--color-success`
+- `--color-error`
+
+Do not hardcode the palette repeatedly across individual components.
+
+The main website must use a light-first theme. Optional dark mode may be implemented later through the same semantic tokens.
+
+## 3.2 Typography
+
+Use a premium SaaS typography system.
+
+Preferred Latin font: Inter or Geist.
+
+Select appropriate Unicode-compatible fonts for Tamil and Sinhala and test rendering thoroughly.
+
+Typography hierarchy:
+
+- Display headings: 48–64px on desktop, responsive on smaller screens
+- Page headings: 36–48px
+- Section headings: 28–36px
+- Card headings: 18–24px
+- Body text: 15–16px
+- Supporting text: 13–14px
+- Labels: 12–14px
+
+Use fluid typography where appropriate.
+
+Requirements:
+
+- Clear hierarchy
+- Strong readability
+- Balanced line height
+- Consistent font weights
+- Limited decorative text
+- Responsive text wrapping
+- Correct multilingual font rendering
+
+## 3.3 Layout and spacing
+
+Use a consistent spacing system based on 4px and 8px increments.
+
+Recommended maximum content width: 1280px.
+
+Use responsive containers with appropriate horizontal padding.
+
+Desktop sections should generally have 80–112px vertical spacing, adjusted for content density and screen size.
+
+Tablet and mobile spacing must be proportionally reduced.
+
+Never use arbitrary margins and padding throughout the application.
+
+## 3.4 Cards and surfaces
+
+All card components must follow one visual language.
+
+Preferred appearance:
+
+- White background
+- Subtle neutral border
+- 12–20px border radius
+- Soft shadow where useful
+- 20–32px internal padding
+- Clear content hierarchy
+- Subtle hover transitions
+- Consistent image ratios
+
+Avoid excessive gradients, thick borders, and unnecessarily deep shadows.
+
+## 3.5 Buttons
+
+Build reusable button variants:
+
+- Primary
+- Secondary
+- Outline
+- Ghost
+- Destructive
+- Icon button
+
+Support:
+
+- Small, medium, and large sizes
+- Loading state
+- Disabled state
+- Focus-visible state
+- Icons
+- Responsive sizing
+- Accessible names
+
+Primary actions should use the brand indigo color.
+
+Maintain consistent heights, padding, border radius, and interaction behavior.
+
+## 3.6 Forms
+
+Create a professional SaaS form system.
+
+Components should include:
+
+- Text input
+- Email input
+- Phone input
+- Password input where applicable
+- Select
+- Searchable select
+- Multi-select
+- Checkbox
+- Radio group
+- Textarea
+- Date input where needed
+- File upload where needed
+- Form validation message
+- Submission feedback
+
+Requirements:
+
+- Visible labels
+- Helpful descriptions
+- Inline validation
+- Accessible focus states
+- Disabled and loading states
+- Mobile-friendly controls
+- Clear success and failure feedback
+
+Do not sacrifice usability for visual appearance.
+
+## 3.7 Motion and interactions
+
+Use subtle, purposeful motion.
+
+Recommended durations: 150–300ms for ordinary UI transitions.
+
+Examples:
+
+- Button hover transitions
+- Card hover elevation
+- Dropdown animation
+- Mobile navigation transitions
+- Modal entrance
+- Accordion expansion
+- Lightweight section reveal
+- Skeleton loading
+
+Respect reduced-motion preferences.
+
+Do not implement excessive parallax, continuous glowing effects, distracting animations, or heavy visual libraries without a clear need.
+
+## 3.8 Icons
+
+Use one consistent icon family, preferably Lucide.
+
+Maintain consistent stroke weight, size, alignment, and spacing.
+
+Avoid mixing unrelated icon styles.
+
+## 3.9 Responsive behavior
+
+Support:
+
+- Small mobile: 320–374px
+- Mobile: 375–767px
+- Tablet: 768–1023px
+- Laptop: 1024–1439px
+- Desktop: 1440px and above
+
+All pages must adapt gracefully.
+
+No horizontal overflow, broken navigation, overlapping components, unreadable tables, or clipped content.
+
+# 4. GLOBAL WEBSITE ARCHITECTURE
+
+Create a unified application shell with:
+
+### Header
+
+- Mentify logo
+- Home
+- Courses
+- Learning Resources
+- Features
+- About
+- Contact
+- Portal Login
+- Primary enrollment CTA
+- Language selector
+- Mobile navigation
+
+Use a sticky header with a subtle border or shadow.
+
+### Footer
+
+Include:
+
+- Brand introduction
+- Quick links
+- Academic links
+- Marketplace links
+- Admissions links
+- Portal access
+- Contact information
+- Privacy Policy
+- Terms of Use
+- Social links when verified
+- Copyright
+
+### Shared UI components
+
+Develop reusable:
+
+- Container
+- SectionHeading
+- Button
+- Card
+- Badge
+- Input
+- Select
+- SearchBar
+- FilterPanel
+- Breadcrumb
+- Pagination
+- Tabs
+- Accordion
+- Modal
+- Drawer
+- Toast
+- Skeleton
+- EmptyState
+- ErrorState
+- LoadingState
+- CourseCard
+- MaterialCard
+- TeacherCard
+- FeatureCard
+- CTASection
+- ResponsiveImage
+
+Keep the components compatible with the existing frontend styling architecture.
+
+Do not introduce Tailwind, shadcn/ui, or another styling framework merely for convenience. First assess the existing CSS Modules approach and choose the least disruptive maintainable solution.
+
+# 5. COMPLETE PAGE REQUIREMENTS
+
+Implement every page using the same Modern SaaS design system.
+
+## PAGE 1 — HOMEPAGE
+
+Create a premium SaaS-style homepage.
+
+### Hero section
+
+Use a two-column desktop layout and stacked mobile layout.
+
+Left side:
+
+Headline:
+
+**Learn Smarter. Achieve More.**
+
+Supporting copy:
+
+Discover academic courses, expert-guided learning, and educational resources through one connected learning platform.
+
+Primary CTA: Explore Courses
+
+Secondary CTA: Explore Learning Resources
+
+Right side:
+
+Create a sophisticated educational product visual.
+
+Prefer a composed Mentify learning interface preview with:
+
+- Course progress
+- Learning resources
+- Upcoming lessons
+- AI-assisted learning
+- Academic activity cards
+
+The preview must be illustrative and must not imply invented live statistics.
+
+Use subtle gradients and floating interface elements only where they improve the composition.
+
+### Homepage sections
+
+1. Hero
+2. Platform introduction
+3. Academic course discovery
+4. Grade and subject exploration
+5. Featured academic programs
+6. Learning features
+7. AI-assisted education
+8. Featured marketplace materials
+9. Student learning experience
+10. Teacher learning experience
+11. Why choose Mentify
+12. Verified testimonials, if available
+13. Admissions CTA
+14. FAQ
+15. Footer
+
+Use alternating section compositions to avoid a repetitive card-grid appearance.
+
+## PAGE 2 — ABOUT MENTIFY
+
+Build a professional About page.
+
+Sections:
+
+- Introduction
+- Mission
+- Vision
+- Educational philosophy
+- Technology-driven learning
+- Student benefits
+- Teacher benefits
+- Institute information
+- Verified team profiles
+- Join Mentify CTA
+
+Use editorial-style layouts, clean typography, imagery, and carefully composed feature sections.
+
+Never invent achievements, accreditation, student numbers, or testimonials.
+
+## PAGE 3 — COURSES
+
+Build a complete academic course catalogue.
+
+Features:
+
+- Search
+- Grade filter
+- Subject filter
+- Learning-format filter
+- Availability filter
+- Responsive cards
+- Pagination
+- Loading state
+- Empty state
+- Error state
+- Course detail navigation
+
+Each card should display verified available information:
+
+- Title
+- Grade
+- Subject
+- Description
+- Teacher, where publicly permitted
+- Learning format
+- Schedule
+- Confirmed fees
+- Availability
+- View Details
+- Enquire / Apply
+
+Use a desktop filter sidebar or compact toolbar, with a mobile filter drawer.
+
+Backend requirement:
+
+The existing academic course management endpoints may be protected.
+
+Do not call Admin-only APIs from anonymous public pages.
+
+Verify whether public published-course list and detail endpoints exist. If absent, document the required backend contracts and isolate development fixtures from live data.
+
+## PAGE 4 — COURSE DETAILS
+
+Create a detailed, professional course landing page.
+
+Include:
+
+- Course header
+- Grade and subject
+- Overview
+- Learning outcomes
+- Syllabus overview
+- Duration
+- Learning format
+- Teacher information
+- Schedule
+- Fee details
+- Benefits
+- FAQs
+- Enquiry / Apply CTA
+
+Use a two-column desktop layout where suitable, with a main content area and a sticky enrollment information card.
+
+Never expose protected lessons or student-only materials.
+
+## PAGE 5 — LEARNING FEATURES
+
+Present the platform's capabilities through premium SaaS feature sections.
+
+Cover:
+
+- AI-assisted learning
+- Learning materials
+- Academic courses
+- Assignments
+- Quizzes
+- Examinations
+- Attendance
+- Progress tracking
+- Student-teacher communication
+- Notifications
+- Academic calendar
+
+Use realistic interface illustrations or approved product screenshots.
+
+These are marketing explanations, not new implementations of protected portal features.
+
+## PAGE 6 — EDUCATIONAL MATERIALS MARKETPLACE
+
+Build a polished digital educational materials catalogue.
+
+Existing public backend routes to verify:
+
+`GET /api/v1/marketplace/materials`
+
+`GET /api/v1/marketplace/materials/{productId}`
+
+Existing documented filters:
+
+- `search`
+- `subject`
+- `gradeId`
+- Pagination parameters
+
+Support available material categories, including:
+
+- Notes
+- Short Notes
+- Past Papers
+- Exam Papers
+- Model Papers
+- Worksheets
+- Question Banks
+- Marking Schemes
+- Revision Packs
+- Study Guides
+- Tutorials
+- Practice Papers
+- Other
+
+Marketplace UI requirements:
+
+- Search
+- Grade filter
+- Subject filter
+- Category filter where supported
+- Free/Paid filtering where supported
+- Product cards
+- Thumbnail images
+- Discount display
+- Currency-aware prices
+- Pagination
+- Responsive layout
+- Loading skeletons
+- Empty results
+- Retry behavior
+
+Verify DTOs before implementation.
+
+Previously documented fields include:
+
+`id`, `materialId`, `title`, `description`, `category`, `subject`, `gradeId`, `price`, `free`, `discountPercent`, `finalPrice`, `currency`, `status`, `thumbnailUrl`.
+
+Only publicly published materials should appear.
+
+Do not invent unsupported query parameters or expose draft products.
+
+## PAGE 7 — MATERIAL DETAILS
+
+Create a premium product detail experience.
+
+Include:
+
+- Cover preview
+- Title
+- Description
+- Category
+- Subject
+- Grade
+- Free/Paid badge
+- Price
+- Discount
+- Available metadata
+- Related materials
+- Download or purchase action
+
+Use a professional digital-product layout with a clear purchase information panel.
+
+Never expose private S3 object keys or unauthorized download URLs.
+
+Only activate checkout if the real payment integration is verified.
+
+## PAGE 8 — MARKETPLACE COMMERCE PREPARATION
+
+Prepare design-ready flows for:
+
+- Cart
+- Checkout
+- Payment pending
+- Payment success
+- Payment failure
+- Order details
+- Purchase history
+- Purchased-material access
+
+The previously documented backend does not establish a completed material-commerce workflow.
+
+Verify the current backend before activating payments.
+
+Required backend capabilities include:
+
+- Order creation
+- Server-authoritative pricing
+- Checkout session creation
+- Payment verification
+- Stripe webhook handling
+- Idempotency
+- Purchase entitlement recording
+- Order history
+- Authorized downloads
+- Refund handling
+
+Never simulate successful payments or grant access based solely on frontend state.
+
+If commerce is unavailable, clearly disable or label purchase actions and document the integration requirements.
+
+## PAGE 9 — ADMISSIONS AND PRE-REGISTRATION
+
+Redesign the existing pre-registration page as a professional admissions experience.
+
+Fields:
+
+- Student name
+- Parent or guardian details where required
+- Email
+- Contact number
+- District
+- City
+- Grade
+- Preferred subjects
+- Learning preference
+- Preferred contact method
+- Consent
+
+Use a clean, structured form.
+
+For longer forms, consider a step-based interface only when it improves usability.
+
+Preserve existing Resend and Upstash Redis integrations and server-side anti-abuse controls.
+
+A pre-registration enquiry must not automatically create an enrolled LMS student account.
+
+## PAGE 10 — TEACHER DIRECTORY
+
+Prepare a modern public teacher directory.
+
+Include approved public information:
+
+- Teacher photo
+- Name
+- Subjects
+- Professional introduction
+- Courses taught
+- Published qualifications
+
+Use clean professional profile cards.
+
+Never expose private teacher contact information, protected user-service data, or internal identifiers.
+
+If a sanitized public teacher API is unavailable, document the backend requirement.
+
+## PAGE 11 — PORTAL ACCESS
+
+Create a polished portal selection page.
+
+Present three consistent cards:
+
+### Student Portal
+Access courses, assignments, materials, progress, and learning activities.
+
+### Teacher Portal
+Manage teaching activities, classes, assignments, and academic workflows.
+
+### Admin Portal
+Access institutional administration and platform management.
+
+Each card must route to the existing portal using environment-configured URLs.
+
+Preserve Keycloak authentication and backend role authorization.
+
+Do not create another identity system.
+
+## PAGE 12 — CONTACT, FAQ, AND LEGAL
+
+Redesign:
+
+- Contact page
+- FAQ page
+- Privacy Policy
+- Terms of Use
+
+Contact features:
+
+- Contact form
+- Email
+- Phone
+- Institute location where verified
+- Business hours where verified
+- Admission support links
+- Helpful FAQs
+
+Preserve the current secure contact API behavior, validation, rate limiting, and email delivery.
+
+# 6. MULTILINGUAL DESIGN
+
+Maintain support for:
+
+- English: `/en`
+- Tamil: `/ta`
+- Sinhala: `/si`
+
+Requirements:
+
+- Fully localized navigation
+- Localized buttons
+- Localized forms
+- Localized validation
+- Localized errors
+- Localized FAQs
+- Language switcher
+- Proper Unicode fonts
+- Correct SEO alternate-language metadata
+- Locale-aware routing
+- Proper fallback behavior
+
+Do not translate backend enum values, API identifiers, or machine-readable keys.
+
+Use localized display labels.
+
+Verify that long Tamil and Sinhala content does not break cards, navigation, forms, or buttons.
+
+# 7. BACKEND AND API INTEGRATION
+
+Create a centralized API layer.
+
+Requirements:
+
+- Environment-based gateway URL
+- Reusable request client
+- Validated response adapters
+- Error normalization
+- Timeouts
+- Cancellation
+- Pagination
+- Appropriate server-side fetching
+- Safe public caching
+- Loading and retry states
+
+Respect the existing Mentify `ApiResponse` wrapper after verifying its actual structure.
+
+Verify the following integrations:
+
+1. Public marketplace list
+2. Public marketplace details
+3. Published course list
+4. Published course details
+5. Public teacher directory
+6. Contact API
+7. Pre-registration API
+8. Material checkout
+9. Purchase entitlements
+10. Authorized downloads
+
+Classify each as:
+
+- Existing and verified
+- Existing but protected
+- Missing
+- Requires backend changes
+- Ready for frontend integration
+
+Do not expose protected endpoints to anonymous visitors.
+
+# 8. AUTHENTICATION AND SECURITY
+
+Preserve the existing Keycloak-backed authentication architecture.
+
+Previously documented authentication routes to verify:
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/forgot-password`
+- `POST /api/v1/auth/forgot-password/verify`
+- `POST /api/v1/auth/forgot-password/reset`
+- `POST /api/v1/auth/refresh`
+- `POST /api/v1/auth/logout`
+
+For the initial public website, portal login may use configured portal URLs.
+
+Do not introduce an independent authentication database or incompatible login mechanism.
+
+For future authenticated marketplace purchases, design a secure session strategy compatible with the backend.
+
+Never expose:
+
+- Private API keys
+- Service credentials
+- Admin-only endpoints
+- Private S3 object keys
+- Sensitive access tokens
+- Protected student data
+- Protected teacher data
+
+# 9. FRONTEND CODE ARCHITECTURE
+
+Work inside:
+
+`frontend/website/institute-website/`
+
+Preserve Next.js App Router and existing working architecture.
+
+Suggested organization:
+
+```text
+website/institute-website/
+├── public/
+├── src/
+│   ├── app/
+│   │   ├── [lang]/
+│   │   │   ├── page.js
+│   │   │   ├── about/
+│   │   │   ├── features/
+│   │   │   ├── courses/
+│   │   │   │   └── [courseId]/
+│   │   │   ├── teachers/
+│   │   │   ├── marketplace/
+│   │   │   │   └── [productId]/
+│   │   │   ├── admissions/
+│   │   │   ├── resources/
+│   │   │   ├── contact/
+│   │   │   ├── faq/
+│   │   │   ├── login/
+│   │   │   ├── privacy-policy/
+│   │   │   └── terms-of-use/
+│   │   └── api/
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── layout/
+│   │   ├── home/
+│   │   ├── courses/
+│   │   ├── marketplace/
+│   │   ├── admissions/
+│   │   └── forms/
+│   ├── features/
+│   │   ├── courses/
+│   │   ├── marketplace/
+│   │   ├── admissions/
+│   │   └── authentication/
+│   ├── lib/
+│   │   ├── api/
+│   │   ├── config/
+│   │   ├── translations/
+│   │   └── utils/
+│   ├── styles/
+│   │   ├── tokens.css
+│   │   ├── globals.css
+│   │   └── utilities.css
+│   ├── data/
+│   └── translations/
+├── .env.example
+└── package.json
+```
+
+This is a proposed architecture.
+
+Do not blindly replace existing directories.
+
+Prefer incremental refactoring and reusable modules.
+
+Use server components for public content where appropriate and client components only for interactive behavior.
+
+# 10. SEO, ACCESSIBILITY, AND PERFORMANCE
+
+Implement:
+
+- Server-rendered public content
+- Semantic HTML
+- Unique page titles
+- Meta descriptions
+- Open Graph metadata
+- Canonical URLs
+- Sitemap
+- Robots configuration
+- Structured data where appropriate
+- Language alternates
+- Optimized images
+- Optimized fonts
+- Lazy loading
+- Accessible navigation
+- Keyboard interactions
+- Visible focus indicators
+- Accessible forms
+- Reduced-motion support
+
+Target WCAG 2.2 AA and strong Core Web Vitals.
+
+Avoid unnecessary client-side JavaScript and oversized dependencies.
+
+# 11. CROSS-APPLICATION DESIGN CONSISTENCY
+
+The Modern SaaS design language is the **long-term visual standard for the entire Mentify ecosystem**.
+
+This includes:
+
+- Public website
+- Admin Portal
+- Student Portal
+- Teacher Portal
+- AI assistant interfaces
+- Educational marketplace
+
+However, this development task must only modify the public website unless explicitly authorized otherwise.
+
+Establish reusable design specifications for future portal alignment:
+
+- Same brand palette
+- Same typography
+- Same spacing scale
+- Same buttons
+- Same form styles
+- Same icon family
+- Same cards
+- Same interaction states
+- Same accessibility principles
+
+The public website should feel like the marketing entry point to the same product used inside the portals.
+
+Do not rewrite or break existing portal code.
+
+# 12. IMPLEMENTATION PHASES
+
+### Phase 1 — Audit and design foundation
+
+- Analyze the current repository
+- Inventory working functionality
+- Verify backend contracts
+- Identify design inconsistencies
+- Establish tokens
+- Build shared UI components
+- Implement responsive navigation and footer
+
+### Phase 2 — Homepage
+
+- Implement complete homepage
+- Create premium hero
+- Build course discovery previews
+- Add feature sections
+- Add marketplace preview
+- Add admissions CTA
+- Complete responsive design
+
+### Phase 3 — Marketing pages
+
+- About
+- Features
+- FAQ
+- Contact
+- Portal Access
+
+### Phase 4 — Course discovery
+
+- Course catalogue
+- Filters
+- Course details
+- Enquiry flows
+- Public API integration where available
+
+### Phase 5 — Marketplace
+
+- Real public marketplace API integration
+- Product cards
+- Search and filtering
+- Material detail pages
+- Pagination and loading states
+
+### Phase 6 — Admissions
+
+- Pre-registration redesign
+- Validation
+- Existing API integration
+- Multilingual forms
+- Confirmation and failure states
+
+### Phase 7 — Commerce readiness
+
+- Checkout UI preparation
+- Payment state design
+- Order and entitlement architecture
+- Backend dependency documentation
+
+### Phase 8 — Production quality
+
+- Mobile testing
+- Multilingual testing
+- Accessibility audit
+- API integration tests
+- SEO audit
+- Performance optimization
+- Production build
+- Deployment readiness
+
+# 13. STRICT IMPLEMENTATION RULES
+
+1. Follow the Modern SaaS design system on every page.
+2. Do not mix unrelated visual themes.
+3. Do not create generic Bootstrap-style interfaces.
+4. Do not use random colors or inconsistent spacing.
+5. Do not break existing portal applications.
+6. Do not invent backend endpoints.
+7. Do not invent API response properties.
+8. Do not expose protected data.
+9. Do not duplicate authentication.
+10. Do not invent successful payments.
+11. Do not expose private S3 resources.
+12. Preserve multilingual functionality.
+13. Preserve existing secure forms.
+14. Reuse components rather than duplicating them.
+15. Every page must be fully responsive.
+16. Every API-driven page needs loading, empty, error, and success states where relevant.
+17. Avoid unnecessary dependencies.
+18. Do not invent student counts, testimonials, teacher profiles, or academic achievements.
+19. Do not leave hardcoded localhost URLs or credentials in production code.
+20. Do not remove existing working features without a justified migration plan.
+21. Use consistent hover, focus, disabled, and active states.
+22. Maintain clean architecture and production-quality code.
+23. Verify builds and tests before claiming completion.
+24. Do not present fixtures as live backend data.
+25. Keep the visual design sophisticated, functional, and educationally appropriate.
+
+# 14. REQUIRED DELIVERABLES
+
+Before implementation, provide:
+
+1. Repository audit
+2. Existing feature inventory
+3. Current UI/UX problems
+4. Backend API capability matrix
+5. Complete website sitemap
+6. Modern SaaS design-system specification
+7. Reusable component inventory
+8. Proposed folder structure
+9. Integration dependencies
+10. Implementation plan
+
+Then begin implementing actual working code.
+
+For each phase:
+
+- Explain the scope briefly
+- Identify files to create or modify
+- Implement the components and pages
+- Integrate verified APIs
+- Preserve existing functionality
+- Verify responsive behavior
+- Run available lint, test, and build checks
+- Report completed work and remaining dependencies
+
+Do not stop at mockups or high-level descriptions.
+
+# 15. FINAL EXECUTION INSTRUCTION
+
+**Start by auditing the existing Mentify public website and backend contracts. Then establish the Modern SaaS design system, build the shared application shell, and implement the complete responsive homepage.**
+
+The result must be visually consistent with a premium SaaS product and architecturally compatible with the existing Mentify ecosystem.
+
+Prioritize real functionality, visual consistency, maintainability, accessibility, and backend correctness.
+
+Do not redesign the Admin, Teacher, or Student portals during this task.
+
+The final objective is a polished, production-ready Mentify public website that can serve as the visual foundation for the entire platform.

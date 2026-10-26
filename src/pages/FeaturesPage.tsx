@@ -112,7 +112,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
                 Try the Core LMS Features in Action
               </h2>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-xl">
-                Switch between the 5 modules below to interact with real course rooms, AI problem solver, calendar events, quiz taking, and grading curves.
+                Switch between the 5 modules above to interact with real course rooms, AI problem solver, calendar events, quiz taking, and grading curves.
               </p>
             </div>
 

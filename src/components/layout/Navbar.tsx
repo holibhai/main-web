@@ -49,11 +49,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { id: 'home', label: t('nav.home'), path: 'home' },
     { id: 'courses', label: t('nav.courses'), path: 'courses' },
-    { id: 'marketplace', label: t('nav.marketplace'), path: 'marketplace' },
     { id: 'features', label: t('nav.features'), path: 'features' },
-    { id: 'teachers', label: t('nav.teachers'), path: 'teachers' },
-    { id: 'about', label: t('nav.about'), path: 'about' },
-    { id: 'contact', label: t('nav.contact'), path: 'contact' },
+    { id: 'marketplace', label: t('nav.marketplace'), path: 'marketplace' },
   ];
 
   const languages: { code: Language; label: string; nativeName: string }[] = [

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ArrowRight,
+  Award,
   BookOpen,
   Bot,
   CheckCircle2,
@@ -23,10 +24,12 @@ import { Badge } from '../components/ui/Badge';
 import { Card } from '../components/ui/Card';
 import { Accordion } from '../components/ui/FeedbackStates';
 import { HeroInteractivePreview } from '../components/home/HeroInteractivePreview';
+import heroStudentsImg from '../assets/images/mentify_students_hero_1792947128104.jpg';
 import { CourseCard } from '../components/courses/CourseCard';
 import { MaterialCard } from '../components/marketplace/MaterialCard';
 import { MOCK_FAQS } from '../data/mockData';
-import { InteractiveAppSuite } from '../components/features/InteractiveAppSuite';
+import { InteractiveAppSuite, FeatureTabKey } from '../components/features/InteractiveAppSuite';
+import { SimpleHowItWorks } from '../components/home/SimpleHowItWorks';
 import { ZScoreCalculator } from '../components/home/ZScoreCalculator';
 import { LiveCampusTicker } from '../components/home/LiveCampusTicker';
 
@@ -53,6 +56,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onAddToCart,
   onOpenAdmissions,
 }) => {
+  const [activeFeatureTab, setActiveFeatureTab] = React.useState<FeatureTabKey>('chat');
   const t = (key: string) => getTranslation(currentLang, key);
 
   return (
@@ -96,8 +100,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => onNavigate('marketplace')}
-                  leftIcon={<BookOpen className="w-5 h-5" />}
+                  onClick={() => {
+                    const el = document.getElementById('how-it-works');
+                    el?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  leftIcon={<Sparkles className="w-5 h-5 text-indigo-500" />}
                   className="w-full sm:w-auto"
                 >
                   {t('hero.cta.resources')}
@@ -125,9 +132,81 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Right Side: Composed SaaS Learning Product Preview */}
-            <div className="lg:col-span-6">
-              <HeroInteractivePreview onNavigate={onNavigate} />
+            {/* Right Side: High-Fidelity Hero Photography & Academic Badges */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative mx-auto max-w-lg lg:max-w-none">
+                {/* Ambient glow backdrop */}
+                <div className="absolute -inset-2 bg-gradient-to-tr from-blue-600/20 via-indigo-500/15 to-emerald-500/20 rounded-3xl blur-2xl -z-10 dark:opacity-40" />
+
+                {/* Hero Photograph Frame */}
+                <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-2xl shadow-blue-900/10 dark:shadow-none bg-slate-900">
+                  <img
+                    src={heroStudentsImg}
+                    alt="Mentify & TiT Education students collaborating in modern campus study hall"
+                    className="w-full h-auto aspect-[4/3] object-cover rounded-3xl transform transition-transform duration-700 hover:scale-[1.02]"
+                    loading="eager"
+                  />
+                  {/* Subtle vignette gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20 pointer-events-none rounded-3xl" />
+
+                  {/* Bottom-left institution watermark */}
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 flex items-center gap-2 bg-slate-950/80 backdrop-blur-md text-white rounded-xl px-3.5 py-2 border border-white/10 text-xs shadow-lg">
+                    <GraduationCap className="w-4 h-4 text-blue-400" />
+                    <div>
+                      <p className="font-semibold text-xs leading-none">TiT Education</p>
+                      <p className="text-[10px] text-slate-300">Official LMS Partner</p>
+                    </div>
+                  </div>
+
+                  {/* Interactive modules teaser button */}
+                  <a
+                    href="#features-demo"
+                    className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-1.5 bg-blue-600/90 hover:bg-blue-600 text-white rounded-full px-3 py-1.5 text-[11px] font-semibold backdrop-blur-md shadow-lg transition-all hover:shadow-blue-500/30"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                    <span>Try 5 LMS Tools Below ↓</span>
+                  </a>
+                </div>
+
+                {/* Floating Achievement Card 1: Island Rank Mentorship */}
+                <div className="absolute -top-4 -left-4 sm:-top-5 sm:-left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-750 flex items-center gap-3 max-w-[260px] sm:max-w-xs transition-transform hover:-translate-y-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <Award className="w-5 h-5 text-emerald-500" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">Island Rank Mentorship</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Top 2% Z-Score Cutoff Results</p>
+                  </div>
+                </div>
+
+                {/* Floating Achievement Card 2: Active Live Cohort */}
+                <div className="absolute -bottom-4 -right-4 sm:-bottom-5 sm:-right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-750 max-w-[240px] sm:max-w-xs transition-transform hover:-translate-y-0.5">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400">Live Cohort</span>
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                      Active Now
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2 shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[9px] flex items-center justify-center ring-2 ring-white dark:ring-slate-900">KS</div>
+                      <div className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-[9px] flex items-center justify-center ring-2 ring-white dark:ring-slate-900">MR</div>
+                      <div className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-[9px] flex items-center justify-center ring-2 ring-white dark:ring-slate-900">AL</div>
+                    </div>
+                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate">
+                      Combined Maths & Physics A/L
+                    </p>
+                  </div>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    Verified TiT Faculty Lead
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
@@ -140,21 +219,33 @@ export const HomePage: React.FC<HomePageProps> = ({
         </Container>
       </section>
 
-      {/* 3. INTERACTIVE LMS SUITE - LIVE WORKING MODULES */}
+      {/* 3. HOW MENTIFY WORKS - 3 SIMPLE STEPS */}
+      <section id="how-it-works" className="pt-4 sm:pt-6">
+        <Container>
+          <SimpleHowItWorks
+            onSelectFeature={(tab) => {
+              setActiveFeatureTab(tab);
+            }}
+            onOpenAdmissions={onOpenAdmissions}
+          />
+        </Container>
+      </section>
+
+      {/* 4. INTERACTIVE LMS SUITE - LIVE WORKING MODULES */}
       <section id="features-demo" className="bg-slate-50/70 dark:bg-slate-950/60 py-16 sm:py-20 border-y border-slate-200/80 dark:border-slate-800 transition-colors">
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5">
                 <Sparkles className="w-4 h-4" />
-                <span>Interactive Platform Architecture</span>
+                <span>Interactive Learning Suite</span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                Try Mentify Core LMS Features in Real-Time
+                Try Mentify Core Tools in Real-Time
               </h2>
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-                Experience our 5 connected systems: Course-wise student and mentor chat rooms, curriculum-grounded AI problem solver,
-                synchronized academic calendar, timed quiz assessments, and visual grading curves.
+                Select any of the 5 modules above to test drive the actual features every student and teacher uses on Mentify:
+                Course chats, 24/7 AI tutor, academic calendar, quizzes, and grading insights.
               </p>
             </div>
 
@@ -165,7 +256,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 onClick={() => onNavigate('features')}
                 className="text-xs"
               >
-                Full Feature Details
+                All Features
               </Button>
               <Button
                 variant="primary"
@@ -173,13 +264,17 @@ export const HomePage: React.FC<HomePageProps> = ({
                 onClick={onOpenAdmissions}
                 className="text-xs"
               >
-                Join Next Batch
+                Enroll in Batch
               </Button>
             </div>
           </div>
 
           {/* Master Interactive Suite embedded on Home Page */}
-          <InteractiveAppSuite onOpenAdmissions={onOpenAdmissions} />
+          <InteractiveAppSuite
+            activeTab={activeFeatureTab}
+            onTabChange={setActiveFeatureTab}
+            onOpenAdmissions={onOpenAdmissions}
+          />
         </Container>
       </section>
 
@@ -353,37 +448,54 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             <div className="lg:col-span-7">
-              <Card padding="none" className="overflow-hidden border border-slate-200/90 shadow-xl bg-slate-900 text-white">
-                <div className="p-6 sm:p-8 space-y-6">
-                  <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                    <div className="flex items-center gap-2">
+              <Card padding="none" className="overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-xl bg-white dark:bg-slate-900">
+                <div className="p-6 sm:p-8 space-y-5">
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+                    <div className="flex items-center gap-2.5">
                       <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
                         <Bot className="w-4 h-4" />
                       </div>
-                      <span className="font-bold text-sm">Mentify AI Diagnostic Simulation</span>
+                      <div>
+                        <span className="font-bold text-sm text-slate-900 dark:text-white">Past-Paper Problem Breakdown</span>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400">Official NIE National Curriculum Rubric</p>
+                      </div>
                     </div>
-                    <Badge variant="accent" size="sm" className="bg-cyan-500 text-slate-950 font-bold">
-                      Active
+                    <Badge variant="accent" size="sm" className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold">
+                      Full Marks (4/4)
                     </Badge>
                   </div>
 
-                  <div className="space-y-3 font-mono text-xs">
-                    <div className="bg-slate-800/80 p-3.5 rounded-xl border border-white/5 text-slate-300">
-                      <p className="text-indigo-400 font-bold mb-1">// Input Exam Question</p>
-                      <p>Determine the horizontal range R of a projectile launched at speed u and angle θ.</p>
+                  <div className="space-y-3 text-xs">
+                    <div className="bg-slate-50 dark:bg-slate-800/80 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700 text-slate-800 dark:text-slate-200">
+                      <p className="text-indigo-600 dark:text-indigo-400 font-bold mb-1">G.C.E. A/L Physics Paper II Question:</p>
+                      <p className="font-medium">"Determine the horizontal range R of a projectile launched with speed u at an angle θ to the horizontal on level ground."</p>
                     </div>
 
-                    <div className="bg-indigo-950/60 p-4 rounded-xl border border-indigo-500/30 text-indigo-200 space-y-2">
-                      <p className="text-emerald-400 font-bold">// Model Paper Marking Formula</p>
-                      <p>Time of flight T = (2u sin θ) / g</p>
-                      <p>Horizontal distance = u cos θ × T = (2u² sin θ cos θ) / g</p>
-                      <p className="text-white font-bold">⇒ R = (u² sin 2θ) / g [Score: 4/4 marks]</p>
+                    <div className="bg-indigo-50/60 dark:bg-indigo-950/40 p-4 rounded-xl border border-indigo-200/80 dark:border-indigo-800/60 text-slate-800 dark:text-slate-200 space-y-2">
+                      <p className="text-emerald-700 dark:text-emerald-400 font-bold">Step-by-Step Marking Breakdown:</p>
+                      <div className="space-y-1.5 pl-2 border-l-2 border-indigo-400 dark:border-indigo-600 text-xs">
+                        <p>1. Time of flight: <span className="font-mono font-semibold">T = (2u sin θ) / g</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">[1 mark]</span></p>
+                        <p>2. Horizontal displacement: <span className="font-mono font-semibold">R = u cos θ × T</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">[1 mark]</span></p>
+                        <p>3. Trigonometric identity: <span className="font-mono font-semibold">2 sin θ cos θ = sin 2θ</span> <span className="text-emerald-600 dark:text-emerald-400 font-bold">[1 mark]</span></p>
+                        <p className="font-bold text-indigo-900 dark:text-white pt-1">4. Final Expression: <span className="font-mono text-emerald-600 dark:text-emerald-400">R = (u² sin 2θ) / g</span> [1 mark]</p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-slate-400 pt-2">
-                    <span>Target: G.C.E. A/L Physics Paper II</span>
-                    <span className="text-indigo-400">Validated by TiT Education Faculty</span>
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs border-t border-slate-100 dark:border-slate-800">
+                    <span className="text-slate-500 dark:text-slate-400">Validated by TiT Education Master Lecturers</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveFeatureTab('ai');
+                        const el = document.getElementById('features-demo');
+                        el?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 cursor-pointer"
+                    >
+                      <span>Try AI Study Bot Live</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
               </Card>

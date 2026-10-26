@@ -2,13 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   MessageSquare,
   Send,
-  Pin,
   CheckCheck,
   User,
   Users,
   ShieldCheck,
   Search,
-  Filter,
   Paperclip,
   Smile,
   BookOpen,
@@ -16,615 +14,974 @@ import {
   HelpCircle,
   FileText,
   Volume2,
+  Bot,
+  Calendar,
+  LineChart,
+  Check,
+  Copy,
+  MoreHorizontal,
+  Edit3,
+  Trash2,
+  Menu,
+  Bell,
+  Sun,
+  Moon,
+  Layers,
+  Shield,
+  GraduationCap,
+  Clock,
+  ArrowRight,
+  ChevronRight,
+  ChevronLeft,
+  Mic,
+  Image as ImageIcon,
+  Compass,
+  CheckCircle2,
+  Maximize2,
 } from 'lucide-react';
-import { Card } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
 
 interface ChatMessage {
   id: string;
-  sender: string;
-  role: 'mentor' | 'student' | 'ta';
-  avatar?: string;
+  sender: 'user' | 'assistant' | 'mentor';
+  senderName: string;
+  avatarLabel: string;
   time: string;
   text: string;
-  tag?: 'Doubt' | 'Solution' | 'Announcement' | 'Lecture Note';
-  isPinned?: boolean;
-  likes: number;
-  userLiked?: boolean;
+  structuredDetails?: string[];
+  copied?: boolean;
 }
 
-interface CourseChannel {
+interface ConversationItem {
   id: string;
-  name: string;
-  subject: string;
-  activeUsers: number;
-  mentor: string;
-  unread: number;
+  title: string;
+  date: string;
+  unreadCount?: number;
+  category: string;
 }
 
-const INITIAL_CHANNELS: CourseChannel[] = [
+const INITIAL_CONVERSATIONS: ConversationItem[] = [
   {
-    id: 'math-2026',
-    name: 'Combined Maths 2026 (Pure & Applied)',
-    subject: 'Mathematics',
-    activeUsers: 342,
-    mentor: 'Eng. S. Perera (BSc. Eng Hons)',
-    unread: 2,
+    id: 'conv-1',
+    title: 'Summarize the current student, teacher, and co...',
+    date: '24 Oct',
+    category: 'Admin & Operations',
   },
   {
-    id: 'phys-2026',
-    name: 'Advanced Level Physics Masterclass',
-    subject: 'Physics',
-    activeUsers: 289,
-    mentor: 'Dr. S. Gunawardana (PhD, Senior Lecturer)',
-    unread: 0,
+    id: 'conv-2',
+    title: 'Combined Maths 2026 Pure & Applied Doubts',
+    date: 'Today',
+    unreadCount: 3,
+    category: 'Course Batch',
   },
   {
-    id: 'chem-2026',
-    name: 'A/L Chemistry Inorganic & Organic',
-    subject: 'Chemistry',
-    activeUsers: 215,
-    mentor: 'Mrs. K. Jayasuriya (MSc, NIE Syllabus Specialist)',
-    unread: 1,
+    id: 'conv-3',
+    title: 'Physics Masterclass: Doppler Effect Derivations',
+    date: 'Yesterday',
+    category: 'Course Batch',
   },
   {
-    id: 'bio-2026',
-    name: 'Biology NIE Curriculum Study Group',
-    subject: 'Biology',
-    activeUsers: 178,
-    mentor: 'Dr. N. Wickramasinghe (MBBS)',
-    unread: 0,
+    id: 'conv-4',
+    title: 'Chemistry Inorganic Equilibrium & Redox',
+    date: '22 Oct',
+    category: 'Course Batch',
+  },
+  {
+    id: 'conv-5',
+    title: 'Attendance & Term Mock Exam Analytics',
+    date: '20 Oct',
+    category: 'Analytics',
   },
 ];
 
-const INITIAL_MESSAGES: Record<string, ChatMessage[]> = {
-  'math-2026': [
-    {
-      id: 'm1',
-      sender: 'Eng. S. Perera',
-      role: 'mentor',
-      time: '10:15 AM',
-      text: 'Good morning everyone! The model solutions for Integration by Parts (Tutorial 08, Questions 14 to 22) have been uploaded to the Materials vault. Make sure to review the reduction formula proof before tomorrow’s live session.',
-      tag: 'Announcement',
-      isPinned: true,
-      likes: 48,
-    },
-    {
-      id: 'm2',
-      sender: 'Kaveen Fernando',
-      role: 'student',
-      time: '10:42 AM',
-      text: 'Sir, on question 18: when we integrate ∫ x² · e^(3x) dx, do we need to state the tabular integration method explicitly, or is standard integration by parts twice required by the NIE marking scheme?',
-      tag: 'Doubt',
-      likes: 12,
-    },
-    {
-      id: 'm3',
-      sender: 'Eng. S. Perera',
-      role: 'mentor',
-      time: '10:45 AM',
-      text: 'Great question Kaveen. The G.C.E. A/L marking scheme awards discrete method marks for writing out u = x² and dv = e^(3x)dx with both derivation steps. Do NOT jump directly using DI tabular shorthand on Paper II, as you risk forfeiting 2 step marks!',
-      tag: 'Solution',
-      likes: 35,
-    },
-    {
-      id: 'm4',
-      sender: 'Dilshan Silva',
-      role: 'student',
-      time: '11:02 AM',
-      text: 'Understood Sir, thank you! I verified with the 2022 marking criteria and they specifically penalize unproven recurrence steps.',
-      likes: 6,
-    },
-  ],
-  'phys-2026': [
-    {
-      id: 'p1',
-      sender: 'Dr. S. Gunawardana',
-      role: 'mentor',
-      time: '09:00 AM',
-      text: 'Reminder: Today at 4:30 PM we will conduct the live simulation on Doppler Effect in Sound with moving reflector boundary conditions. Please download the simulation worksheet.',
-      tag: 'Announcement',
-      isPinned: true,
-      likes: 54,
-    },
-    {
-      id: 'p2',
-      sender: 'Nimna Jayakody',
-      role: 'student',
-      time: '09:20 AM',
-      text: 'Dr. Gunawardana, if the source and wind are moving in the same direction towards a stationary observer, does the apparent frequency formula use (v + w) or (v - w)?',
-      tag: 'Doubt',
-      likes: 9,
-    },
-    {
-      id: 'p3',
-      sender: 'Dr. S. Gunawardana',
-      role: 'mentor',
-      time: '09:26 AM',
-      text: 'The effective velocity of sound relative to the stationary ground becomes (v + w). Therefore, f′ = f₀ · [(v + w) / ((v + w) - uₛ)]. We will draw the wavefront compression diagrams in the interactive whiteboard today.',
-      tag: 'Solution',
-      likes: 29,
-    },
-  ],
-  'chem-2026': [
-    {
-      id: 'c1',
-      sender: 'Mrs. K. Jayasuriya',
-      role: 'mentor',
-      time: 'Yesterday',
-      text: 'All Unit 12 Transition Metal complex color summaries are now pinned. Memorize the coordination numbers for d-block aqueous complexes [Cu(H2O)6]2+ vs [CuCl4]2-.',
-      tag: 'Announcement',
-      isPinned: true,
-      likes: 41,
-    },
-    {
-      id: 'c2',
-      sender: 'Anuki Perera',
-      role: 'student',
-      time: '08:15 AM',
-      text: 'Maam, why does adding concentrated HCl to copper sulphate solution result in yellow-green coloration instead of pure blue?',
-      tag: 'Doubt',
-      likes: 7,
-    },
-  ],
-  'bio-2026': [
-    {
-      id: 'b1',
-      sender: 'Dr. N. Wickramasinghe',
-      role: 'mentor',
-      time: 'Yesterday',
-      text: 'Welcome students to the Biology NIE discussion stream. Feel free to raise questions regarding Photosynthesis C3 vs C4 cycle anatomical adaptations.',
-      tag: 'Announcement',
-      isPinned: true,
-      likes: 33,
-    },
-  ],
-};
+const INITIAL_MESSAGES: ChatMessage[] = [
+  {
+    id: 'msg-1',
+    sender: 'user',
+    senderName: 'You',
+    avatarLabel: 'A',
+    time: '04:05',
+    text: 'Summarize the current student, teacher, and course activity.',
+  },
+  {
+    id: 'msg-2',
+    sender: 'assistant',
+    senderName: 'TiT AI',
+    avatarLabel: 'AI',
+    time: '04:05',
+    text: 'I need a little more context before I can answer that follow-up. Which students, class, quiz, or users do you mean?',
+  },
+  {
+    id: 'msg-3',
+    sender: 'user',
+    senderName: 'You',
+    avatarLabel: 'A',
+    time: '04:05',
+    text: 'what about the attendace',
+  },
+  {
+    id: 'msg-4',
+    sender: 'assistant',
+    senderName: 'TiT AI',
+    avatarLabel: 'AI',
+    time: '04:05',
+    text: 'Here is the current attendance summary across active enrolled course batches:\n\n• Combined Mathematics 2026: 94.2% attendance (342 students enrolled, Eng. S. Perera)\n• A/L Physics Masterclass: 91.8% attendance (289 students enrolled, Dr. S. Gunawardana)\n• A/L Chemistry Inorganic: 88.5% attendance (215 students enrolled, Mrs. K. Jayasuriya)\n• Biology NIE Curriculum Group: 92.4% attendance (178 students enrolled, Dr. N. Wickramasinghe)\n\nOverall institutional average is 91.7%, with 12 pending absence justifications submitted in registration tickets.',
+    structuredDetails: [
+      'Combined Maths 2026: 94.2% (Top cohort attendance)',
+      'Physics Masterclass: 91.8% (Live Zoom lab session)',
+      'Chemistry Inorganic: 88.5% (Module 07 Equilibrium)',
+      'Biology Study Group: 92.4% (Past Paper Revision)',
+    ],
+  },
+];
 
 export const CourseChatShowcase: React.FC = () => {
-  const [selectedChannelId, setSelectedChannelId] = useState<string>('math-2026');
-  const [messages, setMessages] = useState<Record<string, ChatMessage[]>>(INITIAL_MESSAGES);
+  const [viewMode, setViewMode] = useState<'interactive' | 'screenshot'>('interactive');
+  const [conversations, setConversations] = useState<ConversationItem[]>(INITIAL_CONVERSATIONS);
+  const [selectedConvId, setSelectedConvId] = useState<string>('conv-1');
+  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
   const [inputText, setInputText] = useState<string>('');
-  const [selectedTag, setSelectedTag] = useState<'Doubt' | 'General' | 'Solution'>('Doubt');
-  const [activeFilter, setActiveFilter] = useState<'all' | 'doubts' | 'mentors'>('all');
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [leftNavCollapsed, setLeftNavCollapsed] = useState<boolean>(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [screenshotModalOpen, setScreenshotModalOpen] = useState<boolean>(false);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const currentChannel = INITIAL_CHANNELS.find((c) => c.id === selectedChannelId) || INITIAL_CHANNELS[0];
-  const channelMessages = messages[selectedChannelId] || [];
-
-  // Scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, selectedChannelId, isTyping]);
+  }, [messages, isTyping]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputText.trim()) return;
+  const activeConv = conversations.find((c) => c.id === selectedConvId) || conversations[0];
+
+  const handleSendMessage = (textToSend?: string) => {
+    const query = textToSend || inputText.trim();
+    if (!query) return;
 
     const userMsg: ChatMessage = {
-      id: `usr-${Date.now()}`,
-      sender: 'You (Student - Batch 2026)',
-      role: 'student',
-      time: 'Just now',
-      text: inputText.trim(),
-      tag: selectedTag === 'General' ? undefined : selectedTag,
-      likes: 0,
+      id: `user-${Date.now()}`,
+      sender: 'user',
+      senderName: 'You',
+      avatarLabel: 'A',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }),
+      text: query,
     };
 
-    setMessages((prev) => ({
-      ...prev,
-      [selectedChannelId]: [...(prev[selectedChannelId] || []), userMsg],
-    }));
-
-    const questionAsked = inputText;
+    setMessages((prev) => [...prev, userMsg]);
     setInputText('');
-
-    // Simulate mentor/TA contextual response
     setIsTyping(true);
+
     setTimeout(() => {
       setIsTyping(false);
-      let replyText = `Thanks for asking! That is covered in our syllabus guideline. Our teaching team has verified your query. Check the step breakdown in our course summary!`;
+      let reply = `Understood. Processing your query regarding "${query}". Grounded in TiT institutional course database.`;
+      let details: string[] | undefined = undefined;
 
-      if (selectedChannelId === 'math-2026') {
-        replyText = `Excellent query! In Pure Mathematics Paper II, always verify your boundary conditions before integrating. Step marks are awarded sequentially: 1 Mark for substitution, 2 Marks for integration, and 1 Mark for the final simplified expression.`;
-      } else if (selectedChannelId === 'phys-2026') {
-        replyText = `Good observation! Always remember that sound wavelength compresses ahead of the moving source: λ' = (v - u_s)/f. We will demonstrate this on our live visual oscillator in today's broadcast!`;
-      } else if (selectedChannelId === 'chem-2026') {
-        replyText = `Notice the ligand substitution equilibrium: [Cu(H₂O)₆]²⁺ (blue) + 4Cl⁻ ⇌ [CuCl₄]²⁻ (yellow-green) + 6H₂O. The shift occurs according to Le Chatelier's principle.`;
+      const lower = query.toLowerCase();
+      if (lower.includes('math') || lower.includes('integral') || lower.includes('perera')) {
+        reply = `Combined Maths 2026 batch update: Eng. S. Perera confirmed that the integration by parts mark scheme (Unit 08) allocates 1 mark for substitution, 2 marks for tabular reduction, and 1 mark for final simplification + C. Tutorial 08 solutions are live in the materials vault.`;
+        details = [
+          'Paper II Part B marking rubric applied',
+          '342 active students notified in channel',
+          'Next live lecture: Saturday 8:00 AM (Zoom + Campus)',
+        ];
+      } else if (lower.includes('physics') || lower.includes('doppler')) {
+        reply = `Physics Masterclass update: Dr. S. Gunawardana's Doppler effect formula derivation λ′ = (v + w - u_s)/f₀ has been pinned in the physics room with full step justifications for approaching source cases with wind.`;
+        details = [
+          'Syllabus Unit 03 (Oscillations & Waves)',
+          '91.8% cohort live attendance verified',
+          'Drill quiz available in assessments tab',
+        ];
+      } else if (lower.includes('people') || lower.includes('student') || lower.includes('teacher')) {
+        reply = `Workspace People Overview: 1,024 verified enrolled students, 28 senior faculty mentors, and 4 system administrators currently active in the TiT Enterprise workspace. All batch permissions are synchronized.`;
+        details = [
+          'Combined Maths: 342 Students | Eng. S. Perera',
+          'Physics Masterclass: 289 Students | Dr. S. Gunawardana',
+          'Chemistry: 215 Students | Mrs. K. Jayasuriya',
+          'Biology: 178 Students | Dr. N. Wickramasinghe',
+        ];
+      } else if (lower.includes('assessment') || lower.includes('quiz')) {
+        reply = `Assessments Status: 5 timed quizzes are currently published with real-time rubric grading. Average student score across pure mathematics is 78.4%. The next mock examination countdown is scheduled for Sunday.`;
+        details = [
+          'Active Quiz: Integration & Differential Equations',
+          'Average completion time: 24 mins',
+          'Automated rubric grading active',
+        ];
+      } else {
+        reply = `Response from TiT Enterprise Assistant: Your query "${query}" has been logged and contextualized with your enrolled course batch. Mentors and teaching assistants receive instant push alerts for tagged questions.`;
       }
 
-      const mentorReply: ChatMessage = {
-        id: `mentor-${Date.now()}`,
-        sender: currentChannel.mentor.split('(')[0].trim(),
-        role: 'mentor',
-        time: 'Just now',
-        text: replyText,
-        tag: 'Solution',
-        likes: 1,
+      const assistantMsg: ChatMessage = {
+        id: `ai-${Date.now()}`,
+        sender: 'assistant',
+        senderName: 'TiT AI',
+        avatarLabel: 'AI',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }),
+        text: reply,
+        structuredDetails: details,
       };
 
-      setMessages((prev) => ({
-        ...prev,
-        [selectedChannelId]: [...(prev[selectedChannelId] || []), mentorReply],
-      }));
-    }, 1400);
+      setMessages((prev) => [...prev, assistantMsg]);
+    }, 850);
   };
 
-  const handleLike = (msgId: string) => {
-    setMessages((prev) => {
-      const list = prev[selectedChannelId] || [];
-      return {
-        ...prev,
-        [selectedChannelId]: list.map((m) => {
-          if (m.id === msgId) {
-            const liked = !m.userLiked;
-            return {
-              ...m,
-              userLiked: liked,
-              likes: liked ? m.likes + 1 : m.likes - 1,
-            };
-          }
-          return m;
-        }),
-      };
-    });
+  const handleCopy = (text: string, id: string) => {
+    navigator.clipboard?.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const filteredMessages = channelMessages.filter((m) => {
-    if (activeFilter === 'doubts' && m.tag !== 'Doubt') return false;
-    if (activeFilter === 'mentors' && m.role !== 'mentor') return false;
-    if (searchTerm) {
-      return (
-        m.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        m.sender.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    return true;
-  });
-
-  const pinnedMessage = channelMessages.find((m) => m.isPinned);
+  const filteredConversations = conversations.filter((c) =>
+    c.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden transition-colors">
-      {/* Top Banner Explainer */}
-      <div className="px-6 py-4 bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs font-semibold tracking-wider uppercase text-indigo-300">
-              Interactive Course Chat Application
-            </span>
+    <div className="bg-[#0b0f17] text-slate-100 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden font-sans">
+      {/* Top App Bar & View Toggle */}
+      <div className="px-4 py-3 bg-[#0d131f] border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        {/* Left: App Title and breadcrumbs */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setLeftNavCollapsed(!leftNavCollapsed)}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            title="Toggle Navigation Menu"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+          <div>
+            <div className="flex items-center gap-2 text-[11px] text-slate-400">
+              <span>Admin</span>
+              <span>/</span>
+              <span className="text-slate-300 font-medium">Ai Assistant</span>
+              <span>/</span>
+              <span className="text-indigo-400 font-semibold">Course Chat</span>
+            </div>
+            <h3 className="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+              <span>TiT AI Assistant & Course Chat</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-950 text-indigo-300 border border-indigo-800">
+                Enterprise Workspace
+              </span>
+            </h3>
           </div>
-          <h3 className="text-lg font-bold text-white mt-0.5">
-            Peer & Mentor Collaboration Rooms
-          </h3>
-          <p className="text-xs text-slate-300">
-            Enrolled students can debate past paper problems, clear subject doubts directly with faculty, and receive verified answers.
-          </p>
         </div>
-        <div className="flex items-center gap-2 text-xs">
-          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/15 text-slate-200">
-            Current Role: <span className="font-semibold text-emerald-300">Enrolled Student</span>
+
+        {/* View Mode Switcher: Interactive UI vs Screenshot */}
+        <div className="flex items-center gap-2">
+          <div className="bg-slate-900/90 p-1 rounded-xl border border-slate-700/80 flex items-center gap-1 text-xs">
+            <button
+              onClick={() => setViewMode('interactive')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                viewMode === 'interactive'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Interactive Live UI</span>
+            </button>
+            <button
+              onClick={() => setViewMode('screenshot')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                viewMode === 'screenshot'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <ImageIcon className="w-3.5 h-3.5" />
+              <span>Production App Screenshot</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
-        {/* Left Sidebar: Course Channels Selector */}
-        <div className="lg:col-span-4 border-r border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-950/40 p-4 flex flex-col justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                My Enrolled Batches
-              </span>
-              <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
-                {INITIAL_CHANNELS.length} Active Rooms
-              </span>
-            </div>
-
-            {/* Channels List */}
-            <div className="space-y-2">
-              {INITIAL_CHANNELS.map((ch) => {
-                const isSelected = ch.id === selectedChannelId;
-                return (
-                  <button
-                    key={ch.id}
-                    onClick={() => setSelectedChannelId(ch.id)}
-                    className={`w-full text-left p-3.5 rounded-2xl transition-all cursor-pointer border ${
-                      isSelected
-                        ? 'bg-white dark:bg-slate-800 border-indigo-300 dark:border-indigo-600 shadow-sm'
-                        : 'bg-transparent border-transparent hover:bg-slate-100 dark:hover:bg-slate-800/50'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1 min-w-0 pr-2">
-                        <h4
-                          className={`text-xs font-bold truncate ${
-                            isSelected ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-900 dark:text-white'
-                          }`}
-                        >
-                          {ch.name}
-                        </h4>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                          {ch.mentor}
-                        </p>
-                      </div>
-                      {ch.unread > 0 && (
-                        <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-600 text-white shrink-0">
-                          {ch.unread}
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
-                      <span className="flex items-center gap-1">
-                        <Users className="w-3 h-3" /> {ch.activeUsers} students online
-                      </span>
-                      <span className="font-medium text-slate-600 dark:text-slate-400">{ch.subject}</span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Quick Notice Card */}
-          <div className="mt-4 p-3 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 text-xs text-indigo-950 dark:text-indigo-200">
-            <div className="flex items-center gap-1.5 font-bold mb-1">
-              <ShieldCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-              <span>Verified Mentor Room</span>
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-              Faculty responses in this chat room carry official NIE curriculum accreditation status.
-            </p>
-          </div>
-        </div>
-
-        {/* Right Area: Active Course Chat Stream */}
-        <div className="lg:col-span-8 flex flex-col justify-between h-[600px] bg-white dark:bg-slate-900">
-          {/* Header Bar */}
-          <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xs">
+      {/* Main Content Area based on View Mode */}
+      {viewMode === 'screenshot' ? (
+        /* View Mode 2: Real Production Screenshot Display */
+        <div className="p-6 sm:p-8 bg-[#090d14] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
             <div>
-              <div className="flex items-center gap-2">
-                <h4 className="font-bold text-sm text-slate-900 dark:text-white">
-                  {currentChannel.name}
-                </h4>
-                <Badge variant="success" size="sm">
-                  Active
-                </Badge>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-indigo-950/80 border border-indigo-800 text-indigo-300 text-xs font-semibold mb-2">
+                <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
+                <span>TiT Education Official Course Chat & AI Architecture</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Led by {currentChannel.mentor}
+              <h4 className="text-xl font-bold text-white tracking-tight">
+                Production Course Chat & AI Interface
+              </h4>
+              <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+                This screenshot shows the live platform operations of the TiT AI Assistant, course chat conversations,
+                attendance summaries, and workspace context tools.
               </p>
             </div>
 
-            {/* Filter Tabs & Search */}
-            <div className="flex items-center gap-1.5">
-              <div className="flex items-center p-0.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-xs">
-                <button
-                  onClick={() => setActiveFilter('all')}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
-                    activeFilter === 'all'
-                      ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-xs'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
-                  }`}
-                >
-                  All
-                </button>
-                <button
-                  onClick={() => setActiveFilter('doubts')}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
-                    activeFilter === 'doubts'
-                      ? 'bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-xs'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
-                  }`}
-                >
-                  Doubts
-                </button>
-                <button
-                  onClick={() => setActiveFilter('mentors')}
-                  className={`px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
-                    activeFilter === 'mentors'
-                      ? 'bg-white dark:bg-slate-700 text-emerald-600 dark:text-emerald-400 shadow-xs'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
-                  }`}
-                >
-                  Mentors
-                </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setViewMode('interactive')}
+                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-md cursor-pointer"
+              >
+                <span>Try Live Interactive Simulator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Screenshot Frame with High-Fidelity Glow */}
+          <div className="relative rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-950 group">
+            <img
+              src="/assets/aistudio/Screenshot_2026-10-26_at_22.12.48_ebf071d3.png"
+              alt="TiT AI Assistant and Course-wise Chat application interface"
+              className="w-full h-auto object-cover rounded-2xl cursor-pointer"
+              onClick={() => setScreenshotModalOpen(true)}
+            />
+            {/* Quick Hover Zoom overlay */}
+            <div
+              onClick={() => setScreenshotModalOpen(true)}
+              className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer backdrop-blur-[2px]"
+            >
+              <div className="bg-slate-900/90 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 border border-slate-700 shadow-xl">
+                <Maximize2 className="w-4 h-4 text-indigo-400" />
+                <span>Click to View Full Resolution</span>
               </div>
             </div>
           </div>
 
-          {/* Pinned Announcement if available */}
-          {pinnedMessage && (
-            <div className="mx-4 mt-3 p-3 bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/60 rounded-2xl flex items-start gap-2.5">
-              <Pin className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-amber-900 dark:text-amber-300">
-                    Pinned Faculty Announcement
-                  </span>
-                  <span className="text-[10px] text-amber-700 dark:text-amber-400 font-medium">
-                    {pinnedMessage.time}
-                  </span>
+          {/* Screenshot Feature Highlights */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            <div className="p-4 rounded-2xl bg-[#0f1624] border border-slate-800 space-y-1.5">
+              <div className="flex items-center gap-2 text-indigo-400 font-bold text-xs">
+                <Menu className="w-4 h-4" />
+                <span>Admin LMS Navigation</span>
+              </div>
+              <p className="text-xs text-slate-300">
+                Full-tier role access with Students, Teachers, Registrations (12), Courses, and Quizzes modules.
+              </p>
+            </div>
+            <div className="p-4 rounded-2xl bg-[#0f1624] border border-slate-800 space-y-1.5">
+              <div className="flex items-center gap-2 text-indigo-400 font-bold text-xs">
+                <MessageSquare className="w-4 h-4" />
+                <span>Conversational Intelligence</span>
+              </div>
+              <p className="text-xs text-slate-300">
+                Secure assistant session handling student doubts, teacher queries, and attendance tracking in real-time.
+              </p>
+            </div>
+            <div className="p-4 rounded-2xl bg-[#0f1624] border border-slate-800 space-y-1.5">
+              <div className="flex items-center gap-2 text-indigo-400 font-bold text-xs">
+                <Compass className="w-4 h-4" />
+                <span>Workspace Context Panel</span>
+              </div>
+              <p className="text-xs text-slate-300">
+                Direct shortcuts for People, Courses, Enrollments, Assessments, Attendance, and Insights data.
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* View Mode 1: Exact Interactive Replica of the UI from Screenshot */
+        <div className="flex flex-col bg-[#0b0f17]">
+          {/* Top App Navigation Bar matching Screenshot */}
+          <div className="px-4 py-2.5 bg-[#0e1422] border-b border-slate-800/90 flex flex-wrap items-center justify-between gap-3 text-xs">
+            {/* Left breadcrumb & brand */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+                <span>Admin</span>
+                <span>/</span>
+                <span className="text-slate-200">Ai Assistant</span>
+              </div>
+              <span className="text-sm font-bold text-white tracking-tight">TiT AI Assistant</span>
+            </div>
+
+            {/* Middle search bar */}
+            <div className="relative flex-1 max-w-sm hidden sm:block">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500" />
+              <input
+                type="text"
+                placeholder="Search platform... ⌘K"
+                className="w-full bg-[#131b2e] border border-slate-700/70 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              />
+            </div>
+
+            {/* Right quick actions & user status */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleSendMessage('Quick summary of active course rooms and pending assignments')}
+                className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Quick Actions ⌄</span>
+              </button>
+
+              <div className="hidden md:flex items-center gap-2 text-slate-400 pl-2 border-l border-slate-800">
+                <button className="p-1.5 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
+                  <Calendar className="w-3.5 h-3.5" />
+                </button>
+                <button className="p-1.5 hover:text-white rounded-lg hover:bg-slate-800 transition-colors">
+                  <Sparkles className="w-3.5 h-3.5" />
+                </button>
+                <button className="p-1.5 hover:text-white rounded-lg hover:bg-slate-800 transition-colors relative">
+                  <Bell className="w-3.5 h-3.5" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 absolute top-1 right-1" />
+                </button>
+              </div>
+
+              {/* User Identity Pill */}
+              <div className="flex items-center gap-2 bg-[#131b2e] border border-slate-700/70 rounded-xl px-2.5 py-1 text-slate-200">
+                <div className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center">
+                  SA
                 </div>
-                <p className="text-xs text-amber-800 dark:text-amber-200 line-clamp-2 mt-0.5">
-                  {pinnedMessage.text}
+                <div className="text-left hidden lg:block">
+                  <div className="text-[11px] font-bold leading-none">System Administrator</div>
+                  <div className="text-[9px] text-slate-400 leading-none mt-0.5">Super Administrator ⌄</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Subheader Banner */}
+          <div className="px-6 py-4 bg-[#0d131f] border-b border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mb-1">
+                <span>Admin</span>
+                <span>/</span>
+                <span>Platform Operations</span>
+                <span>/</span>
+                <span className="text-indigo-400 font-medium">TiT AI</span>
+              </div>
+              <h2 className="text-xl font-extrabold text-white tracking-tight">
+                TiT AI Assistant & Course Chat
+              </h2>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Premium conversational intelligence grounded in TiT institutional data and live platform analytics.
+              </p>
+            </div>
+
+            <button
+              onClick={() => {
+                const newTitle = `Course Batch Session #${conversations.length + 1}`;
+                const newConv: ConversationItem = {
+                  id: `conv-${Date.now()}`,
+                  title: newTitle,
+                  date: 'Today',
+                  category: 'Course Batch',
+                };
+                setConversations([newConv, ...conversations]);
+                setSelectedConvId(newConv.id);
+                setMessages([
+                  {
+                    id: `msg-${Date.now()}`,
+                    sender: 'assistant',
+                    senderName: 'TiT AI',
+                    avatarLabel: 'AI',
+                    time: 'Just now',
+                    text: `Started new conversation "${newTitle}". How can I assist you with students, courses, or analytics today?`,
+                  },
+                ]);
+              }}
+              className="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md transition-colors cursor-pointer self-start sm:self-auto"
+            >
+              <span>+ New chat</span>
+            </button>
+          </div>
+
+          {/* Main 3-Pane Layout matching Screenshot */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
+            {/* Leftmost LMS Drawer (Collapsible) */}
+            {!leftNavCollapsed && (
+              <div className="hidden xl:block xl:col-span-2 border-r border-slate-800/90 bg-[#090d15] p-3 text-xs space-y-4">
+                {/* Brand */}
+                <div className="flex items-center justify-between px-2 py-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center font-black text-white text-xs shadow-md">
+                      TiT
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white">ADMIN</div>
+                      <div className="text-[10px] text-slate-400">Enterprise Workspace</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setLeftNavCollapsed(true)}
+                    className="text-slate-500 hover:text-slate-300 p-1"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Super Admin Mode Pill */}
+                <div className="px-3 py-1.5 rounded-xl bg-indigo-950/60 border border-indigo-800/80 text-indigo-300 text-[11px] font-semibold flex items-center gap-2">
+                  <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Super Admin Mode</span>
+                </div>
+
+                {/* Nav Groups */}
+                <div className="space-y-3 pt-1">
+                  <div>
+                    <div className="px-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1 flex items-center justify-between">
+                      <span>Overview</span>
+                    </div>
+                    <ul className="space-y-0.5 text-slate-400">
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <Layers className="w-3.5 h-3.5" />
+                        <span>Dashboard</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <LineChart className="w-3.5 h-3.5" />
+                        <span>Analytics</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center justify-between cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <Bell className="w-3.5 h-3.5" />
+                          <span>Notifications</span>
+                        </div>
+                        <span className="text-[9px] font-bold px-1.5 py-0.2 bg-slate-800 text-slate-300 rounded">1</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div className="px-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      <span>User Management</span>
+                    </div>
+                    <ul className="space-y-0.5 text-slate-400">
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <GraduationCap className="w-3.5 h-3.5" />
+                        <span>Students</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <Users className="w-3.5 h-3.5" />
+                        <span>Teachers</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <Shield className="w-3.5 h-3.5" />
+                        <span>Administrators</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center justify-between cursor-pointer">
+                        <div className="flex items-center gap-2">
+                          <User className="w-3.5 h-3.5" />
+                          <span>Registrations</span>
+                        </div>
+                        <span className="text-[9px] font-bold px-1.5 py-0.2 bg-slate-800 text-slate-300 rounded">12</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div className="px-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                      <span>Academic Management</span>
+                    </div>
+                    <ul className="space-y-0.5 text-slate-400">
+                      <li className="px-2 py-1.5 rounded-lg bg-indigo-950/70 text-indigo-300 border border-indigo-800/60 font-semibold flex items-center gap-2">
+                        <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                        <span>Courses & Chat</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <Users className="w-3.5 h-3.5" />
+                        <span>Enrollments</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <FileText className="w-3.5 h-3.5" />
+                        <span>Assignments</span>
+                      </li>
+                      <li className="px-2 py-1.5 rounded-lg hover:bg-slate-800 hover:text-white flex items-center gap-2 cursor-pointer">
+                        <HelpCircle className="w-3.5 h-3.5" />
+                        <span>Quizzes</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Alex Mercer Footer */}
+                <div className="pt-4 border-t border-slate-800/80 flex items-center gap-2.5 px-2">
+                  <div className="w-7 h-7 rounded-full bg-slate-800 text-white font-bold text-xs flex items-center justify-center">
+                    N
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold text-white">Alex Mercer</div>
+                    <div className="text-[10px] text-slate-400">Administrator</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Pane 1: Conversations List */}
+            <div className={`${leftNavCollapsed ? 'xl:col-span-3' : 'xl:col-span-2'} lg:col-span-3 border-r border-slate-800/90 bg-[#0c121e] p-3 flex flex-col justify-between space-y-3`}>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider px-1">
+                  <span>Conversations</span>
+                  <button
+                    onClick={() => {
+                      const newConv: ConversationItem = {
+                        id: `conv-${Date.now()}`,
+                        title: 'New Subject Discussion Thread',
+                        date: 'Today',
+                        category: 'Course Batch',
+                      };
+                      setConversations([newConv, ...conversations]);
+                      setSelectedConvId(newConv.id);
+                    }}
+                    className="p-1 hover:text-white rounded"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* New Conversation Button */}
+                <button
+                  onClick={() => {
+                    const newConv: ConversationItem = {
+                      id: `conv-${Date.now()}`,
+                      title: 'New Course Thread',
+                      date: 'Today',
+                      category: 'Course Batch',
+                    };
+                    setConversations([newConv, ...conversations]);
+                    setSelectedConvId(newConv.id);
+                  }}
+                  className="w-full py-2 px-3 rounded-xl border border-indigo-700/60 bg-indigo-950/40 hover:bg-indigo-900/60 text-indigo-300 text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <span>+ New conversation</span>
+                </button>
+
+                {/* Search Conversations input */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search conversations"
+                    className="w-full bg-[#11192b] border border-slate-700/60 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+
+                {/* Conversations Threads list */}
+                <div className="space-y-1.5 overflow-y-auto max-h-[440px] pr-1">
+                  {filteredConversations.map((c) => {
+                    const isSelected = c.id === selectedConvId;
+                    return (
+                      <button
+                        key={c.id}
+                        onClick={() => setSelectedConvId(c.id)}
+                        className={`w-full text-left p-2.5 rounded-xl text-xs transition-all cursor-pointer border flex items-start gap-2.5 ${
+                          isSelected
+                            ? 'bg-[#162137] border-indigo-600/80 text-white shadow-sm'
+                            : 'bg-transparent border-transparent hover:bg-slate-800/60 text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <Clock className="w-3.5 h-3.5 shrink-0 mt-0.5 text-indigo-400" />
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium truncate text-slate-200">{c.title}</p>
+                          <div className="flex items-center justify-between text-[10px] text-slate-500 mt-0.5">
+                            <span>{c.date}</span>
+                            {c.unreadCount && (
+                              <span className="px-1.5 py-0.2 rounded-full bg-indigo-600 text-white font-bold text-[9px]">
+                                {c.unreadCount}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Course Batch quick status */}
+              <div className="p-2.5 rounded-xl bg-[#11192b] border border-slate-800 text-[11px] text-slate-400">
+                <span className="font-bold text-slate-200 block mb-0.5">Active Channel:</span>
+                <span>Combined Maths 2026 (Eng. S. Perera)</span>
+              </div>
+            </div>
+
+            {/* Pane 2: Middle Chat Feed matching Screenshot */}
+            <div className={`${leftNavCollapsed ? 'xl:col-span-6' : 'xl:col-span-5'} lg:col-span-6 flex flex-col justify-between bg-[#090d16] border-r border-slate-800/90`}>
+              {/* Header inside Conversation Area */}
+              <div className="px-4 py-3 bg-[#0d1422] border-b border-slate-800 flex items-center justify-between">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white shrink-0 shadow-sm">
+                    <Bot className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="text-xs font-bold text-white truncate max-w-xs sm:max-w-md">
+                      {activeConv.title}
+                    </h4>
+                    <div className="flex items-center gap-1.5 text-[10px] text-emerald-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Assistant connected</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 text-slate-400">
+                  <button className="p-1 hover:text-white rounded hover:bg-slate-800">
+                    <Edit3 className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (messages.length > 2) {
+                        setMessages(messages.slice(0, 2));
+                      }
+                    }}
+                    className="p-1 hover:text-white rounded hover:bg-slate-800"
+                    title="Clear history"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button className="p-1 hover:text-white rounded hover:bg-slate-800">
+                    <MoreHorizontal className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Sub-banner: Security verification */}
+              <div className="px-4 py-2 bg-[#0c121e] border-b border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="flex items-center gap-1.5 text-emerald-400">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Your assistant is ready to help</span>
+                </div>
+                <span className="text-[10px] text-slate-500">Secure assistant session</span>
+              </div>
+
+              {/* Message Stream */}
+              <div className="p-4 sm:p-5 overflow-y-auto space-y-4 max-h-[460px] min-h-[380px]">
+                {messages.map((m) => {
+                  const isUser = m.sender === 'user';
+                  return (
+                    <div
+                      key={m.id}
+                      className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} animate-in fade-in duration-150`}
+                    >
+                      {/* Sender line */}
+                      <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mb-1">
+                        {!isUser && (
+                          <div className="w-5 h-5 rounded-lg bg-indigo-600 flex items-center justify-center text-white shrink-0">
+                            <Sparkles className="w-3 h-3" />
+                          </div>
+                        )}
+                        <span className="font-semibold text-slate-300">{m.senderName}</span>
+                        <span>{m.time}</span>
+                        {isUser && (
+                          <div className="w-5 h-5 rounded-full bg-slate-700 text-white font-bold text-[9px] flex items-center justify-center shrink-0">
+                            {m.avatarLabel}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Message Bubble matching Screenshot */}
+                      {isUser ? (
+                        <div className="max-w-md bg-indigo-600 text-white text-xs sm:text-sm px-4 py-2.5 rounded-2xl rounded-tr-xs shadow-md leading-relaxed">
+                          {m.text}
+                        </div>
+                      ) : (
+                        <div className="max-w-lg bg-[#141d2e] border border-slate-750/80 text-slate-200 text-xs sm:text-sm p-4 rounded-2xl rounded-tl-xs shadow-md space-y-2.5">
+                          <div className="whitespace-pre-line leading-relaxed">{m.text}</div>
+
+                          {m.structuredDetails && (
+                            <div className="pt-2 border-t border-slate-700/60 space-y-1">
+                              {m.structuredDetails.map((line, idx) => (
+                                <div key={idx} className="flex items-start gap-1.5 text-xs text-indigo-300">
+                                  <Check className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                                  <span>{line}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Action Button: Copy Response */}
+                          <div className="pt-1 flex items-center justify-between text-[11px] text-slate-400">
+                            <button
+                              onClick={() => handleCopy(m.text, m.id)}
+                              className="flex items-center gap-1.5 hover:text-white text-slate-400 transition-colors cursor-pointer"
+                            >
+                              {copiedId === m.id ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                  <span className="text-emerald-400 font-medium">Copied to clipboard</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3.5 h-3.5" />
+                                  <span>Copy response</span>
+                                </>
+                              )}
+                            </button>
+                            <span className="text-[10px] text-slate-500">Verified TiT LLM</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+
+                {isTyping && (
+                  <div className="flex items-center gap-2 text-xs text-indigo-400 p-2">
+                    <div className="w-4 h-4 rounded bg-indigo-600/50 flex items-center justify-center animate-spin">
+                      <Sparkles className="w-3 h-3" />
+                    </div>
+                    <span>TiT AI Assistant is preparing verified response...</span>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Bottom Interactive Input Bar */}
+              <div className="p-3 bg-[#0d131f] border-t border-slate-800 space-y-2">
+                {/* Prompt Chips */}
+                <div className="flex gap-1.5 overflow-x-auto pb-1 text-[11px]">
+                  <button
+                    onClick={() => handleSendMessage('what about the attendace')}
+                    className="px-2.5 py-1 rounded-full bg-[#141d2e] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 shrink-0 cursor-pointer transition-colors"
+                  >
+                    What about the attendance?
+                  </button>
+                  <button
+                    onClick={() => handleSendMessage('Show current student doubts in Combined Maths 2026')}
+                    className="px-2.5 py-1 rounded-full bg-[#141d2e] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 shrink-0 cursor-pointer transition-colors"
+                  >
+                    Combined Maths doubts
+                  </button>
+                  <button
+                    onClick={() => handleSendMessage('Summarize the current student, teacher, and course activity.')}
+                    className="px-2.5 py-1 rounded-full bg-[#141d2e] hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/60 shrink-0 cursor-pointer transition-colors"
+                  >
+                    Summarize activity
+                  </button>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }}
+                  className="flex items-center gap-2"
+                >
+                  <div className="relative flex-1">
+                    <input
+                      type="text"
+                      value={inputText}
+                      onChange={(e) => setInputText(e.target.value)}
+                      placeholder="Ask anything about courses, doubts, past papers, or student analytics..."
+                      className="w-full bg-[#121929] border border-slate-700/80 rounded-xl pl-3 pr-20 py-2.5 text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 shadow-inner"
+                    />
+                    <div className="absolute right-2 top-2 flex items-center gap-1 text-slate-400">
+                      <button
+                        type="button"
+                        className="p-1 hover:text-slate-200 transition-colors"
+                        title="Attach past paper or solution"
+                      >
+                        <Paperclip className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        className="p-1 hover:text-slate-200 transition-colors"
+                        title="Voice note query"
+                      >
+                        <Mic className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={!inputText.trim()}
+                    className="px-3.5 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:hover:bg-indigo-600 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center cursor-pointer"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            {/* Pane 3: Right Sidebar "WORKSPACE CONTEXT" matching Screenshot */}
+            <div className="xl:col-span-3 lg:col-span-3 bg-[#0a0e17] p-4 text-xs space-y-4">
+              {/* Header */}
+              <div className="flex items-center gap-2 text-indigo-400 font-bold uppercase tracking-wider text-[11px] pb-2 border-b border-slate-800">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Workspace Context</span>
+              </div>
+
+              {/* Status Card */}
+              <div className="p-3 rounded-2xl bg-[#101726] border border-slate-800 space-y-1">
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                  Status
+                </div>
+                <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Ready to help</span>
+                </div>
+              </div>
+
+              {/* Admin Access Card with 8 Grid Buttons */}
+              <div className="p-3 rounded-2xl bg-[#101726] border border-slate-800 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                    <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                    <span>Admin Access</span>
+                  </div>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-snug">
+                  Ask about the areas available in your administration workspace.
+                </p>
+
+                {/* 8-Tile Shortcut Grid matching Screenshot */}
+                <div className="grid grid-cols-2 gap-1.5 pt-1">
+                  {[
+                    { label: 'People', icon: <Users className="w-3.5 h-3.5 text-indigo-400" />, query: 'Show summary of verified students and teachers' },
+                    { label: 'Courses', icon: <BookOpen className="w-3.5 h-3.5 text-indigo-400" />, query: 'List active A/L syllabus courses and enrolled batches' },
+                    { label: 'Enrollments', icon: <User className="w-3.5 h-3.5 text-indigo-400" />, query: 'Show enrollment status and batch capacity' },
+                    { label: 'Assessments', icon: <FileText className="w-3.5 h-3.5 text-indigo-400" />, query: 'Check current timed quiz assessments and marks' },
+                    { label: 'Attendance', icon: <Calendar className="w-3.5 h-3.5 text-indigo-400" />, query: 'what about the attendace' },
+                    { label: 'Insights', icon: <LineChart className="w-3.5 h-3.5 text-indigo-400" />, query: 'Generate student progression and Z-score insights' },
+                    { label: 'Messages', icon: <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />, query: 'Check unread doubts and messages from students' },
+                    { label: 'Schedules', icon: <Clock className="w-3.5 h-3.5 text-indigo-400" />, query: 'Show upcoming live lectures and submission deadlines' },
+                  ].map((tile, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handleSendMessage(tile.query)}
+                      className="flex items-center gap-1.5 p-2 rounded-xl bg-[#151f33] hover:bg-[#1a263e] border border-slate-700/60 text-slate-200 text-xs font-medium transition-colors cursor-pointer text-left"
+                    >
+                      {tile.icon}
+                      <span className="truncate">{tile.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Data Privacy Card */}
+              <div className="p-3 rounded-2xl bg-[#101726] border border-slate-800 space-y-1 text-slate-400">
+                <div className="text-xs font-bold text-white">Data privacy</div>
+                <p className="text-[11px] leading-relaxed">
+                  Your conversations stay within the information available to your administrator workspace.
                 </p>
               </div>
             </div>
-          )}
-
-          {/* Messages Scroll Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {filteredMessages.map((msg) => {
-              const isMe = msg.role === 'student' && msg.sender.startsWith('You');
-              const isMentor = msg.role === 'mentor';
-
-              return (
-                <div
-                  key={msg.id}
-                  className={`flex items-start gap-3 ${isMe ? 'flex-row-reverse' : ''}`}
-                >
-                  {/* Avatar */}
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
-                      isMentor
-                        ? 'bg-indigo-600 text-white shadow-xs'
-                        : isMe
-                        ? 'bg-emerald-600 text-white shadow-xs'
-                        : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    }`}
-                  >
-                    {isMentor ? 'M' : isMe ? 'ME' : msg.sender.charAt(0)}
-                  </div>
-
-                  {/* Message Bubble */}
-                  <div
-                    className={`max-w-lg rounded-2xl p-3.5 text-xs ${
-                      isMe
-                        ? 'bg-indigo-600 text-white rounded-tr-xs'
-                        : isMentor
-                        ? 'bg-indigo-50/80 dark:bg-indigo-950/50 border border-indigo-200/80 dark:border-indigo-800 text-slate-900 dark:text-slate-100 rounded-tl-xs'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-tl-xs'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-3 mb-1">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`font-bold ${
-                            isMe
-                              ? 'text-indigo-100'
-                              : isMentor
-                              ? 'text-indigo-700 dark:text-indigo-300'
-                              : 'text-slate-800 dark:text-slate-200'
-                          }`}
-                        >
-                          {msg.sender}
-                        </span>
-                        {isMentor && (
-                          <span className="text-[10px] bg-indigo-200/60 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-1.5 py-0.2 rounded font-semibold">
-                            Faculty Mentor
-                          </span>
-                        )}
-                      </div>
-                      <span
-                        className={`text-[10px] ${
-                          isMe ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'
-                        }`}
-                      >
-                        {msg.time}
-                      </span>
-                    </div>
-
-                    {msg.tag && (
-                      <div className="mb-1.5">
-                        <span
-                          className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                            msg.tag === 'Doubt'
-                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-                              : msg.tag === 'Solution'
-                              ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-                              : 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'
-                          }`}
-                        >
-                          #{msg.tag}
-                        </span>
-                      </div>
-                    )}
-
-                    <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
-
-                    {/* Reactions Bar */}
-                    <div className="mt-2.5 pt-2 border-t border-slate-200/40 dark:border-slate-700/60 flex items-center justify-between text-[11px]">
-                      <button
-                        onClick={() => handleLike(msg.id)}
-                        className={`flex items-center gap-1 font-medium transition-colors cursor-pointer ${
-                          msg.userLiked
-                            ? 'text-rose-500 font-bold'
-                            : isMe
-                            ? 'text-indigo-200 hover:text-white'
-                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                        }`}
-                      >
-                        <span>❤️</span>
-                        <span>{msg.likes}</span>
-                      </button>
-
-                      {isMe && (
-                        <span className="flex items-center gap-1 text-[10px] text-indigo-200">
-                          <CheckCheck className="w-3.5 h-3.5" /> Delivered
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Mentor typing indicator */}
-            {isTyping && (
-              <div className="flex items-center gap-2 text-xs text-indigo-600 dark:text-indigo-400 italic bg-indigo-50/50 dark:bg-indigo-950/30 p-2.5 rounded-xl border border-indigo-100 dark:border-indigo-900/40 w-fit">
-                <span className="w-2 h-2 rounded-full bg-indigo-600 animate-bounce" />
-                <span>Faculty Mentor is typing a verified answer...</span>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
           </div>
-
-          {/* Interactive Message Input Box */}
-          <form
-            onSubmit={handleSendMessage}
-            className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-950/60"
-          >
-            {/* Tag selector */}
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                Message Type:
-              </span>
-              {(['Doubt', 'General', 'Solution'] as const).map((tag) => (
-                <button
-                  type="button"
-                  key={tag}
-                  onClick={() => setSelectedTag(tag)}
-                  className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors cursor-pointer ${
-                    selectedTag === tag
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder={`Ask a question or share steps in ${currentChannel.name}...`}
-                className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-              <Button
-                type="submit"
-                variant="primary"
-                size="sm"
-                className="rounded-xl px-4 py-2.5 shrink-0"
-                disabled={!inputText.trim()}
-              >
-                <Send className="w-4 h-4 mr-1.5" />
-                Send
-              </Button>
-            </div>
-            <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1.5">
-              Tip: Post your mathematics or physics doubts with question numbers for immediate faculty review.
-            </p>
-          </form>
         </div>
-      </div>
+      )}
+
+      {/* Full-screen Screenshot Modal if user wants to examine the original PNG */}
+      {screenshotModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6">
+          <div className="relative max-w-5xl w-full bg-slate-900 rounded-3xl border border-slate-700 p-4 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+              <div className="flex items-center gap-2 text-white font-bold text-sm">
+                <ImageIcon className="w-4 h-4 text-indigo-400" />
+                <span>Original TiT AI Course Chat UI (Production Screenshot)</span>
+              </div>
+              <button
+                onClick={() => setScreenshotModalOpen(false)}
+                className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold cursor-pointer"
+              >
+                Close ✕
+              </button>
+            </div>
+            <div className="max-h-[75vh] overflow-auto rounded-xl">
+              <img
+                src="/assets/aistudio/Screenshot_2026-10-26_at_22.12.48_ebf071d3.png"
+                alt="TiT Course Chat Screenshot full view"
+                className="w-full h-auto rounded-xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

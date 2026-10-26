@@ -18,16 +18,16 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'Cart',
 
     // Hero
-    'hero.badge': 'Unified Educational SaaS & Learning Marketplace',
-    'hero.headline': 'Learn Smarter. Achieve More.',
+    'hero.badge': 'TiT Education Official Digital Platform',
+    'hero.headline': 'The All-in-One Learning App for Sri Lankan Students',
     'hero.subheadline':
-      'Discover academic courses, expert-guided learning, and educational resources through one connected learning platform.',
-    'hero.cta.courses': 'Explore Courses',
-    'hero.cta.resources': 'Explore Learning Resources',
+      'Chat directly with your course mentors and classmates, get 24/7 answers from our AI study bot, track classes on your calendar, and practice with timed quizzes.',
+    'hero.cta.courses': 'Explore Courses & Batches',
+    'hero.cta.resources': 'Try 5 LMS Features Live',
     'hero.stat.courses': 'Curated Syllabi',
-    'hero.stat.materials': 'Verified Resources',
-    'hero.stat.teachers': 'Expert Educators',
-    'hero.stat.curriculum': 'G.C.E. & International',
+    'hero.stat.materials': 'Past Papers & Notes',
+    'hero.stat.teachers': 'Verified Mentors',
+    'hero.stat.curriculum': 'G.C.E. A/L & O/L',
 
     // Features Highlights
     'features.title': 'Intelligent Learning Infrastructure',
@@ -134,16 +134,16 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'கூடை',
 
     // Hero
-    'hero.badge': 'ஒருங்கிணைந்த கல்வி தளம் & வளச் சந்தை',
-    'hero.headline': 'புத்திசாலித்தனமாக கற்போம். உயர் வெற்றிகளை அடைவோம்.',
+    'hero.badge': 'TiT Education × Mentify கற்றல் தளம்',
+    'hero.headline': 'இலங்கை மாணவர்களுக்கான ஒரே முழுமையான கற்றல் செயலி',
     'hero.subheadline':
-      'கல்வி பாடநெறிகள், வழிகாட்டும் ஆசிரியர்கள் மற்றும் பிரீமியம் கற்றல் வளங்களை ஒரே தளத்தில் கண்டறியுங்கள்.',
-    'hero.cta.courses': 'பாடநெறிகளை ஆராய்க',
-    'hero.cta.resources': 'கற்றல் வளங்களை ஆராய்க',
+      'பாடநெறி வழிகாட்டிகள் மற்றும் நண்பர்களுடன் கலந்துரையாடுங்கள், 24/7 AI சந்தேக தீர்வு, கல்வி நாட்காட்டி மற்றும் மாதிரி வினாத்தாள்களை ஒரே இடத்தில் பெறுங்கள்.',
+    'hero.cta.courses': 'பாடநெறிகளை காண்க',
+    'hero.cta.resources': '5 நேரலை அம்சங்களை சோதிக்க',
     'hero.stat.courses': 'பாடத்திட்டங்கள்',
-    'hero.stat.materials': 'சரிபார்க்கப்பட்ட வளங்கள்',
+    'hero.stat.materials': 'வினாத்தாள்கள் & குறிப்புகள்',
     'hero.stat.teachers': 'சிறந்த ஆசிரியர்கள்',
-    'hero.stat.curriculum': 'உள்ளூர் & சர்வதேச தரம்',
+    'hero.stat.curriculum': 'G.C.E. A/L & O/L',
 
     // Features Highlights
     'features.title': 'அறிவுசார் கற்றல் கட்டமைப்பு',
@@ -241,16 +241,16 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'කරත්තය',
 
     // Hero
-    'hero.badge': 'ඒකාබද්ධ අධ්‍යාපනික SaaS සහ සම්පත් වේදිකාව',
-    'hero.headline': 'බුද්ධිමත්ව ඉගෙන ගන්න. ඉහළ ජයග්‍රහණ ලබන්න.',
+    'hero.badge': 'TiT Education × Mentify ඉගෙනුම් වේදිකාව',
+    'hero.headline': 'ශ්‍රී ලාංකික සිසුන් සඳහා වන එකම පරිපූර්ණ ඉගෙනුම් යෙදුම',
     'hero.subheadline':
-      'අධ්‍යයන පාඨමාලා, විශේෂඥ ගුරු මඟපෙන්වීම් සහ ඉගෙනුම් සම්පත් එකම වේදිකාවකින් සොයා ගන්න.',
+      'ඔබේ ගුරුවරුන් සහ මිතුරන් සමඟ පන්ති කාමරයේ කතාබස් කරන්න, 24/7 AI සහාය, දින දර්ශනය සහ ආදර්ශ ප්‍රශ්න පත්‍ර සියල්ල එකම තැනකින් ලබා ගන්න.',
     'hero.cta.courses': 'පාඨමාලා ගවේෂණය කරන්න',
-    'hero.cta.resources': 'ඉගෙනුම් සම්පත් සොයන්න',
+    'hero.cta.resources': 'සජීවී විශේෂාංග අත්හදා බලන්න',
     'hero.stat.courses': 'සවිස්තර විෂය නිර්දේශ',
-    'hero.stat.materials': 'තහවුරු කළ සම්පත්',
+    'hero.stat.materials': 'ප්‍රශ්න පත්‍ර සහ සටහන්',
     'hero.stat.teachers': 'විශිෂ්ට ගුරුවරුන්',
-    'hero.stat.curriculum': 'දේශීය සහ ජාත්‍යන්තර',
+    'hero.stat.curriculum': 'G.C.E. A/L සහ O/L',
 
     // Features Highlights
     'features.title': 'බුද්ධිමත් අධ්‍යාපන පද්ධතිය',

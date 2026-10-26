@@ -100,51 +100,61 @@ export const HeroInteractivePreview: React.FC<HeroInteractivePreviewProps> = ({ 
         {/* Tab 1: Course Chat Preview */}
         {activeTab === 'chat' && (
           <div className="p-5 sm:p-6 space-y-3.5 animate-in fade-in duration-200">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800 text-xs">
-              <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                Combined Maths 2026 Batch Room
-              </span>
-              <span className="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold">
-                Eng. S. Perera (Mentor) Online
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-100 dark:border-slate-800 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-bold text-slate-900 dark:text-white">
+                  TiT AI & Course Batch Room
+                </span>
+                <span className="text-[10px] bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.2 rounded font-bold">
+                  Live
+                </span>
+              </div>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                Combined Maths 2026
               </span>
             </div>
 
-            <div className="space-y-3">
-              <div className="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-2xl text-xs space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-800 dark:text-slate-200">Kaveen (Student)</span>
-                  <span className="text-[10px] text-slate-400">10:42 AM</span>
+            <div className="space-y-2.5">
+              {/* User Bubble matching screenshot */}
+              <div className="flex flex-col items-end space-y-1">
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                  <span>04:05</span>
+                  <span className="font-semibold text-slate-300">You</span>
+                  <div className="w-4 h-4 rounded-full bg-slate-700 text-white font-bold text-[8px] flex items-center justify-center">
+                    A
+                  </div>
                 </div>
-                <p className="text-slate-600 dark:text-slate-300">
-                  Sir, on question 18: how do we structure the integration by parts proof for G.C.E. A/L Paper II?
-                </p>
+                <div className="bg-indigo-600 text-white text-xs px-3.5 py-2 rounded-2xl rounded-tr-xs shadow-sm max-w-sm">
+                  Summarize the current student, teacher, and course activity.
+                </div>
               </div>
 
-              <div className="bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800 p-3 rounded-2xl text-xs space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-1">
-                    Eng. S. Perera
-                    <span className="text-[9px] bg-indigo-200 dark:bg-indigo-900 px-1.5 rounded">Mentor</span>
-                  </span>
-                  <span className="text-[10px] text-slate-400">10:45 AM</span>
+              {/* Assistant Bubble matching screenshot */}
+              <div className="flex flex-col items-start space-y-1">
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
+                  <div className="w-4 h-4 rounded-md bg-indigo-600 flex items-center justify-center text-white text-[8px] font-black">
+                    TiT
+                  </div>
+                  <span className="font-bold text-indigo-400">TiT AI</span>
+                  <span>04:05</span>
                 </div>
-                <p className="text-slate-700 dark:text-slate-300">
-                  Write out u = x² and dv = e^(3x)dx with both derivation steps. Discrete method marks are awarded for intermediate substitutions.
-                </p>
+                <div className="bg-slate-100 dark:bg-[#131b2c] border border-slate-200 dark:border-slate-750 p-3 rounded-2xl rounded-tl-xs text-xs text-slate-800 dark:text-slate-200 leading-relaxed shadow-sm max-w-sm">
+                  Combined Maths 2026 has 94.2% attendance. Eng. S. Perera uploaded Tutorial 08 solutions to the vault.
+                </div>
               </div>
             </div>
 
             <div className="pt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
               <span className="text-indigo-600 dark:text-indigo-400 font-medium">
-                342 active students in this batch room
+                342 active students • 28 senior mentors
               </span>
               {onNavigate && (
                 <button
                   onClick={() => onNavigate('features')}
                   className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
-                  Open Live Chat <ArrowRight className="w-3.5 h-3.5" />
+                  Open Full 3-Pane Chat <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>

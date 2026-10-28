@@ -115,7 +115,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             <div className="space-y-4 mb-6">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
-                  Recipient Mentify / Student Email
+                  Recipient TiT / Student Email
                 </label>
                 <input
                   type="email"
@@ -136,7 +136,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <span>Production Commerce Specification</span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-blue-800 dark:text-blue-300">
-                  Per Mentify security policy, payment capture relies on server-authoritative Stripe webhooks. Unverified client-side downloads are disallowed.
+                  Per TiT security policy, payment capture relies on server-authoritative Stripe webhooks. Unverified client-side downloads are disallowed.
                 </p>
               </div>
             </div>
@@ -178,7 +178,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             </div>
 
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-md mx-auto">
-              Your payment has been recorded. Entitlements have been provisioned to your Mentify account. A receipt has been dispatched to {studentEmail || 'your registered email'}.
+              Your payment has been recorded. Entitlements have been provisioned to your TiT account. A receipt has been dispatched to {studentEmail || 'your registered email'}.
             </p>
 
             <div className="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 text-left text-xs space-y-2">

@@ -6,6 +6,8 @@ import { Footer } from './components/layout/Footer';
 import { CartDrawer } from './components/layout/CartDrawer';
 import { CheckoutModal } from './components/marketplace/CheckoutModal';
 import { QuickApplyModal } from './components/admissions/QuickApplyModal';
+import { ExamResultsLookupModal } from './components/portal/ExamResultsLookupModal';
+import { TutorApplicationModal } from './components/tutors/TutorApplicationModal';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -37,7 +39,7 @@ export default function App() {
   // Theme State (Light by default, togglable to Dark)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('mentify_theme');
+      const saved = localStorage.getItem('tit_theme') || localStorage.getItem('mentify_theme');
       if (saved === 'dark' || saved === 'light') return saved;
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
@@ -53,7 +55,7 @@ export default function App() {
     } else {
       root.classList.remove('dark');
     }
-    localStorage.setItem('mentify_theme', theme);
+    localStorage.setItem('tit_theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -63,6 +65,10 @@ export default function App() {
   // Admission Enquiry Modal State
   const [isQuickApplyOpen, setIsQuickApplyOpen] = useState(false);
   const [quickApplyCourse, setQuickApplyCourse] = useState<CourseItem | null>(null);
+
+  // TiT Jaffna Exam Results & Tutor Application Modals
+  const [isResultsOpen, setIsResultsOpen] = useState(false);
+  const [isTutorApplyOpen, setIsTutorApplyOpen] = useState(false);
 
   // Synchronize hash with currentPath
   useEffect(() => {
@@ -175,6 +181,8 @@ export default function App() {
               setQuickApplyCourse(null);
               setIsQuickApplyOpen(true);
             }}
+            onOpenResults={() => setIsResultsOpen(true)}
+            onOpenTutorApply={() => setIsTutorApplyOpen(true)}
           />
         )}
 
@@ -264,8 +272,12 @@ export default function App() {
         )}
       </main>
 
-      {/* Global Application Footer */}
-      <Footer onNavigate={navigateTo} />
+      {/* Global Application Footer with titjaffna.lk actions */}
+      <Footer
+        onNavigate={navigateTo}
+        onOpenResults={() => setIsResultsOpen(true)}
+        onOpenTutorApply={() => setIsTutorApplyOpen(true)}
+      />
 
       {/* Slide-out Cart Drawer */}
       <CartDrawer
@@ -295,6 +307,18 @@ export default function App() {
         isOpen={isQuickApplyOpen}
         onClose={() => setIsQuickApplyOpen(false)}
         selectedCourse={quickApplyCourse}
+      />
+
+      {/* Official titjaffna.lk Exam Results Lookup Modal */}
+      <ExamResultsLookupModal
+        isOpen={isResultsOpen}
+        onClose={() => setIsResultsOpen(false)}
+      />
+
+      {/* Official titjaffna.lk Apply as a Tutor Modal */}
+      <TutorApplicationModal
+        isOpen={isTutorApplyOpen}
+        onClose={() => setIsTutorApplyOpen(false)}
       />
     </div>
   );

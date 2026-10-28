@@ -5,14 +5,6 @@ import {
   Calendar,
   FileCheck,
   LineChart,
-  Sparkles,
-  ArrowRight,
-  CheckCircle2,
-  GraduationCap,
-  Layers,
-  ChevronRight,
-  ShieldCheck,
-  Check,
 } from 'lucide-react';
 import { CourseChatShowcase } from './CourseChatShowcase';
 import { AIChatbotShowcase } from './AIChatbotShowcase';
@@ -153,8 +145,6 @@ export const InteractiveAppSuite: React.FC<InteractiveAppSuiteProps> = ({
     },
   ];
 
-  const currentTab = tabs.find((t) => t.key === activeTab) || tabs[0];
-
   return (
     <div className="w-full space-y-6">
       {/* Full-Width Feature Selection Bar (Placed Above the Images / Modules) */}
@@ -209,65 +199,6 @@ export const InteractiveAppSuite: React.FC<InteractiveAppSuiteProps> = ({
         </div>
       </div>
 
-      {/* Full-Width Contextual Helper Strip (Above the Images / Modules) */}
-      <div className="w-full bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 rounded-2xl px-4 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs text-indigo-950 dark:text-indigo-200 shadow-xs">
-        <div className="flex items-start sm:items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shrink-0 animate-ping mt-1 sm:mt-0" />
-          <div className="space-y-1">
-            <p className="leading-snug">
-              {activeTab === 'chat' && (
-                <>
-                  <strong>Course-wise Live Chat:</strong> Every enrolled batch has its own channel. Ask questions, submit doubts, and discuss past papers with teachers and peers.
-                </>
-              )}
-              {activeTab === 'ai' && (
-                <>
-                  <strong>24/7 AI Study Bot:</strong> Solves syllabus derivations, calculus proofs, and past-paper problems instantly according to official NIE rubrics.
-                </>
-              )}
-              {activeTab === 'calendar' && (
-                <>
-                  <strong>Academic Calendar:</strong> Synchronizes live Zoom/physical lectures, assignment deadlines, and term mock exams in one unified schedule.
-                </>
-              )}
-              {activeTab === 'quiz' && (
-                <>
-                  <strong>Quizzes & Timed Tests:</strong> Practice past paper questions under exam conditions with live timer, immediate grading, and solution breakdowns.
-                </>
-              )}
-              {activeTab === 'analytics' && (
-                <>
-                  <strong>Grading & Z-Score Analytics:</strong> View your subject strengths, progression curves, and simulate university cutoff feasibility for engineering, medicine, and commerce.
-                </>
-              )}
-            </p>
-            {/* Quick feature tags */}
-            <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-indigo-700 dark:text-indigo-300">
-              {currentTab.highlights.map((h, i) => (
-                <span key={i} className="inline-flex items-center gap-1 font-medium">
-                  <Check className="w-3 h-3 text-indigo-500" />
-                  <span>{h}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0 self-end md:self-auto">
-          <span className="text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-lg border border-indigo-200 dark:border-indigo-800 shadow-2xs">
-            Live Interactive Simulator
-          </span>
-          {onOpenAdmissions && (
-            <button
-              onClick={onOpenAdmissions}
-              className="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold transition-all shadow-sm flex items-center gap-1 cursor-pointer"
-            >
-              <span>Enroll</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          )}
-        </div>
-      </div>
 
       {/* Main Full-Width Feature Canvas (Uses the complete width without any squeezing sidebar) */}
       <div className="w-full transition-all duration-200">

@@ -266,7 +266,7 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
         ) : isError ? (
           <ErrorState
             title="Failed to Load Materials"
-            message="Could not connect to the Mentify marketplace gateway. Please try reloading."
+            message="Could not connect to the TiT marketplace gateway. Please try reloading."
             onRetry={fetchMaterials}
           />
         ) : materials.length > 0 ? (

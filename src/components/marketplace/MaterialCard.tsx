@@ -70,7 +70,7 @@ export const MaterialCard: React.FC<MaterialCardProps> = ({
           <div className="mt-3 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-3 border-t border-slate-100 dark:border-slate-800">
             <span className="flex items-center gap-1 truncate max-w-[160px]">
               <User className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
-              <span className="truncate">{material.authorName || 'Mentify Academic Board'}</span>
+              <span className="truncate">{material.authorName || 'TiT Academic Board'}</span>
             </span>
             <div className="flex items-center gap-1 text-amber-500 font-medium">
               <Star className="w-3 h-3 fill-amber-400 text-amber-400" />

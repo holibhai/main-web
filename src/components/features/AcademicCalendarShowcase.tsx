@@ -46,7 +46,7 @@ const SAMPLE_EVENTS: CalendarEvent[] = [
     location: 'Main Auditorium & Live HD Stream',
     syllabusTopic: 'Unit 08: Integral Calculus (NIE A/L Core)',
     status: 'upcoming',
-    zoomLink: 'https://mentify.edu.lk/stream/math-live',
+    zoomLink: 'https://tit.edu.lk/stream/math-live',
   },
   {
     id: 'ev-2',
@@ -122,7 +122,7 @@ const SAMPLE_EVENTS: CalendarEvent[] = [
     dayNumber: 24,
     timeRange: '06:00 PM – 07:30 PM',
     instructor: 'Dr. N. Wickramasinghe',
-    location: 'Google Meet / Mentify Chat Room',
+    location: 'Google Meet / TiT Chat Room',
     syllabusTopic: 'Unit 05: Plant Physiology & C4 Pathway',
     status: 'upcoming',
   },
@@ -176,7 +176,7 @@ export const AcademicCalendarShowcase: React.FC = () => {
   };
 
   const handleDownloadICS = (ev: CalendarEvent) => {
-    const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Mentify Education//Academic Calendar//EN\nBEGIN:VEVENT\nSUMMARY:${ev.title}\nDESCRIPTION:${ev.syllabusTopic} - Instructor: ${ev.instructor}\nLOCATION:${ev.location}\nSTATUS:CONFIRMED\nEND:VEVENT\nEND:VCALENDAR`;
+    const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//TiT Education//Academic Calendar//EN\nBEGIN:VEVENT\nSUMMARY:${ev.title}\nDESCRIPTION:${ev.syllabusTopic} - Instructor: ${ev.instructor}\nLOCATION:${ev.location}\nSTATUS:CONFIRMED\nEND:VEVENT\nEND:VCALENDAR`;
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

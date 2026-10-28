@@ -108,7 +108,7 @@ export const AIChatbotShowcase: React.FC = () => {
     {
       id: 'init-1',
       sender: 'ai',
-      text: 'Ayubowan & Vanakkam! I am your Mentify Syllabus AI Study Coach. I can provide step-by-step mathematical proofs, Physics derivations, and Chemistry reaction mechanisms strictly aligned with official NIE marking standards. What would you like to solve today?',
+      text: 'Ayubowan & Vanakkam! I am your TiT Syllabus AI Study Coach. I can provide step-by-step mathematical proofs, Physics derivations, and Chemistry reaction mechanisms strictly aligned with official NIE marking standards. What would you like to solve today?',
       timestamp: 'Just now',
     },
     {
@@ -194,7 +194,7 @@ export const AIChatbotShowcase: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-white">Mentify AI Study Coach</span>
+              <span className="text-sm font-bold text-white">TiT AI Study Coach</span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/30 text-indigo-300 border border-indigo-400/30">
                 Grounded on NIE Syllabus
               </span>
@@ -293,7 +293,7 @@ export const AIChatbotShowcase: React.FC = () => {
                       isAI ? 'text-indigo-600 dark:text-indigo-400' : 'text-indigo-100'
                     }`}
                   >
-                    {isAI ? 'Mentify AI Tutor' : 'You (Student)'}
+                    {isAI ? 'TiT AI Tutor' : 'You (Student)'}
                   </span>
                   <span
                     className={`text-[10px] ${

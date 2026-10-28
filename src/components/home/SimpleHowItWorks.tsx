@@ -59,7 +59,7 @@ export const SimpleHowItWorks: React.FC<SimpleHowItWorksProps> = ({
       step: '02',
       title: 'Ask Questions & Get 24/7 AI Answers',
       summary:
-        'Stuck on a tricky past-paper derivation late at night? Ask our Mentify AI Tutor in English, Tamil, or Sinhala for step-by-step working aligned with official marking schemes.',
+        'Stuck on a tricky past-paper derivation late at night? Ask our TiT AI Tutor in English, Tamil, or Sinhala for step-by-step working aligned with official marking schemes.',
       featureKey: 'ai' as FeatureTabKey,
       icon: <Bot className="w-6 h-6 text-purple-600 dark:text-purple-400" />,
       tag: '24/7 Instant Help',
@@ -76,7 +76,7 @@ export const SimpleHowItWorks: React.FC<SimpleHowItWorksProps> = ({
               AI
             </div>
             <p className="text-slate-700 dark:text-slate-300">
-              <span className="font-semibold text-slate-900 dark:text-white">Mentify AI:</span> "For projectile range on flat ground, R = (u² sin 2θ) / g. Let us break down the steps..."
+              <span className="font-semibold text-slate-900 dark:text-white">TiT AI:</span> "For projectile range on flat ground, R = (u² sin 2θ) / g. Let us break down the steps..."
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const SimpleHowItWorks: React.FC<SimpleHowItWorksProps> = ({
           <span>Simple 3-Step Experience</span>
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          How Mentify Works for Every Student
+          How TiT Works for Every Student
         </h2>
         <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
           No complicated setup or confusing dashboards. Everything you need to understand your syllabus, ask questions, and pass your exams is ready in three simple steps.
@@ -192,7 +192,7 @@ export const SimpleHowItWorks: React.FC<SimpleHowItWorksProps> = ({
           </div>
           <div>
             <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-              Try Mentify Core Tools Right Here:
+              Try TiT Core Tools Right Here:
             </h4>
             <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
               Click any tool to open its live interactive simulator below

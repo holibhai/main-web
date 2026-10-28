@@ -168,7 +168,7 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
           <div className="text-xs text-indigo-950 dark:text-indigo-200 space-y-1">
             <h4 className="font-bold text-sm text-indigo-950 dark:text-white">Keycloak Role-Based Authentication Architecture</h4>
             <p className="text-indigo-900/80 dark:text-indigo-300/80 leading-relaxed">
-              Mentify portals are safeguarded by single sign-on (SSO) with OpenID Connect (OIDC).
+              TiT portals are safeguarded by single sign-on (SSO) with OpenID Connect (OIDC).
               Users are routed to their authorized role dashboard (Student, Teacher, or Administrator) with
               strict token validation and session rotation.
             </p>

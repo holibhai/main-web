@@ -18,16 +18,16 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'Cart',
 
     // Hero
-    'hero.badge': 'TiT Education Official Digital Platform',
-    'hero.headline': 'The All-in-One Learning App for Sri Lankan Students',
+    'hero.badge': 'TiT Online Education · titjaffna.lk · Alaveddy, Jaffna',
+    'hero.headline': 'Online Tuition Platform for Grades 1 to 13',
     'hero.subheadline':
-      'Chat directly with your course mentors and classmates, get 24/7 answers from our AI study bot, track classes on your calendar, and practice with timed quizzes.',
-    'hero.cta.courses': 'Explore Courses & Batches',
+      'Headquartered in Alaveddy, Jaffna, TiT empowers school students across Sri Lanka with live interactive Zoom classes, 500+ recorded lessons, past papers, and instant exam result tracking.',
+    'hero.cta.courses': 'Explore Grades 1–13 Courses',
     'hero.cta.resources': 'Try 5 LMS Features Live',
-    'hero.stat.courses': 'Curated Syllabi',
-    'hero.stat.materials': 'Past Papers & Notes',
-    'hero.stat.teachers': 'Verified Mentors',
-    'hero.stat.curriculum': 'G.C.E. A/L & O/L',
+    'hero.stat.courses': 'Grades 1 to 13',
+    'hero.stat.materials': '500+ Videos & Notes',
+    'hero.stat.teachers': 'Verified Tutors',
+    'hero.stat.curriculum': 'Jaffna & Islandwide',
 
     // Features Highlights
     'features.title': 'Intelligent Learning Infrastructure',
@@ -134,16 +134,16 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'கூடை',
 
     // Hero
-    'hero.badge': 'TiT Education × Mentify கற்றல் தளம்',
-    'hero.headline': 'இலங்கை மாணவர்களுக்கான ஒரே முழுமையான கற்றல் செயலி',
+    'hero.badge': 'TiT Online Education · titjaffna.lk · அளவெட்டி, யாழ்ப்பாணம்',
+    'hero.headline': 'தரம் 1 முதல் தரம் 13 வரையிலான முன்னணி இணையக் கல்வி தளம்',
     'hero.subheadline':
-      'பாடநெறி வழிகாட்டிகள் மற்றும் நண்பர்களுடன் கலந்துரையாடுங்கள், 24/7 AI சந்தேக தீர்வு, கல்வி நாட்காட்டி மற்றும் மாதிரி வினாத்தாள்களை ஒரே இடத்தில் பெறுங்கள்.',
-    'hero.cta.courses': 'பாடநெறிகளை காண்க',
+      'யாழ்ப்பாணம் அளவெட்டியை தலைமையகமாகக் கொண்டு, இலங்கை முழுவதுமுள்ள மாணவர்களுக்கு நேரலை Zoom வகுப்புகள், 500+ வீடியோ பாடங்கள், மாதிரி வினாத்தாள்கள் மற்றும் உடனடி பரீட்சை பெறுபேறுகளை வழங்கும் தளம்.',
+    'hero.cta.courses': 'தரம் 1-13 பாடநெறிகள்',
     'hero.cta.resources': '5 நேரலை அம்சங்களை சோதிக்க',
-    'hero.stat.courses': 'பாடத்திட்டங்கள்',
-    'hero.stat.materials': 'வினாத்தாள்கள் & குறிப்புகள்',
+    'hero.stat.courses': 'தரம் 1 முதல் 13',
+    'hero.stat.materials': '500+ வீடியோ & குறிப்புகள்',
     'hero.stat.teachers': 'சிறந்த ஆசிரியர்கள்',
-    'hero.stat.curriculum': 'G.C.E. A/L & O/L',
+    'hero.stat.curriculum': 'யாழ்ப்பாணம் & நாடளாவிய ரீதியில்',
 
     // Features Highlights
     'features.title': 'அறிவுசார் கற்றல் கட்டமைப்பு',
@@ -241,7 +241,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'කරත්තය',
 
     // Hero
-    'hero.badge': 'TiT Education × Mentify ඉගෙනුම් වේදිකාව',
+    'hero.badge': 'TiT Education නිල ඉගෙනුම් වේදිකාව',
     'hero.headline': 'ශ්‍රී ලාංකික සිසුන් සඳහා වන එකම පරිපූර්ණ ඉගෙනුම් යෙදුම',
     'hero.subheadline':
       'ඔබේ ගුරුවරුන් සහ මිතුරන් සමඟ පන්ති කාමරයේ කතාබස් කරන්න, 24/7 AI සහාය, දින දර්ශනය සහ ආදර්ශ ප්‍රශ්න පත්‍ර සියල්ල එකම තැනකින් ලබා ගන්න.',

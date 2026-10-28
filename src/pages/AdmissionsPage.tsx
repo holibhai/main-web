@@ -367,7 +367,7 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ currentLang, onN
                   {/* Consent & Policy Checkbox */}
                   <div className="pt-2">
                     <Checkbox
-                      label="I confirm the accuracy of information and authorize Mentify admissions to contact me via WhatsApp/Email."
+                      label="I confirm the accuracy of information and authorize TiT admissions to contact me via WhatsApp/Email."
                       description="Pre-registration does not immediately activate LMS billing until counselor intake confirmation."
                       checked={formData.consentAgreed}
                       onChange={(e) => setFormData({ ...formData, consentAgreed: e.target.checked })}

@@ -37,7 +37,7 @@ export const HeroInteractivePreview: React.FC<HeroInteractivePreviewProps> = ({ 
             <span className="w-3 h-3 rounded-full bg-rose-400" />
             <span className="w-3 h-3 rounded-full bg-amber-400" />
             <span className="w-3 h-3 rounded-full bg-emerald-400" />
-            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-2">mentify-app.edu.lk/lms-suite</span>
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-2">tit-app.edu.lk/lms-suite</span>
           </div>
 
           <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-2xs">
@@ -182,7 +182,7 @@ export const HeroInteractivePreview: React.FC<HeroInteractivePreviewProps> = ({ 
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                    Mentify Syllabus AI Tutor
+                    TiT Syllabus AI Tutor
                   </span>
                   <Badge variant="accent" size="sm">
                     Step-by-Step
@@ -268,7 +268,7 @@ export const HeroInteractivePreview: React.FC<HeroInteractivePreviewProps> = ({ 
         <div className="px-5 py-3 bg-slate-50/80 dark:bg-slate-950/80 border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
           <div className="flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span className="font-medium">All 5 Features Live in Mentify Core</span>
+            <span className="font-medium">All 5 Features Live in TiT Core</span>
           </div>
 
           {onNavigate && (

@@ -141,7 +141,7 @@ export const MaterialDetailPage: React.FC<MaterialDetailPageProps> = ({
               <div className="text-xs text-indigo-950 dark:text-indigo-200 space-y-1">
                 <span className="font-bold block">Academic Integrity & Verified Solutions</span>
                 <p className="text-indigo-900/80 dark:text-indigo-300/80 leading-relaxed">
-                  Every past paper scheme and model document published on the Mentify marketplace is vetted by faculty members to ensure precision and syllabus conformity.
+                  Every past paper scheme and model document published on the TiT marketplace is vetted by faculty members to ensure precision and syllabus conformity.
                 </p>
               </div>
             </div>
@@ -182,7 +182,7 @@ export const MaterialDetailPage: React.FC<MaterialDetailPageProps> = ({
                   <div className="min-w-0">
                     <span className="text-[11px] font-semibold text-slate-400 block uppercase">Authored By</span>
                     <h5 className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">
-                      {material.authorName || 'Mentify Academic Board'}
+                      {material.authorName || 'TiT Academic Board'}
                     </h5>
                   </div>
                 </div>

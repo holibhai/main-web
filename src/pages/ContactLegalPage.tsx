@@ -81,7 +81,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
             Help Center, Inquiries & Governance
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
-            Get in touch with the Mentify and TiT Education administration team or review institutional policies.
+            Get in touch with the TiT Education administration team or review institutional policies.
           </p>
 
           <div className="mt-8 flex justify-center">
@@ -250,7 +250,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
                       Ticket ID: {ticketId}
                     </p>
                     <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
-                      Thank you for contacting Mentify. A member of our academic support team will respond to {formData.email} within 1 business day.
+                      Thank you for contacting TiT. A member of our academic support team will respond to {formData.email} within 1 business day.
                     </p>
                     <Button
                       variant="outline"
@@ -306,7 +306,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
             <section className="space-y-2">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">1. Information We Collect</h3>
               <p>
-                Mentify collects personal information necessary to facilitate academic enrollment, portal access,
+                TiT collects personal information necessary to facilitate academic enrollment, portal access,
                 and digital resource distribution. This includes student names, guardian contact numbers, email addresses,
                 geographic district, and educational stream preferences submitted during pre-registration.
               </p>
@@ -332,7 +332,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">4. Parental Rights</h3>
               <p>
                 Parents and legal guardians may request inspection, correction, or deletion of their child's pre-registration
-                records by contacting admissions@mentify.edu.lk.
+                records by contacting admissions@tit.edu.lk.
               </p>
             </section>
           </div>
@@ -349,7 +349,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
             <section className="space-y-2">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">1. Acceptance of Terms</h3>
               <p>
-                By using Mentify and its associated services, you agree to comply with all institutional academic rules,
+                By using TiT and its associated services, you agree to comply with all institutional academic rules,
                 code of conduct guidelines, and applicable intellectual property laws.
               </p>
             </section>
@@ -357,8 +357,8 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
             <section className="space-y-2">
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">2. Intellectual Property of Learning Materials</h3>
               <p>
-                All past paper markings, model answers, revision guides, and video lectures made available on Mentify
-                are the intellectual property of Mentify and its authoring educators. Redistribution, unauthorized
+                All past paper markings, model answers, revision guides, and video lectures made available on TiT
+                are the intellectual property of TiT and its authoring educators. Redistribution, unauthorized
                 resale, or public republication is strictly prohibited.
               </p>
             </section>

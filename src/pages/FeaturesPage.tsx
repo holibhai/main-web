@@ -180,7 +180,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
                 align="left"
                 badge="Pedagogical Engine"
                 title="Curriculum-Grounded AI & Verified Mentorship"
-                subtitle="Unlike generic tools, Mentify's chat, AI engine, and grading schemes are verified by certified educators against NIE curricula."
+                subtitle="Unlike generic tools, TiT's chat, AI engine, and grading schemes are verified by certified educators against NIE curricula."
               />
 
               <div className="space-y-3.5">
@@ -268,7 +268,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
       <section>
         <Container size="md" className="text-center">
           <Card padding="lg" className="border-indigo-100 dark:border-indigo-900/40 bg-gradient-to-r from-indigo-50/50 via-white to-blue-50/50 dark:from-slate-900 dark:via-indigo-950/20 dark:to-slate-900">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Experience the Mentify Difference</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Experience the TiT Difference</h3>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto">
               Join upcoming term batches or access our open marketplace materials today.
             </p>

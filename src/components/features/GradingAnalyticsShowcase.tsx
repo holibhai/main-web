@@ -390,7 +390,7 @@ export const GradingAnalyticsShowcase: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900 dark:text-white">
-                    TiT Institute of Technology & Mentify
+                    TiT Education & Academic Board
                   </h4>
                   <p className="text-[11px] text-slate-500">Official Term Academic Report Card</p>
                 </div>

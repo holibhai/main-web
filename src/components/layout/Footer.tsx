@@ -12,9 +12,11 @@ import { SITE_CONFIG } from '../../lib/config/site';
 
 export interface FooterProps {
   onNavigate: (path: string) => void;
+  onOpenResults?: () => void;
+  onOpenTutorApply?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResults, onOpenTutorApply }) => {
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,16 +29,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div>
                 <span className="text-xl font-extrabold text-white tracking-tight">
-                  {SITE_CONFIG.brandName}
+                  {SITE_CONFIG.brandName} Online Education
                 </span>
-                <span className="text-xs text-slate-400 block -mt-0.5">
-                  Academic Platform & Resource Hub
+                <span className="text-xs text-indigo-400 block -mt-0.5">
+                  titjaffna.lk · Alaveddy, Jaffna
                 </span>
               </div>
             </div>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              Empowering students, educators, and institutions with intelligent learning management,
-              curated educational resources, and syllabus-aligned AI study assistance.
+              Empowering students across Sri Lanka from Grade 1 to Grade 13 with live Zoom classes,
+              500+ video lessons, past papers, and official exam results tracking.
             </p>
             <div className="pt-2 text-xs text-slate-400 space-y-2">
               <div className="flex items-center gap-2">
@@ -45,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-indigo-400 shrink-0" />
-                <span>{SITE_CONFIG.contact.phone} • WhatsApp: {SITE_CONFIG.contact.whatsapp}</span>
+                <span>Phone / WhatsApp: {SITE_CONFIG.contact.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-indigo-400 shrink-0" />
@@ -65,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('courses')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  All Academic Courses
+                  All Grades (1–13)
                 </button>
               </li>
               <li>
@@ -73,7 +75,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('courses')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  A/L Combined Mathematics
+                  Grade 5 Scholarship
                 </button>
               </li>
               <li>
@@ -81,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('courses')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  A/L Physics & Chemistry
+                  G.C.E. O/L (Grades 10–11)
                 </button>
               </li>
               <li>
@@ -89,16 +91,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('courses')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  O/L Foundation Series
+                  G.C.E. A/L (Grades 12–13)
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('teachers')}
-                  className="hover:text-indigo-400 transition-colors cursor-pointer"
-                >
-                  Verified Teacher Directory
-                </button>
+                {onOpenTutorApply && (
+                  <button
+                    onClick={onOpenTutorApply}
+                    className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer font-medium"
+                  >
+                    Apply as a Tutor
+                  </button>
+                )}
               </li>
             </ul>
           </div>
@@ -106,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Marketplace & Features */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Marketplace & AI
+              Resources & Tests
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -114,7 +118,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('marketplace')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  Model Papers & Marking
+                  Download Model Papers
                 </button>
               </li>
               <li>
@@ -122,23 +126,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('marketplace')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  Short Notes & Summaries
+                  Syllabus PDF Notes
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('marketplace')}
-                  className="hover:text-indigo-400 transition-colors cursor-pointer"
-                >
-                  Past Paper Archives
-                </button>
+                {onOpenResults && (
+                  <button
+                    onClick={onOpenResults}
+                    className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer font-semibold flex items-center gap-1.5"
+                  >
+                    <span>Check Exam Results</span>
+                    <span className="text-[9px] bg-amber-400 text-slate-950 px-1 rounded font-bold">Portal</span>
+                  </button>
+                )}
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('features')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  AI Study Coach Overview
+                  Live Classroom & AI Tutor
                 </button>
               </li>
               <li>
@@ -155,62 +162,66 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Institutional Portals & Governance */}
           <div>
             <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-              Institutional Access
+              Institutional Portals
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <a
-                  href={SITE_CONFIG.portals.student}
+                  href={SITE_CONFIG.officialUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+                  className="text-indigo-400 hover:underline flex items-center gap-1.5 font-medium"
                 >
-                  <span>Student Portal</span>
+                  <span>titjaffna.lk</span>
                   <span className="text-[10px] bg-indigo-950 text-indigo-300 px-1 rounded border border-indigo-800">
-                    LMS
+                    Official
                   </span>
                 </a>
               </li>
               <li>
-                <a
-                  href={SITE_CONFIG.portals.teacher}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
-                >
-                  <span>Teacher Portal</span>
-                  <span className="text-[10px] bg-blue-950 text-blue-300 px-1 rounded border border-blue-800">
-                    Faculty
-                  </span>
-                </a>
+                {onOpenResults ? (
+                  <button
+                    onClick={onOpenResults}
+                    className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>Student Result Tracker</span>
+                  </button>
+                ) : (
+                  <a
+                    href={SITE_CONFIG.portals.results}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>Student Result Tracker</span>
+                  </a>
+                )}
               </li>
               <li>
-                <a
-                  href={SITE_CONFIG.portals.admin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
-                >
-                  <span>Admin Portal</span>
-                  <span className="text-[10px] bg-slate-800 text-slate-300 px-1 rounded border border-slate-700">
-                    Secure
-                  </span>
-                </a>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('faq')}
-                  className="hover:text-indigo-400 transition-colors cursor-pointer"
-                >
-                  Help & FAQs
-                </button>
+                {onOpenTutorApply ? (
+                  <button
+                    onClick={onOpenTutorApply}
+                    className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>Tutor Registration</span>
+                  </button>
+                ) : (
+                  <a
+                    href={SITE_CONFIG.portals.teacher}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-indigo-400 transition-colors flex items-center gap-1.5"
+                  >
+                    <span>Tutor Portal</span>
+                  </a>
+                )}
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('contact')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  Campus Support
+                  Jaffna Campus Support
                 </button>
               </li>
             </ul>

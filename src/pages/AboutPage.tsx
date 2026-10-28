@@ -32,13 +32,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
       <section className="pt-12 sm:pt-16 bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-slate-800 pb-16 transition-colors">
         <Container size="md" className="text-center">
           <Badge variant="primary" size="md" className="mb-4">
-            About Mentify & TiT Education
+            About TiT Education
           </Badge>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Advancing Academic Excellence Through Intelligent Learning Technology
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            Mentify connects students with distinguished educators, validated past paper resources, and
+            TiT connects students with distinguished educators, validated past paper resources, and
             structured curriculum pathways across Sri Lanka and international examination boards.
           </p>
         </Container>
@@ -82,19 +82,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
               <SectionHeading
                 align="left"
                 badge="Academic Heritage"
-                title="Institutional Collaboration with TiT Education"
-                subtitle="Rooted in decades of proven classroom teaching, augmented by modern software architecture."
+                title="TiT Online Education (titjaffna.lk)"
+                subtitle="Rooted in Alaveddy, Jaffna, empowering students across Sri Lanka from Grade 1 to Grade 13."
               />
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                Mentify was built in direct coordination with active teachers at TiT Education who recognized
-                that students needed more than passive video libraries. They needed systematic question practice,
-                speed drills, and an AI revision coach aligned with actual examination criteria.
+                TiT was founded in Alaveddy, Jaffna, with a vision to provide every student across the island
+                with direct access to premier educators. Through live Zoom classes, 500+ on-demand video archives,
+                comprehensive past papers, and our official online Exam Results Portal, TiT delivers quality
+                education in Tamil and English mediums from Primary to Advanced Level.
               </p>
               <div className="pt-2 space-y-3">
                 {[
-                  'Strict alignment with National Institute of Education (NIE) syllabi',
-                  'Verified marking schemes vetted by senior national paper setters',
-                  'Complete transparency between students, parents, and educators',
+                  'Headquartered in Alaveddy, Jaffna, serving all 25 administrative districts',
+                  'Comprehensive syllabus coverage from Grade 1 through Grade 13 (Scholarship, O/L, A/L)',
+                  'Live Zoom lectures + 24/7 video replays + downloadable PDF study packs',
+                  'Instant Exam Results Portal and Term Report Card verification',
                 ].map((pt, idx) => (
                   <div key={idx} className="flex items-center gap-2.5 text-sm text-slate-700 dark:text-slate-300">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -150,7 +152,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
           <SectionHeading
             badge="Verified Faculty"
             title="Academic Leadership & Department Heads"
-            subtitle="Meet the experienced educators who curate syllabi and lead academic development across Mentify."
+            subtitle="Meet the experienced educators who curate syllabi and lead academic development across TiT."
           />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
@@ -175,7 +177,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
       <section>
         <Container size="md" className="text-center">
           <Card padding="lg" className="border-indigo-100 dark:border-indigo-900/40 bg-indigo-50/30 dark:bg-indigo-950/20">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Ready to Experience Mentify?</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Ready to Experience TiT?</h3>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto">
               Join hundreds of motivated students already preparing with our structured courses and verified materials.
             </p>

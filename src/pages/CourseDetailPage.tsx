@@ -159,7 +159,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                   </div>
                   <p className="text-xs sm:text-sm text-indigo-600 dark:text-indigo-400 font-medium">{course.teacher.title}</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Senior curriculum specialist conducting live broadcast lectures and personal doubt review sessions inside the Mentify portal.
+                    Senior curriculum specialist conducting live broadcast lectures and personal doubt review sessions inside the TiT portal.
                   </p>
                 </div>
               </div>

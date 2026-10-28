@@ -176,7 +176,7 @@ export const ZScoreCalculator: React.FC<{ onOpenAdmissions?: () => void }> = ({ 
             <Info className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
             <p className="text-[11px] leading-relaxed">
               Calculated using the Department of Examinations standardization algorithm: $Z = (X - \mu) / \sigma$.
-              Mentify syllabus revision courses are designed to boost raw performance above the top 5% island tier.
+              TiT syllabus revision courses are designed to boost raw performance above the top 5% island tier.
             </p>
           </div>
         </div>
@@ -251,7 +251,7 @@ export const ZScoreCalculator: React.FC<{ onOpenAdmissions?: () => void }> = ({ 
               className="w-full rounded-xl text-xs"
               rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
             >
-              Consult Mentify Faculty Counselor
+              Consult TiT Faculty Counselor
             </Button>
           </div>
         </div>

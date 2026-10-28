@@ -81,12 +81,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                   {SITE_CONFIG.brandName}
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-200/60 dark:border-indigo-800/60">
-                  SaaS
+                <span className="text-[10px] font-bold tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-200/60 dark:border-indigo-800/60">
+                  titjaffna.lk
                 </span>
               </div>
               <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block -mt-0.5">
-                in partnership with {SITE_CONFIG.instituteName}
+                Online Education · Alaveddy, Jaffna
               </span>
             </div>
           </div>

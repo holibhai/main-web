@@ -45,7 +45,7 @@ export interface MarketplaceQueryParams {
   limit?: number;
 }
 
-class MentifyApiClient {
+class TiTApiClient {
   private baseUrl: string;
 
   constructor() {
@@ -270,4 +270,4 @@ class MentifyApiClient {
   }
 }
 
-export const api = new MentifyApiClient();
+export const api = new TiTApiClient();

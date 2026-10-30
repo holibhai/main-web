@@ -75,7 +75,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
       <section className="pt-12 sm:pt-16 bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-slate-800 pb-12 transition-colors">
         <Container size="md" className="text-center">
           <Badge variant="primary" size="md" className="mb-3">
-            Campus Support & Legal
+            Student Support & Legal
           </Badge>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Help Center, Inquiries & Governance
@@ -87,7 +87,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
           <div className="mt-8 flex justify-center">
             <Tabs
               tabs={[
-                { id: 'contact', label: 'Contact Campus' },
+                { id: 'contact', label: 'Contact Tuition Center' },
                 { id: 'faq', label: 'Frequently Asked Questions' },
                 { id: 'privacy', label: 'Privacy Policy' },
                 { id: 'terms', label: 'Terms of Use' },
@@ -100,14 +100,14 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
       </section>
 
       <Container>
-        {/* TAB 1: CONTACT FORM & CAMPUS INFO */}
+        {/* TAB 1: CONTACT FORM & CENTER INFO */}
         {activeTab === 'contact' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            {/* Left: Campus Contact Details */}
+            {/* Left: Contact Details */}
             <div className="lg:col-span-5 space-y-6">
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-                  Head Office & Campus
+                  Head Office & Tuition Center
                 </span>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Reach Out to Our Team</h3>
                 <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -122,7 +122,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div className="text-xs">
-                    <span className="font-bold text-slate-800 dark:text-slate-200 text-sm block">Main Campus Address</span>
+                    <span className="font-bold text-slate-800 dark:text-slate-200 text-sm block">Main Center Address</span>
                     <p className="text-slate-600 dark:text-slate-400 mt-0.5 leading-relaxed">{SITE_CONFIG.contact.address}</p>
                   </div>
                 </div>
@@ -313,18 +313,18 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
             </section>
 
             <section className="space-y-2">
-              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">2. Keycloak Authentication & Role Security</h3>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">2. Secure Student & Staff Accounts</h3>
               <p>
-                Student, Teacher, and Administrator accounts are authenticated via Keycloak. We never store plain-text
-                passwords. Access tokens and session credentials are securely encrypted and subjected to automatic expiry.
+                Student, Teacher, and Administrator accounts are protected by secure industry-standard encryption. We never store plain-text
+                passwords, and logins expire automatically when sessions finish to safeguard student privacy.
               </p>
             </section>
 
             <section className="space-y-2">
-              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">3. Educational Data & S3 Asset Protection</h3>
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">3. Learning Material Protection</h3>
               <p>
-                Digital learning materials, recordings, and assignments are hosted in secure AWS S3 storage buckets with
-                time-limited pre-signed URLs. Direct public enumeration of internal S3 object keys is prohibited.
+                Digital learning materials, class recordings, and assignments are hosted in private, secure cloud storage with
+                personalized student access. Unapproved copying or unauthorized distribution of intellectual property is strictly prohibited.
               </p>
             </section>
 

@@ -3,7 +3,6 @@ import {
   BookOpen,
   ChevronDown,
   Globe,
-  GraduationCap,
   LogIn,
   Menu,
   Moon,
@@ -68,28 +67,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18">
-          {/* Brand Logo */}
-          <div
+          {/* Brand Logo: ONLY the official TiT Jaffna logo image without text near it */}
+          <button
+            type="button"
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 cursor-pointer select-none group"
+            className="flex items-center cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-full group py-1"
+            title="TiT Jaffna - Home"
+            aria-label="TiT Jaffna Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  {SITE_CONFIG.brandName}
-                </span>
-                <span className="text-[10px] font-bold tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded border border-indigo-200/60 dark:border-indigo-800/60">
-                  titjaffna.lk
-                </span>
-              </div>
-              <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 block -mt-0.5">
-                Online Education · Alaveddy, Jaffna
-              </span>
-            </div>
-          </div>
+            <img
+              src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+              alt="TiT Jaffna Publication"
+              className="h-12 w-12 sm:h-13 sm:w-13 rounded-full object-contain bg-white shadow-xs ring-1 ring-slate-200/90 dark:ring-slate-700 group-hover:scale-105 transition-transform duration-200"
+            />
+          </button>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1">

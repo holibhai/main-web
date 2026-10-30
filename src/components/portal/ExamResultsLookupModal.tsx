@@ -173,19 +173,21 @@ export const ExamResultsLookupModal: React.FC<ExamResultsLookupModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-7 space-y-6">
-        {/* Header with titjaffna.lk branding */}
+        {/* Header with TiT branding */}
         <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-md">
-              <Award className="w-6 h-6" />
-            </div>
+          <div className="flex items-center gap-3.5">
+            <img
+              src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+              alt="TiT Jaffna Publication"
+              className="w-13 h-13 rounded-full object-contain bg-white shadow-md ring-2 ring-indigo-500/30 shrink-0"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   TiT Exam Results Portal
                 </h3>
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-200/80 dark:border-indigo-800/80">
-                  titjaffna.lk
+                  Student Verification
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -304,16 +306,23 @@ export const ExamResultsLookupModal: React.FC<ExamResultsLookupModalProps> = ({
             {/* Student Metadata Card */}
             <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 text-white p-5 rounded-2xl shadow-md space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
-                <div>
-                  <span className="text-[10px] font-bold tracking-wider uppercase text-indigo-300">
-                    Official Student Statement
-                  </span>
-                  <h4 className="text-xl font-bold tracking-tight">
-                    {searchedRecord.studentName}
-                  </h4>
-                  <p className="text-xs text-indigo-200">
-                    Index No: <strong>{searchedRecord.indexNo}</strong> · District: {searchedRecord.district}
-                  </p>
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+                    alt="TiT Emblem"
+                    className="w-12 h-12 rounded-full object-contain bg-white shadow-md ring-2 ring-white/20 shrink-0 hidden sm:block"
+                  />
+                  <div>
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-indigo-300">
+                      Official Student Statement
+                    </span>
+                    <h4 className="text-xl font-bold tracking-tight">
+                      {searchedRecord.studentName}
+                    </h4>
+                    <p className="text-xs text-indigo-200">
+                      Index No: <strong>{searchedRecord.indexNo}</strong> · District: {searchedRecord.district}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="text-left sm:text-right">
@@ -405,15 +414,9 @@ export const ExamResultsLookupModal: React.FC<ExamResultsLookupModalProps> = ({
 
             {/* Action Bar */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-200 dark:border-slate-800">
-              <a
-                href={SITE_CONFIG.officialUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
-              >
-                <span>Verify on official titjaffna.lk portal</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </a>
+              <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium flex items-center gap-1">
+                <span>Verified by TiT Online Education Academic Registry</span>
+              </div>
 
               <div className="flex items-center gap-2">
                 <Button

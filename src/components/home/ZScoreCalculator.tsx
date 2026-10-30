@@ -104,7 +104,7 @@ export const ZScoreCalculator: React.FC<{ onOpenAdmissions?: () => void }> = ({ 
             </span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
-            G.C.E. A/L Projected Z-Score & Faculty Eligibility Simulator
+            G.C.E. A/L Projected Z-Score & Faculty Eligibility Calculator
           </h3>
           <p className="text-xs text-slate-300 mt-0.5">
             Slide your target term marks to project your standard deviation Z-score and check university cutoff eligibility.

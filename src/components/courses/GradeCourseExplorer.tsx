@@ -200,106 +200,118 @@ export const GradeCourseExplorer: React.FC<GradeCourseExplorerProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* 1. TOP CONTROLS: Academic Stages & View Mode Switcher */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs">
-        {/* Stage Filter Buttons */}
-        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1 md:pb-0">
-          {SITE_CONFIG.academicStages.map((stage) => {
-            const isActive = activeStage === stage.id;
-            return (
-              <button
-                key={stage.id}
-                type="button"
-                onClick={() => handleStageChange(stage.id)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-xl whitespace-nowrap transition-all flex items-center gap-1.5 ${
-                  isActive
-                    ? 'bg-indigo-600 text-white shadow-xs ring-2 ring-indigo-500/20'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`}
-              >
-                {stage.id === 'all' && <Compass className="w-3.5 h-3.5" />}
-                {stage.id === 'primary' && <Award className="w-3.5 h-3.5" />}
-                {stage.id === 'junior' && <BookOpen className="w-3.5 h-3.5" />}
-                {stage.id === 'ol' && <CheckCircle2 className="w-3.5 h-3.5" />}
-                {stage.id === 'al' && <GraduationCap className="w-3.5 h-3.5" />}
-                <span>{stage.name}</span>
-              </button>
-            );
-          })}
-        </div>
+      {/* 1. TOP BAR: Stage Tabs & View Mode Switcher */}
+      <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs space-y-3">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+          {/* Academic Tier Tabs */}
+          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1 lg:pb-0">
+            {SITE_CONFIG.academicStages.map((stage) => {
+              const isActive = activeStage === stage.id;
+              return (
+                <button
+                  key={stage.id}
+                  type="button"
+                  onClick={() => handleStageChange(stage.id)}
+                  className={`px-3.5 py-2 text-xs font-semibold rounded-xl whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 border ${
+                    isActive
+                      ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
+                      : 'bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700/60 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  {stage.id === 'all' && <Compass className="w-3.5 h-3.5" />}
+                  {stage.id === 'primary' && <Award className="w-3.5 h-3.5" />}
+                  {stage.id === 'junior' && <BookOpen className="w-3.5 h-3.5" />}
+                  {stage.id === 'ol' && <CheckCircle2 className="w-3.5 h-3.5" />}
+                  {stage.id === 'al' && <GraduationCap className="w-3.5 h-3.5" />}
+                  <span>{stage.name}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-md font-mono ${
+                      isActive ? 'bg-indigo-700/80 text-indigo-100' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                    }`}
+                  >
+                    {stage.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-        {/* View Mode Toggle (Cards vs. Timetable vs. Curriculum) */}
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl self-start md:self-auto shrink-0">
-          <button
-            type="button"
-            onClick={() => setViewMode('grid')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 ${
-              viewMode === 'grid'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Course Cards</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('timetable')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 ${
-              viewMode === 'timetable'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Calendar className="w-3.5 h-3.5 text-blue-500" />
-            <span>Class Timetable</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewMode('curriculum')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 ${
-              viewMode === 'curriculum'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <FileText className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Syllabus Topics</span>
-          </button>
+          {/* View Mode Toggle (Cards vs. Timetable vs. Curriculum) */}
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl shrink-0 self-start lg:self-auto">
+            <button
+              type="button"
+              onClick={() => setViewMode('grid')}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5 text-indigo-500" />
+              <span>Course Cards</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('timetable')}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer ${
+                viewMode === 'timetable'
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Calendar className="w-3.5 h-3.5 text-blue-500" />
+              <span>Weekly Timetable</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('curriculum')}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer ${
+                viewMode === 'curriculum'
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs font-semibold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-500" />
+              <span>Syllabus Topics</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* 2. INTERACTIVE 13-GRADE RAIL / SELECTOR */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+      {/* 2. CLEAN & PROPER GRADE SELECTOR CARDS */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-700 dark:text-slate-300">
-              Grade Selection:
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              {activeStage === 'all'
+                ? 'All Academic Grades (Grade 1 to 13)'
+                : SITE_CONFIG.academicStages.find((s) => s.id === activeStage)?.name || 'Select Grade'}
             </span>
-            <span className="hidden sm:inline text-slate-400">
-              Click any grade from Grade 1 to 13 to inspect curriculum & batch schedules
+            <span className="text-xs text-slate-400">·</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              Click a grade to view active batches and syllabi
             </span>
           </div>
 
           {selectedGradeId !== 'all' && (
-            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-lg">
+            <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-2.5 py-1 rounded-xl shadow-2xs">
               <button
                 type="button"
                 onClick={handlePrevGrade}
                 disabled={currentIndex <= 0}
-                className="p-1 rounded hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="p-1 rounded text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                 title="Previous Grade"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
               </button>
-              <span className="text-[11px] font-bold text-slate-700 dark:text-slate-200">
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
                 Grade {currentGrade?.level} of 13
               </span>
               <button
                 type="button"
                 onClick={handleNextGrade}
                 disabled={currentIndex >= allGrades.length - 1}
-                className="p-1 rounded hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="p-1 rounded text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                 title="Next Grade"
               >
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -308,44 +320,83 @@ export const GradeCourseExplorer: React.FC<GradeCourseExplorerProps> = ({
           )}
         </div>
 
-        {/* 13 Grade Cards with Visual Milestone Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 lg:grid-cols-14 gap-2">
-          {showAllGradesOption && (
+        {/* Clean Responsive Grade Deck */}
+        <div
+          className={`grid gap-3 ${
+            activeStage === 'ol' || activeStage === 'al'
+              ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl'
+              : activeStage === 'primary'
+              ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5'
+              : activeStage === 'junior'
+              ? 'grid-cols-2 sm:grid-cols-4'
+              : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7'
+          }`}
+        >
+          {/* "All Grades" Card when viewing All stage */}
+          {showAllGradesOption && activeStage === 'all' && (
             <button
               type="button"
               onClick={() => {
                 setSelectedGradeId('all');
                 setSelectedSubject('all');
               }}
-              className={`p-2.5 rounded-xl border text-left transition-all flex flex-col justify-between ${
+              className={`p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                 selectedGradeId === 'all'
-                  ? 'border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-200 ring-2 ring-indigo-500/20 shadow-xs'
-                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
+                  ? 'border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/70 text-indigo-950 dark:text-indigo-200 ring-2 ring-indigo-500/20 shadow-md'
+                  : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xs'
               }`}
             >
-              <div className="flex items-center justify-between text-[10px] uppercase font-bold text-slate-400">
-                <span>All</span>
-                <Compass className="w-3 h-3 text-indigo-500" />
+              <div className="flex items-center justify-between text-[11px] font-bold text-slate-400">
+                <span>Overview</span>
+                <Compass className="w-4 h-4 text-indigo-500" />
               </div>
-              <div className="font-bold text-xs sm:text-sm mt-1">All 13</div>
-              <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
-                {courses.length} Batches
+              <div className="my-2">
+                <div className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">
+                  All Grades
+                </div>
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                  Grades 1 – 13
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-[11px] font-semibold text-indigo-600 dark:text-indigo-400 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <span>{courses.length} Total Batches</span>
+                {selectedGradeId === 'all' && <span>✓ Active</span>}
               </div>
             </button>
           )}
 
-          {allGrades.map((grade) => {
+          {visibleGrades.map((grade) => {
             const isSelected = selectedGradeId === grade.id;
             const count = courseCountByGrade[grade.id] || 0;
-            const isStageMatch = activeStage === 'all' || grade.stageId === activeStage;
 
-            // Milestone badge label
-            let milestoneTag: string | null = null;
-            if (grade.level === 5) milestoneTag = 'Scholarship';
-            if (grade.level === 10) milestoneTag = 'O/L Theory';
-            if (grade.level === 11) milestoneTag = 'O/L Exam';
-            if (grade.level === 12) milestoneTag = 'A/L Theory';
-            if (grade.level === 13) milestoneTag = 'A/L Exam';
+            // Milestone badge styling
+            let milestoneTag: { label: string; badgeClass: string } | null = null;
+            if (grade.level === 5) {
+              milestoneTag = {
+                label: 'Scholarship Exam',
+                badgeClass: 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300/60',
+              };
+            } else if (grade.level === 10) {
+              milestoneTag = {
+                label: 'O/L Theory Year',
+                badgeClass: 'bg-sky-100 text-sky-800 dark:bg-sky-950/80 dark:text-sky-300 border border-sky-300/60',
+              };
+            } else if (grade.level === 11) {
+              milestoneTag = {
+                label: 'O/L National Exam',
+                badgeClass: 'bg-blue-100 text-blue-800 dark:bg-blue-950/80 dark:text-blue-300 border border-blue-300/60',
+              };
+            } else if (grade.level === 12) {
+              milestoneTag = {
+                label: 'A/L Theory Stream',
+                badgeClass: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/80 dark:text-indigo-300 border border-indigo-300/60',
+              };
+            } else if (grade.level === 13) {
+              milestoneTag = {
+                label: 'A/L Final Revision',
+                badgeClass: 'bg-purple-100 text-purple-800 dark:bg-purple-950/80 dark:text-purple-300 border border-purple-300/60',
+              };
+            }
 
             return (
               <button
@@ -355,52 +406,48 @@ export const GradeCourseExplorer: React.FC<GradeCourseExplorerProps> = ({
                   setSelectedGradeId(grade.id);
                   setSelectedSubject('all');
                 }}
-                className={`relative p-2 rounded-xl border text-left transition-all flex flex-col justify-between min-h-[78px] ${
+                className={`group p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between relative ${
                   isSelected
-                    ? 'border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/60 text-indigo-950 dark:text-indigo-200 ring-2 ring-indigo-500/20 shadow-xs scale-[1.02]'
-                    : !isStageMatch
-                    ? 'border-slate-200/50 dark:border-slate-800/50 bg-slate-50/40 dark:bg-slate-900/30 text-slate-400 opacity-60 hover:opacity-100'
-                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700'
+                    ? 'border-indigo-600 bg-indigo-50/90 dark:bg-indigo-950/70 text-indigo-950 dark:text-indigo-200 ring-2 ring-indigo-500/30 shadow-md'
+                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-indigo-300 dark:hover:border-slate-700 hover:shadow-xs'
                 }`}
               >
-                {/* Stage Tag & Milestone Indicator */}
-                <div className="flex items-center justify-between w-full">
-                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 truncate">
-                    G{grade.level}
+                {/* Top: Stage Tag & Milestone Pill */}
+                <div className="flex items-center justify-between gap-1 w-full mb-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    {grade.stage}
                   </span>
                   {milestoneTag && (
-                    <span
-                      className={`w-2 h-2 rounded-full shrink-0 ${
-                        grade.level === 5
-                          ? 'bg-amber-500 ring-2 ring-amber-400/30'
-                          : grade.level === 11
-                          ? 'bg-blue-500 ring-2 ring-blue-400/30'
-                          : grade.level === 13
-                          ? 'bg-emerald-500 ring-2 ring-emerald-400/30'
-                          : 'bg-purple-500 ring-2 ring-purple-400/30'
-                      }`}
-                      title={milestoneTag}
-                    />
+                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-md ${milestoneTag.badgeClass}`}>
+                      {milestoneTag.label}
+                    </span>
                   )}
                 </div>
 
-                {/* Grade Label */}
-                <div>
-                  <div className="font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white leading-tight mt-0.5 truncate">
+                {/* Grade Name & Highlight */}
+                <div className="my-1">
+                  <div className="font-black text-sm sm:text-base text-slate-900 dark:text-white leading-tight">
                     {grade.shortName}
                   </div>
-                  {milestoneTag && (
-                    <div className="text-[8px] font-bold uppercase text-indigo-600 dark:text-indigo-400 tracking-tight leading-none mt-0.5 truncate">
-                      {milestoneTag}
-                    </div>
-                  )}
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
+                    {grade.highlight}
+                  </div>
                 </div>
 
-                {/* Available course count */}
-                <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 flex items-center justify-between">
-                  <span>{count} {count === 1 ? 'class' : 'classes'}</span>
-                  {isSelected && (
-                    <span className="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold">✓</span>
+                {/* Bottom: Batch count and selection indicator */}
+                <div className="flex items-center justify-between text-xs pt-2 mt-1 border-t border-slate-100 dark:border-slate-800/80">
+                  <span className="font-semibold text-slate-600 dark:text-slate-400">
+                    {count} {count === 1 ? 'batch' : 'batches'}
+                  </span>
+                  {isSelected ? (
+                    <span className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <span>Active</span>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                    </span>
+                  ) : (
+                    <span className="text-[11px] text-slate-400 group-hover:text-indigo-500 transition-colors">
+                      Select
+                    </span>
                   )}
                 </div>
               </button>
@@ -409,121 +456,87 @@ export const GradeCourseExplorer: React.FC<GradeCourseExplorerProps> = ({
         </div>
       </div>
 
-      {/* 3. SELECTED GRADE CONTEXT & SEARCH / QUICK STATS BAR */}
-      <div className="bg-gradient-to-r from-slate-50 via-indigo-50/30 to-slate-50 dark:from-slate-900 dark:via-indigo-950/20 dark:to-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 transition-colors">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          {/* Grade Title, Stage, and Educational Highlight */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 flex-wrap text-xs text-slate-500 dark:text-slate-400">
-              <span className="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-100/70 dark:bg-indigo-950/80 px-2 py-0.5 rounded-md">
-                {currentGrade ? currentGrade.stage : 'Full Curriculum'}
-              </span>
-              <span>·</span>
-              <span className="font-medium text-slate-700 dark:text-slate-300">
-                {gradeCourses.length} Active Batches
-              </span>
-              <span>·</span>
-              <span className="flex items-center gap-1">
-                <Users className="w-3.5 h-3.5 text-slate-400" />
-                {totalEnrolledInSelection} Students Enrolled
-              </span>
-              {currentGrade?.highlight && (
-                <>
-                  <span>·</span>
-                  <span className="text-amber-700 dark:text-amber-400 font-semibold flex items-center gap-1">
-                    <Sparkles className="w-3 h-3" />
-                    {currentGrade.highlight}
-                  </span>
-                </>
-              )}
-            </div>
+      {/* 3. COMPACT SEARCH & SUBJECT FILTER STRIP */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3 sm:p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs">
+        {/* Subject Filter Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1 md:pb-0">
+          <button
+            type="button"
+            onClick={() => setSelectedSubject('all')}
+            className={`px-3 py-1.5 text-xs rounded-xl font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+              selectedSubject === 'all'
+                ? 'bg-indigo-600 text-white shadow-2xs font-semibold'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }`}
+          >
+            <span>All Subjects</span>
+            <span
+              className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                selectedSubject === 'all'
+                  ? 'bg-indigo-700 text-indigo-100'
+                  : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              {gradeCourses.length}
+            </span>
+          </button>
 
-            <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {currentGrade ? `${currentGrade.name} Academic Batches` : 'All Grades (Grade 1 to Grade 13)'}
-            </h4>
+          {availableSubjects.map((sub) => (
+            <button
+              key={sub.name}
+              type="button"
+              onClick={() => setSelectedSubject(sub.name)}
+              className={`px-3 py-1.5 text-xs rounded-xl font-medium transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                selectedSubject === sub.name
+                  ? 'bg-indigo-600 text-white shadow-2xs font-semibold'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+              }`}
+            >
+              <span>{sub.name}</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                  selectedSubject === sub.name
+                    ? 'bg-indigo-700 text-indigo-100'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                }`}
+              >
+                {sub.count}
+              </span>
+            </button>
+          ))}
+        </div>
 
-            {currentGrade?.description && (
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
-                {currentGrade.description}
-              </p>
+        {/* Search & Format Filter Controls */}
+        <div className="flex items-center gap-2.5 shrink-0 self-end md:self-auto w-full md:w-auto">
+          <div className="relative flex-1 md:w-56">
+            <Input
+              placeholder={currentGrade ? `Search ${currentGrade.shortName}...` : 'Search courses...'}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              leftIcon={<Search className="w-3.5 h-3.5 text-slate-400" />}
+              className="py-1.5 text-xs pr-7"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             )}
           </div>
 
-          {/* Quick Search & Format Filter */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
-            <div className="relative w-full sm:w-60">
-              <Input
-                placeholder={`Search in ${currentGrade ? currentGrade.shortName : 'all grades'}...`}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                leftIcon={<Search className="w-3.5 h-3.5 text-slate-400" />}
-                className="py-1.5 text-xs pr-7"
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {/* Learning Format Filter */}
-            <select
-              value={selectedFormat}
-              onChange={(e) => setSelectedFormat(e.target.value)}
-              className="px-3 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 font-medium"
-            >
-              <option value="all">All Formats (Live & Hybrid)</option>
-              <option value="Online Live">Online Live Stream</option>
-              <option value="Hybrid">Hybrid (Campus + Online)</option>
-            </select>
-          </div>
+          <select
+            value={selectedFormat}
+            onChange={(e) => setSelectedFormat(e.target.value)}
+            className="px-3 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 font-medium shrink-0"
+          >
+            <option value="all">All Formats</option>
+            <option value="Online Live">Live Stream</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
         </div>
-
-        {/* Quick Subject Tabs with Count Badges */}
-        {availableSubjects.length > 1 && (
-          <div className="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 mr-1 flex items-center gap-1">
-              <Filter className="w-3 h-3" />
-              Subjects:
-            </span>
-            <button
-              type="button"
-              onClick={() => setSelectedSubject('all')}
-              className={`px-2.5 py-1 text-xs rounded-lg font-medium transition-all flex items-center gap-1.5 ${
-                selectedSubject === 'all'
-                  ? 'bg-indigo-600 text-white shadow-2xs'
-                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
-              }`}
-            >
-              <span>All Subjects</span>
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedSubject === 'all' ? 'bg-indigo-700 text-indigo-100' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
-                {gradeCourses.length}
-              </span>
-            </button>
-
-            {availableSubjects.map((sub) => (
-              <button
-                key={sub.name}
-                type="button"
-                onClick={() => setSelectedSubject(sub.name)}
-                className={`px-2.5 py-1 text-xs rounded-lg font-medium transition-all flex items-center gap-1.5 ${
-                  selectedSubject === sub.name
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
-                }`}
-              >
-                <span>{sub.name}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${selectedSubject === sub.name ? 'bg-indigo-700 text-indigo-100' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
-                  {sub.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* 4. MAIN VIEW CONTENT: Cards OR Timetable OR Curriculum */}

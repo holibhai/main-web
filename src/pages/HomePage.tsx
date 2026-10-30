@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Award,
@@ -20,7 +21,9 @@ import { CourseCard } from '../components/courses/CourseCard';
 import { MaterialCard } from '../components/marketplace/MaterialCard';
 import { MOCK_FAQS } from '../data/mockData';
 import { InteractiveAppSuite, FeatureTabKey } from '../components/features/InteractiveAppSuite';
+import { FourCoreFeaturesShowcase } from '../components/features/FourCoreFeaturesShowcase';
 import { GradeCourseExplorer } from '../components/courses/GradeCourseExplorer';
+import { AcademicPlacementSection } from '../components/home/AcademicPlacementSection';
 
 export interface HomePageProps {
   currentLang: Language;
@@ -50,6 +53,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenTutorApply,
 }) => {
   const [activeFeatureTab, setActiveFeatureTab] = useState<FeatureTabKey>('chat');
+  const [showInteractiveSandbox, setShowInteractiveSandbox] = useState<boolean>(false);
   const t = (key: string) => getTranslation(currentLang, key);
 
   return (
@@ -116,11 +120,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 )}
               </div>
 
-              {/* Verified Trust Metrics from titjaffna.lk */}
+              {/* Verified Trust Metrics */}
               <div className="pt-6 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
                 <div>
-                  <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Grades 1–13</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Primary to A/L</div>
+                  <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Islandwide</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Student Community</div>
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">500+</div>
@@ -128,33 +132,37 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Alaveddy</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Jaffna Campus</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Tuition Center</div>
                 </div>
                 <div>
-                  <div className="text-xl sm:text-2xl font-bold text-indigo-600 dark:text-indigo-400">titjaffna.lk</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Official Platform</div>
+                  <div className="text-xl sm:text-2xl font-bold text-indigo-600 dark:text-indigo-400">Grade 1 - 13</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Academic Programs</div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Clean Photography with Real titjaffna.lk watermark */}
+            {/* Right Column: Clean Photography with Watermark */}
             <div className="lg:col-span-6 relative">
               <div className="relative mx-auto max-w-lg lg:max-w-none">
                 <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-2xl bg-slate-900">
                   <img
                     src={heroStudentsImg}
-                    alt="TiT Online Education students collaborating in modern campus study hall"
+                    alt="TiT Online Education students collaborating in modern study hall"
                     className="w-full h-auto aspect-[4/3] object-cover rounded-3xl transition-transform duration-700 hover:scale-[1.01]"
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none rounded-3xl" />
 
-                  {/* Clean bottom watermark reflecting titjaffna.lk */}
+                  {/* Clean bottom watermark */}
                   <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 flex items-center gap-3 bg-slate-950/85 backdrop-blur-md text-white rounded-xl px-4 py-2.5 border border-white/10 text-xs shadow-lg">
-                    <GraduationCap className="w-5 h-5 text-indigo-400 shrink-0" />
+                    <img
+                      src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+                      alt="TiT Logo"
+                      className="w-7 h-7 rounded-full object-contain bg-white shadow-xs shrink-0"
+                    />
                     <div>
                       <p className="font-bold text-xs leading-none">TiT Online Education</p>
-                      <p className="text-[10px] text-slate-300 mt-0.5">Alaveddy, Jaffna · titjaffna.lk · +94 77 015 8446</p>
+                      <p className="text-[10px] text-slate-300 mt-0.5">Alaveddy, Jaffna · +94 77 015 8446</p>
                     </div>
                   </div>
                 </div>
@@ -228,77 +236,65 @@ export const HomePage: React.FC<HomePageProps> = ({
         </Container>
       </section>
 
-      {/* 2. INTERACTIVE LMS SUITE - FULL WIDTH & PROMINENT */}
+      {/* 2. CORE PLATFORM CAPABILITIES */}
       <section id="features-demo" className="bg-slate-50/70 dark:bg-slate-950/60 py-12 sm:py-16 border-y border-slate-200/80 dark:border-slate-800 transition-colors">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5">
-                <Sparkles className="w-4 h-4" />
-                <span>Interactive Learning Suite</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                Try TiT Core Features in Action
-              </h2>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-                Select any of the 5 modules above to test drive the live platform: Course chats, 24/7 AI tutor, academic calendar, quizzes, and grading insights.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onNavigate('features')}
-                className="text-xs"
-              >
-                All Features
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={onOpenAdmissions}
-                className="text-xs"
-              >
-                Enroll in Batch
-              </Button>
-            </div>
-          </div>
-
-          {/* Master Interactive Suite with 5 modules and full width screenshot/live UI */}
-          <InteractiveAppSuite
-            activeTab={activeFeatureTab}
-            onTabChange={setActiveFeatureTab}
+          <FourCoreFeaturesShowcase
+            initialFeature="ai"
+            onExploreMore={() => onNavigate('features')}
             onOpenAdmissions={onOpenAdmissions}
+            title="Core Learning Features of TiT"
+            subtitle="Explore our flagship capabilities: TiT AI Assistant, Course-wise Communication, Academic Calendar, and Timed Live Assessments."
+            badgeText="Platform Core Features"
           />
+
+          {/* Optional Demo Toggle */}
+          <div className="mt-10 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-col items-center justify-center">
+            <button
+              onClick={() => setShowInteractiveSandbox(!showInteractiveSandbox)}
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xs text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-indigo-500" />
+              <span>{showInteractiveSandbox ? 'Hide Interactive Demo' : 'Try Interactive Learning Demo (Live Tools)'}</span>
+            </button>
+
+            {showInteractiveSandbox && (
+              <div className="w-full mt-6 animate-in fade-in duration-300">
+                <InteractiveAppSuite
+                  activeTab={activeFeatureTab}
+                  onTabChange={setActiveFeatureTab}
+                  onOpenAdmissions={onOpenAdmissions}
+                />
+              </div>
+            )}
+          </div>
         </Container>
       </section>
 
       {/* 3. ACADEMIC GRADE & COURSE EXPLORER (GRADES 1 TO 13) */}
       <section id="grade-explorer" className="pt-2">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5">
-                <BookOpen className="w-4 h-4" />
-                <span>Curriculum Directory</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                Academic Grades & Available Courses
-              </h2>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-                Choose any grade from Grade 1 to Grade 13 to explore current active batches, curriculum syllabus, master teachers, and class schedules.
-              </p>
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">
+              <BookOpen className="w-4 h-4" />
+              <span>School Grades & Classes</span>
             </div>
-            <Button
-              variant="outline"
-              size="md"
-              onClick={() => onNavigate('courses')}
-              rightIcon={<ArrowRight className="w-4 h-4" />}
-              className="shrink-0 self-start md:self-end"
-            >
-              Full Course Directory
-            </Button>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Classes Available for Grade 1 to Grade 13
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              Select any grade from Grade 1 to Grade 13 to explore current active classes, lesson topics, teachers, and weekly timetables.
+            </p>
+            <div className="mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onNavigate('courses')}
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+              >
+                Full Class Directory
+              </Button>
+            </div>
           </div>
 
           <GradeCourseExplorer
@@ -314,22 +310,23 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 4. VERIFIED MARKETPLACE MATERIALS */}
       <section className="bg-slate-50 dark:bg-slate-950/50 py-12 sm:py-16 border-y border-slate-200/80 dark:border-slate-800 transition-colors">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-8">
             <SectionHeading
-              align="left"
+              align="center"
               badge="Curated Resources"
               title="Verified Educational Materials"
               subtitle="Past papers, marking schemes, and revision guides vetted by national curriculum specialists."
             />
-            <Button
-              variant="outline"
-              size="md"
-              onClick={() => onNavigate('marketplace')}
-              rightIcon={<ArrowRight className="w-4 h-4" />}
-              className="shrink-0 self-start md:self-end"
-            >
-              Browse All Materials
-            </Button>
+            <div className="mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onNavigate('marketplace')}
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+              >
+                Browse All Materials
+              </Button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -345,44 +342,11 @@ export const HomePage: React.FC<HomePageProps> = ({
         </Container>
       </section>
 
-      {/* 5. ADMISSIONS CALL TO ACTION */}
-      <section>
-        <Container>
-          <div className="relative rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-800 to-blue-900 text-white p-8 sm:p-12 overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="relative z-10 max-w-2xl space-y-4">
-              <Badge variant="accent" size="md" className="bg-white/20 text-white border-white/20">
-                Academic Intakes Open
-              </Badge>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-                Secure Your Academic Placement for Upcoming Batches
-              </h2>
-              <p className="text-indigo-200 text-sm sm:text-base leading-relaxed">
-                Pre-register online in under 2 minutes. Receive timetable details, syllabi previews, and
-                personalized counseling for G.C.E. O/L and A/L streams.
-              </p>
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={onOpenAdmissions}
-                  className="bg-white text-indigo-950 hover:bg-slate-100 shadow-md"
-                >
-                  Apply Online Now
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => onNavigate('contact')}
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
-                  Contact Academic Campus
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
+      {/* 5. SECURE YOUR ACADEMIC PLACEMENT - PROPER PRE-REGISTRATION SECTION */}
+      <AcademicPlacementSection
+        onOpenAdmissions={onOpenAdmissions}
+        onNavigate={onNavigate}
+      />
 
       {/* 6. FREQUENTLY ASKED QUESTIONS */}
       <section>

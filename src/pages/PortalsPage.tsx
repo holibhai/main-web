@@ -30,7 +30,7 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
       id: 'student',
       title: t('portals.student.title'),
       role: 'Student & Candidate Access',
-      badge: 'LMS Active',
+      badge: 'Active',
       badgeVariant: 'primary' as const,
       icon: <GraduationCap className="w-8 h-8 text-indigo-600" />,
       desc: t('portals.student.desc'),
@@ -38,7 +38,7 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
       features: [
         'Live lecture video links & archives',
         'Homework assignments & marksheets',
-        'AI Study Coach past paper explanations',
+        'Step-by-step past paper explanations',
         'Digital library and class downloads',
       ],
       btnVariant: 'primary' as const,
@@ -56,7 +56,7 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
         'Classroom stream management & attendance',
         'Assignment evaluation & grading rubrics',
         'Marketplace digital material publishing',
-        'Student performance diagnostic reports',
+        'Student test marksheets and progress reports',
       ],
       btnVariant: 'secondary' as const,
     },
@@ -70,10 +70,10 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
       desc: t('portals.admin.desc'),
       url: SITE_CONFIG.portals.admin,
       features: [
-        'Curriculum & stream architecture',
-        'Teacher allocations & schedule planning',
-        'Tuition fee reconciliation & ledger',
-        'Keycloak RBAC permission oversight',
+        'Class & subject timetable planning',
+        'Teacher allocations and room management',
+        'Tuition fee payment records',
+        'Staff accounts & access protection',
       ],
       btnVariant: 'outline' as const,
     },
@@ -84,6 +84,11 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
       {/* Header */}
       <section className="pt-12 sm:pt-16 bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-slate-800 pb-12 transition-colors">
         <Container size="md" className="text-center">
+          <img
+            src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+            alt="TiT Jaffna Publication"
+            className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full object-contain bg-white shadow-md ring-2 ring-indigo-500/20 mb-4"
+          />
           <Badge variant="primary" size="md" className="mb-3">
             Institutional Gateway
           </Badge>
@@ -166,11 +171,10 @@ export const PortalsPage: React.FC<PortalsPageProps> = ({ currentLang }) => {
             <Lock className="w-5 h-5" />
           </div>
           <div className="text-xs text-indigo-950 dark:text-indigo-200 space-y-1">
-            <h4 className="font-bold text-sm text-indigo-950 dark:text-white">Keycloak Role-Based Authentication Architecture</h4>
+            <h4 className="font-bold text-sm text-indigo-950 dark:text-white">Protected Access for Students, Teachers & Parents</h4>
             <p className="text-indigo-900/80 dark:text-indigo-300/80 leading-relaxed">
-              TiT portals are safeguarded by single sign-on (SSO) with OpenID Connect (OIDC).
-              Users are routed to their authorized role dashboard (Student, Teacher, or Administrator) with
-              strict token validation and session rotation.
+              TiT portals provide safe, personalized access for every user. Students, teachers, and school administrators
+              are automatically directed to their dedicated dashboard with private and encrypted login protection.
             </p>
           </div>
         </div>

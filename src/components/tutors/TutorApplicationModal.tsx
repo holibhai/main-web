@@ -57,17 +57,19 @@ export const TutorApplicationModal: React.FC<TutorApplicationModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-7 space-y-5">
         <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-600 text-white flex items-center justify-center shadow-md">
-              <UserCheck className="w-5 h-5" />
-            </div>
+          <div className="flex items-center gap-3.5">
+            <img
+              src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+              alt="TiT Jaffna Publication"
+              className="w-12 h-12 rounded-full object-contain bg-white shadow-md ring-2 ring-indigo-500/30 shrink-0"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                   Apply as a TiT Tutor
                 </h3>
                 <span className="text-[10px] font-bold uppercase bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-200/80 dark:border-indigo-800/80">
-                  titjaffna.lk
+                  Private Tuition
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">

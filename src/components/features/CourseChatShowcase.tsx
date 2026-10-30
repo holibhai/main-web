@@ -182,7 +182,7 @@ export const CourseChatShowcase: React.FC = () => {
         details = [
           'Paper II Part B marking rubric applied',
           '342 active students notified in channel',
-          'Next live lecture: Saturday 8:00 AM (Zoom + Campus)',
+          'Next live lecture: Saturday 8:00 AM (Zoom + Classroom)',
         ];
       } else if (lower.includes('physics') || lower.includes('doppler')) {
         reply = `Physics Masterclass update: Dr. S. Gunawardana's Doppler effect formula derivation λ′ = (v + w - u_s)/f₀ has been pinned in the physics room with full step justifications for approaching source cases with wind.`;
@@ -301,7 +301,7 @@ export const CourseChatShowcase: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-indigo-950/80 border border-indigo-800 text-indigo-300 text-xs font-semibold mb-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-indigo-400" />
-                <span>TiT Education Official Course Chat & AI Architecture</span>
+                <span>TiT Education Official Course Chat & AI Learning Platform</span>
               </div>
               <h4 className="text-xl font-bold text-white tracking-tight">
                 Production Course Chat & AI Interface
@@ -317,7 +317,7 @@ export const CourseChatShowcase: React.FC = () => {
                 onClick={() => setViewMode('interactive')}
                 className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-md cursor-pointer"
               >
-                <span>Try Live Interactive Simulator</span>
+                <span>Try Live Class Chat</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -348,7 +348,7 @@ export const CourseChatShowcase: React.FC = () => {
             <div className="p-4 rounded-2xl bg-[#0f1624] border border-slate-800 space-y-1.5">
               <div className="flex items-center gap-2 text-indigo-400 font-bold text-xs">
                 <Menu className="w-4 h-4" />
-                <span>Admin LMS Navigation</span>
+                <span>School Admin Navigation</span>
               </div>
               <p className="text-xs text-slate-300">
                 Full-tier role access with Students, Teachers, Registrations (12), Courses, and Quizzes modules.
@@ -802,7 +802,7 @@ export const CourseChatShowcase: React.FC = () => {
                                 </>
                               )}
                             </button>
-                            <span className="text-[10px] text-slate-500">Verified TiT LLM</span>
+                            <span className="text-[10px] text-slate-500">Verified TiT Assistant</span>
                           </div>
                         </div>
                       )}

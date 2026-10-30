@@ -42,7 +42,7 @@ export const HeroInteractivePreview: React.FC<HeroInteractivePreviewProps> = ({ 
 
           <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Interactive Campus Live</span>
+            <span>Interactive Learning Live</span>
           </div>
         </div>
 

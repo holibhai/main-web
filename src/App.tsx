@@ -167,7 +167,24 @@ export default function App() {
 
       {/* Main Page Content Router */}
       <main className="flex-1">
-        {currentPath === 'home' && (
+        {(![
+          'courses',
+          'course-detail',
+          'marketplace',
+          'material-detail',
+          'features',
+          'about',
+          'teachers',
+          'portals',
+          'admissions',
+          'contact',
+          'faq',
+          'privacy',
+          'terms',
+        ].includes(currentPath) ||
+          currentPath === 'home' ||
+          (currentPath === 'course-detail' && !selectedCourse) ||
+          (currentPath === 'material-detail' && !selectedMaterial)) && (
           <HomePage
             currentLang={currentLang}
             onNavigate={navigateTo}
@@ -272,7 +289,7 @@ export default function App() {
         )}
       </main>
 
-      {/* Global Application Footer with titjaffna.lk actions */}
+      {/* Global Application Footer */}
       <Footer
         onNavigate={navigateTo}
         onOpenResults={() => setIsResultsOpen(true)}
@@ -309,13 +326,13 @@ export default function App() {
         selectedCourse={quickApplyCourse}
       />
 
-      {/* Official titjaffna.lk Exam Results Lookup Modal */}
+      {/* Official Exam Results Lookup Modal */}
       <ExamResultsLookupModal
         isOpen={isResultsOpen}
         onClose={() => setIsResultsOpen(false)}
       />
 
-      {/* Official titjaffna.lk Apply as a Tutor Modal */}
+      {/* Official Apply as a Tutor Modal */}
       <TutorApplicationModal
         isOpen={isTutorApplyOpen}
         onClose={() => setIsTutorApplyOpen(false)}

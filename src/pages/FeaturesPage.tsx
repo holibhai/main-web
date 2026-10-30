@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Bell,
   BookOpen,
   Bot,
   Calendar,
-  CheckCircle2,
   FileCheck,
   GraduationCap,
   HelpCircle,
@@ -16,13 +15,19 @@ import {
   Users,
   Video,
   ArrowRight,
+  Maximize2,
+  Check,
 } from 'lucide-react';
 import { Container } from '../components/ui/Container';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
-import { InteractiveAppSuite } from '../components/features/InteractiveAppSuite';
+import {
+  FourCoreFeaturesShowcase,
+  CORE_FEATURES_DATA,
+  CoreFeatureId,
+} from '../components/features/FourCoreFeaturesShowcase';
 
 export interface FeaturesPageProps {
   onNavigate: (path: string) => void;
@@ -30,124 +35,233 @@ export interface FeaturesPageProps {
 }
 
 export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAdmissions }) => {
+  const [selectedLightboxImage, setSelectedLightboxImage] = useState<{
+    src: string;
+    title: string;
+    subtitle: string;
+  } | null>(null);
+
   const coreFeatures = [
     {
-      icon: <MessageSquare className="w-6 h-6 text-indigo-600" />,
-      title: 'Course-wise Chatting Rooms',
-      category: 'Collaboration',
-      desc: 'Dedicated peer and mentor spaces for every batch. Ask questions, discuss marking schemes, and tag doubts directly with faculty.',
+      icon: <Bot className="w-6 h-6 text-indigo-600" />,
+      title: 'TiT AI Assistant',
+      category: 'School Management',
+      desc: 'Easy-to-use assistant for school principals and teachers to quickly check student numbers and class updates.',
     },
     {
-      icon: <Bot className="w-6 h-6 text-cyan-600" />,
-      title: 'Curriculum-Grounded AI Tutor',
-      category: 'Intelligence',
-      desc: 'Step-by-step mathematical proofs, physics derivations, and chemistry mechanisms aligned with national NIE curricula.',
+      icon: <MessageSquare className="w-6 h-6 text-blue-600" />,
+      title: 'Class Discussions & Messaging',
+      category: 'Communication',
+      desc: 'Class groups for every subject and grade, where students can ask homework questions and get help from teachers.',
     },
     {
       icon: <Calendar className="w-6 h-6 text-amber-600" />,
-      title: 'Academic Calendar Maintenance',
-      category: 'Scheduling',
-      desc: 'Synchronized live lecture times, homework deadlines, mock examinations, and countdown timers with .ics calendar export.',
+      title: 'Academic Class Timetable',
+      category: 'Timetable',
+      desc: 'Live class timetables, homework due dates, and exam dates neatly organized in Month, Week, and Day views.',
     },
     {
       icon: <FileCheck className="w-6 h-6 text-emerald-600" />,
-      title: 'Timed Quizzes & Rubric Grading',
-      category: 'Assessments',
-      desc: 'Interactive question drill arena with instant grading, question palettes, and digital homework submissions with rubric marks.',
+      title: 'Practice Tests & Quizzes',
+      category: 'Practice Tests',
+      desc: 'Practice tests with a live timer, question checklist, bookmark button, and instant marks with step-by-step answers.',
     },
     {
-      icon: <LineChart className="w-6 h-6 text-blue-600" />,
-      title: 'Diagnostic Analytics & Z-Score',
-      category: 'Insights',
-      desc: 'Interactive SVG assessment progression curves, topic-level mastery diagnostics, attendance rate, and official report cards.',
+      icon: <LineChart className="w-6 h-6 text-purple-600" />,
+      title: 'Progress & Report Cards',
+      category: 'Report Cards',
+      desc: 'View term test results, subject progress reports, attendance records, and personal improvement feedback.',
     },
     {
       icon: <Video className="w-6 h-6 text-rose-600" />,
-      title: 'Interactive Live Classrooms',
-      category: 'Delivery',
-      desc: 'High-definition live video feeds with live chat Q&A, digital whiteboard exports, and automatic recording archives.',
+      title: 'Live Online Classrooms',
+      category: 'Live Classes',
+      desc: 'Live Zoom tuition classes with interactive teacher chat, digital whiteboard lessons, and replay recordings.',
     },
     {
       icon: <BookOpen className="w-6 h-6 text-indigo-600" />,
-      title: 'Educational Materials Vault',
-      category: 'Marketplace',
-      desc: 'Instant access to model papers, provincial test collections, and revision notes reviewed by certified educators.',
+      title: 'Past Papers & Study Notes',
+      category: 'Study Materials',
+      desc: 'Download term test papers, provincial exam papers, and revision notes prepared by experienced teachers.',
     },
     {
       icon: <Shield className="w-6 h-6 text-slate-700" />,
-      title: 'Institutional Grade Security',
-      category: 'Security',
-      desc: 'Role-based access control protecting academic records, personal information, and student performance data.',
+      title: 'Student Safety & Privacy',
+      category: 'Privacy',
+      desc: 'Protected accounts keeping student details, test marks, and attendance records strictly private.',
     },
   ];
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* Page Header */}
+      {/* 1. Page Header */}
       <section className="pt-12 sm:pt-16 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200/80 dark:border-slate-800 pb-12 transition-colors">
         <Container size="md" className="text-center">
           <Badge variant="primary" size="md" className="mb-4">
-            Interactive Platform Architecture
+            All-In-One School Platform
           </Badge>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-            The Complete Modern Learning Operating System
+            Everything Students & Teachers Need to Excel
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            Experience our unified suite: Course-based collaboration, AI study assistant, synchronized academic calendars,
-            timed quiz drills, and predictive analytics.
+            Explore our integrated student features: <strong>School Assistant</strong>,{' '}
+            <strong>Class Discussions</strong>, <strong>Class Timetable</strong>, and{' '}
+            <strong>Practice Tests</strong>.
           </p>
-        </Container>
-      </section>
-
-      {/* Interactive Application Showcase Testbed */}
-      <section id="interactive-suite">
-        <Container>
-          <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1">
-                <Sparkles className="w-4 h-4" />
-                <span>Live Interactive Showcase</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-                Try the Core LMS Features in Action
-              </h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-xl">
-                Switch between the 5 modules above to interact with real course rooms, AI problem solver, calendar events, quiz taking, and grading curves.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onNavigate('courses')}
-                className="text-xs"
-              >
-                Browse Batches
-              </Button>
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={onOpenAdmissions}
-                className="text-xs"
-              >
-                Enroll Now
-              </Button>
-            </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Button variant="primary" size="md" onClick={onOpenAdmissions}>
+              Enroll in Batch
+            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              onClick={() => {
+                const el = document.getElementById('platform-features');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Explore Features
+            </Button>
           </div>
-
-          {/* Master Interactive Suite */}
-          <InteractiveAppSuite onOpenAdmissions={onOpenAdmissions} />
         </Container>
       </section>
 
-      {/* Grid of All Architectural Capabilities */}
+      {/* 2. THE PLATFORM FEATURES SHOWCASE (PRIMARY SECTION WITH USER SCREENSHOTS) */}
+      <section id="platform-features" className="scroll-mt-20">
+        <Container>
+          <FourCoreFeaturesShowcase
+            initialFeature="ai"
+            onExploreMore={() => {
+              const el = document.getElementById('deep-dive-grid');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onOpenAdmissions={onOpenAdmissions}
+            title="Core Platform Features"
+            subtitle="Authentic views inside the TiT platform: Admin AI Assistant, Student & Faculty Communication, Academic Calendar, and Timed Live Assessments."
+            badgeText="Flagship Interfaces"
+          />
+        </Container>
+      </section>
+
+      {/* 3. FEATURES DEEP-DIVE CARDS WITH EMBEDDED SCREENSHOT PREVIEWS */}
+      <section id="deep-dive-grid" className="bg-slate-50/70 dark:bg-slate-950/60 py-16 border-y border-slate-200/80 dark:border-slate-800 transition-colors">
+        <Container>
+          <SectionHeading
+            badge="Features Overview"
+            title="Explore Our Core Learning Features"
+            subtitle="Click on any screenshot below to view the interface in full screen."
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {CORE_FEATURES_DATA.map((feat) => (
+              <div
+                key={feat.id}
+                className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              >
+                {/* Top preview frame */}
+                <div
+                  className="relative group bg-slate-950 cursor-pointer overflow-hidden aspect-[16/10] border-b border-slate-100 dark:border-slate-800"
+                  onClick={() =>
+                    setSelectedLightboxImage({
+                      src: feat.imageSrc,
+                      title: feat.title,
+                      subtitle: feat.headline,
+                    })
+                  }
+                >
+                  <img
+                    src={feat.imageSrc}
+                    alt={feat.altText}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-slate-950/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 text-white text-xs font-semibold shadow-lg">
+                      <Maximize2 className="w-3.5 h-3.5 text-indigo-400" />
+                      <span>Expand Screenshot</span>
+                    </span>
+                  </div>
+                  <div className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-semibold text-white border border-white/10">
+                    {feat.portalBadge}
+                  </div>
+                </div>
+
+                {/* Content body */}
+                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                        {feat.category}
+                      </span>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                        {feat.userRole}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
+                      {feat.title}
+                    </h3>
+
+                    <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {feat.description}
+                    </p>
+                  </div>
+
+                  {/* Highlights list */}
+                  <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    {feat.hotspots.slice(0, 2).map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300">
+                        <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="font-semibold text-slate-800 dark:text-slate-200">{item.title}:</strong>{' '}
+                          <span>{item.desc}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between text-xs">
+                    <button
+                      onClick={() =>
+                        setSelectedLightboxImage({
+                          src: feat.imageSrc,
+                          title: feat.title,
+                          subtitle: feat.headline,
+                        })
+                      }
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline inline-flex items-center gap-1"
+                    >
+                      <span>View Screenshot</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                    <div className="flex gap-1">
+                      {feat.specs.slice(0, 2).map((spec, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-300 font-medium"
+                        >
+                          {spec.label}: {spec.value}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+
+
+      {/* 5. Grid of All Educational Capabilities */}
       <section>
         <Container>
           <SectionHeading
-            badge="Full Feature Spectrum"
-            title="Engineered for High-Stakes Exam Excellence"
-            subtitle="Built to support students, faculty, and administrative boards throughout the Sri Lankan A/L and O/L cycles."
+            align="center"
+            badge="Full Curriculum Support"
+            title="Built to Help Students Excel in School and National Exams"
+            subtitle="Designed to support students from Grade 1 through Grade 13 with verified teaching, past papers, and personal guidance."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -171,100 +285,8 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
         </Container>
       </section>
 
-      {/* Pedagogical Quality Breakdown */}
-      <section className="bg-slate-50 dark:bg-slate-950/50 py-16 sm:py-20 border-y border-slate-200/80 dark:border-slate-800 transition-colors">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <SectionHeading
-                align="left"
-                badge="Pedagogical Engine"
-                title="Curriculum-Grounded AI & Verified Mentorship"
-                subtitle="Unlike generic tools, TiT's chat, AI engine, and grading schemes are verified by certified educators against NIE curricula."
-              />
 
-              <div className="space-y-3.5">
-                {[
-                  {
-                    title: 'Course-Wise Isolated Chat Streams',
-                    desc: 'Students interact strictly within their enrolled batch subject rooms with faculty moderators.',
-                  },
-                  {
-                    title: 'Formula & Proof Guidance',
-                    desc: 'Guides students through algebraic and calculus steps without dumping unexplained final answers.',
-                  },
-                  {
-                    title: 'Multilingual Vernacular Support',
-                    desc: 'Full natural language comprehension in Sinhala, Tamil, and English for all complex scientific terms.',
-                  },
-                  {
-                    title: 'Interactive Assessment Engine',
-                    desc: 'Timed question drills with instant rubric grading and step-by-step marking scheme rationales.',
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-                    <CheckCircle2 className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-800 dark:text-slate-200">{item.title}</h4>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-5">
-              <h4 className="font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
-                <span>Diagnostic Accuracy Benchmark</span>
-                <Badge variant="success" size="sm">
-                  Verified 99.2%
-                </Badge>
-              </h4>
-
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    <span>G.C.E. A/L Pure Mathematics NIE Rubric Alignment</span>
-                    <span>100%</span>
-                  </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                    <div className="bg-indigo-600 h-2 rounded-full w-full" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    <span>Physics Practical Experiment Breakdown</span>
-                    <span>98.6%</span>
-                  </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                    <div className="bg-blue-600 h-2 rounded-full w-[98.6%]" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                    <span>Chemistry Reaction Kinetics & Equilibrium Models</span>
-                    <span>99.1%</span>
-                  </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                    <div className="bg-emerald-600 h-2 rounded-full w-[99.1%]" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                <span>Audited by TiT Faculty Board</span>
-                <Button variant="outline" size="sm" onClick={() => onNavigate('courses')}>
-                  Explore Relevant Batches
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA */}
+      {/* 7. CTA */}
       <section>
         <Container size="md" className="text-center">
           <Card padding="lg" className="border-indigo-100 dark:border-indigo-900/40 bg-gradient-to-r from-indigo-50/50 via-white to-blue-50/50 dark:from-slate-900 dark:via-indigo-950/20 dark:to-slate-900">
@@ -283,6 +305,41 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
           </Card>
         </Container>
       </section>
+
+      {/* Lightbox Modal */}
+      {selectedLightboxImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setSelectedLightboxImage(null)}
+        >
+          <div
+            className="relative max-w-6xl w-full bg-slate-900 rounded-3xl border border-slate-700 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="px-5 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between text-white shrink-0">
+              <div>
+                <h3 className="font-bold text-base leading-tight">
+                  {selectedLightboxImage.title}
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">{selectedLightboxImage.subtitle}</p>
+              </div>
+              <button
+                onClick={() => setSelectedLightboxImage(null)}
+                className="w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="overflow-auto p-4 flex items-center justify-center bg-slate-950">
+              <img
+                src={selectedLightboxImage.src}
+                alt={selectedLightboxImage.title}
+                className="w-full max-h-[75vh] object-contain rounded-xl shadow-2xl border border-slate-800"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

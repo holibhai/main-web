@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   BookOpen,
-  GraduationCap,
   Mail,
   MapPin,
   Phone,
@@ -23,16 +22,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResults, onOpe
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-slate-800">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-blue-500 flex items-center justify-center text-white shadow-md">
-                <GraduationCap className="w-5 h-5" />
-              </div>
+            <div className="flex items-center gap-3.5">
+              <img
+                src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+                alt="TiT Jaffna Publication"
+                className="w-13 h-13 rounded-full object-contain bg-white shadow-md ring-2 ring-indigo-500/40 shrink-0"
+              />
               <div>
-                <span className="text-xl font-extrabold text-white tracking-tight">
+                <span className="text-xl font-extrabold text-white tracking-tight block">
                   {SITE_CONFIG.brandName} Online Education
                 </span>
-                <span className="text-xs text-indigo-400 block -mt-0.5">
-                  titjaffna.lk · Alaveddy, Jaffna
+                <span className="text-xs text-indigo-400 block mt-0.5">
+                  Private Tuition · Alaveddy, Jaffna
                 </span>
               </div>
             </div>
@@ -166,17 +167,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResults, onOpe
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a
-                  href={SITE_CONFIG.officialUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-indigo-400 hover:underline flex items-center gap-1.5 font-medium"
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="text-indigo-400 hover:underline flex items-center gap-1.5 font-medium text-left"
                 >
-                  <span>titjaffna.lk</span>
+                  <span>TiT Online Education</span>
                   <span className="text-[10px] bg-indigo-950 text-indigo-300 px-1 rounded border border-indigo-800">
                     Official
                   </span>
-                </a>
+                </button>
               </li>
               <li>
                 {onOpenResults ? (
@@ -221,7 +220,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResults, onOpe
                   onClick={() => onNavigate('contact')}
                   className="hover:text-indigo-400 transition-colors cursor-pointer"
                 >
-                  Jaffna Campus Support
+                  Jaffna Tuition Center Support
                 </button>
               </li>
             </ul>
@@ -252,7 +251,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenResults, onOpe
               className="hover:text-slate-400 transition-colors cursor-pointer flex items-center gap-1"
             >
               <Shield className="w-3.5 h-3.5 text-emerald-500" />
-              Keycloak Authenticated
+              Secure Student Portal
             </button>
           </div>
         </div>

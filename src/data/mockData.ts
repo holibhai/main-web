@@ -470,7 +470,7 @@ export const MOCK_COURSES: CourseItem[] = [
       rating: 4.99,
     },
     learningFormat: 'Hybrid',
-    schedule: 'Saturdays: 7:30 AM – 12:30 PM (Live + Physical at TiT Campus)',
+    schedule: 'Saturdays: 7:30 AM – 12:30 PM (Live + Physical Tuition)',
     duration: '10 Months Intensive Programme',
     fee: { amount: 3200, currency: 'LKR', period: 'monthly' },
     availability: 'Limited Seats',
@@ -710,7 +710,7 @@ export const MOCK_COURSES: CourseItem[] = [
     syllabus: [
       { term: 'Term 1: Pythagoras & Linear Graphs', weeks: 10, topics: ['Pythagorean Triples', 'Cartesian Coordinates and Straight Lines', 'Factorization of Expressions'] },
     ],
-    faqs: [{ question: 'Is physical attendance mandatory?', answer: 'No, students can attend either 100% online or physically at our Colombo campus.' }],
+    faqs: [{ question: 'Is physical attendance mandatory?', answer: 'No, students can attend either 100% online or physically at our tuition study center.' }],
   },
   {
     id: 'crs-g8-sci',
@@ -1020,7 +1020,7 @@ export const MOCK_COURSES: CourseItem[] = [
       rating: 4.95,
     },
     learningFormat: 'Hybrid',
-    schedule: 'Saturdays: 7:30 AM – 1:30 PM (Live & Physical at TiT Campus)',
+    schedule: 'Saturdays: 7:30 AM – 1:30 PM (Live & Physical Tuition)',
     duration: '18 Months Academic Program',
     fee: { amount: 4500, currency: 'LKR', period: 'monthly' },
     availability: 'Limited Seats',
@@ -1484,7 +1484,7 @@ export const MOCK_FAQS = [
     category: 'Portals & Authentication',
     question: 'How do I access the Student, Teacher, or Admin Portals?',
     answer:
-      'Click the "Portal Login" button in the top navigation bar or visit the Portals page. Select your designated role (Student, Teacher, or Admin) to be redirected to the secure Keycloak authentication gateway.',
+      'Click the "Portal Login" button in the top navigation bar or visit the Portals page. Select your designated role (Student, Teacher, or Admin) to log in directly to your secure portal.',
   },
   {
     category: 'AI-Assisted Learning',

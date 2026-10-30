@@ -95,7 +95,7 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
             Academic Programs & Batches
           </Badge>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Academic Courses (Grade 1 to Grade 13)
+            Academic Courses & Batches
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
             Discover syllabus-aligned programs for Primary, Junior Secondary, G.C.E. Ordinary Level (O/L), and Advanced Level (A/L) streams.

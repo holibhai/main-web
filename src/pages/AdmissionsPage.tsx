@@ -329,9 +329,9 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ currentLang, onN
                       value={formData.learningPreference}
                       onChange={(e) => setFormData({ ...formData, learningPreference: e.target.value as any })}
                       options={[
-                        { value: 'Hybrid', label: 'Hybrid (Campus + Online)' },
+                        { value: 'Hybrid', label: 'Hybrid (Tuition Center + Online)' },
                         { value: 'Online Live', label: 'Online Live Stream Only' },
-                        { value: 'Physical Classroom', label: 'Physical Classroom (TiT Campus)' },
+                        { value: 'Physical Classroom', label: 'Physical Classroom (Tuition Center)' },
                       ]}
                     />
                   </div>
@@ -368,7 +368,7 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ currentLang, onN
                   <div className="pt-2">
                     <Checkbox
                       label="I confirm the accuracy of information and authorize TiT admissions to contact me via WhatsApp/Email."
-                      description="Pre-registration does not immediately activate LMS billing until counselor intake confirmation."
+                      description="Pre-registration is completely free and tuition fees only apply after your enrollment is confirmed."
                       checked={formData.consentAgreed}
                       onChange={(e) => setFormData({ ...formData, consentAgreed: e.target.checked })}
                     />
@@ -449,10 +449,10 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ currentLang, onN
                 1. An academic counselor will reach out via WhatsApp ({formData.guardianPhone}) within 24 hours.
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                2. You will receive batch timetable schedules and campus orientation passes.
+                2. You will receive batch timetable schedules and class admission details.
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                3. LMS onboarding credentials will be issued upon formal enrollment confirmation.
+                3. Student portal login details will be sent via WhatsApp once your class enrollment is confirmed.
               </p>
             </div>
 

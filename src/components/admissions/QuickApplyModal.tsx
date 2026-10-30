@@ -77,14 +77,16 @@ export const QuickApplyModal: React.FC<QuickApplyModalProps> = ({
 
         {!isSuccess ? (
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-                <GraduationCap className="w-5 h-5" />
-              </div>
+            <div className="flex items-center gap-3.5 mb-5">
+              <img
+                src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+                alt="TiT Jaffna Publication"
+                className="w-12 h-12 rounded-full object-contain bg-white shadow-md ring-2 ring-indigo-500/30 shrink-0"
+              />
               <div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Course Admission Enquiry</h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                  {selectedCourse ? selectedCourse.title : 'Academic Intake Pre-Registration'}
+                  {selectedCourse ? selectedCourse.title : 'TiT Online Education · Academic Intake Pre-Registration'}
                 </p>
               </div>
             </div>
@@ -141,7 +143,7 @@ export const QuickApplyModal: React.FC<QuickApplyModalProps> = ({
                   value={learningPreference}
                   onChange={(e) => setLearningPreference(e.target.value as any)}
                   options={[
-                    { value: 'Hybrid', label: 'Hybrid (Online + Campus)' },
+                    { value: 'Hybrid', label: 'Hybrid (Online + In-Person Tuition)' },
                     { value: 'Online Live', label: 'Online Live Only' },
                     { value: 'Physical Classroom', label: 'Physical Classroom' },
                   ]}

@@ -31,6 +31,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
       {/* Hero Header */}
       <section className="pt-12 sm:pt-16 bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-slate-800 pb-16 transition-colors">
         <Container size="md" className="text-center">
+          <img
+            src="/assets/aistudio/TiTJaffna-logo_53bc2e27.jpeg"
+            alt="TiT Jaffna Publication"
+            className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-contain bg-white shadow-lg ring-4 ring-indigo-500/20 mb-6"
+          />
           <Badge variant="primary" size="md" className="mb-4">
             About TiT Education
           </Badge>
@@ -77,14 +82,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
       {/* Educational Philosophy & Partnership */}
       <section>
         <Container>
+          <div className="mb-12">
+            <SectionHeading
+              align="center"
+              badge="Academic Heritage"
+              title="TiT Online Education"
+              subtitle="Rooted in Alaveddy, Jaffna, empowering students across Sri Lanka from Grade 1 to Grade 13."
+            />
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-5">
-              <SectionHeading
-                align="left"
-                badge="Academic Heritage"
-                title="TiT Online Education (titjaffna.lk)"
-                subtitle="Rooted in Alaveddy, Jaffna, empowering students across Sri Lanka from Grade 1 to Grade 13."
-              />
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 TiT was founded in Alaveddy, Jaffna, with a vision to provide every student across the island
                 with direct access to premier educators. Through live Zoom classes, 500+ on-demand video archives,
@@ -115,7 +123,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
                     </div>
                     <div>
                       <h4 className="font-bold text-base text-white">Three Core Pillars</h4>
-                      <p className="text-xs text-slate-400">Guiding our pedagogical architecture</p>
+                      <p className="text-xs text-slate-400">Guiding our teaching and learning standards</p>
                     </div>
                   </div>
 
@@ -186,7 +194,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenAdmissio
                 Enroll in Upcoming Batch
               </Button>
               <Button variant="outline" size="lg" onClick={() => onNavigate('contact')}>
-                Contact Academic Campus
+                Contact Tuition Center
               </Button>
             </div>
           </Card>

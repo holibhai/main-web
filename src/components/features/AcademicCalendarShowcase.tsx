@@ -109,7 +109,7 @@ const SAMPLE_EVENTS: CalendarEvent[] = [
     dayNumber: 20,
     timeRange: '08:00 AM – 01:00 PM',
     instructor: 'TiT Examination Board',
-    location: 'Campus Examination Halls 1–6',
+    location: 'Main Examination Halls 1–6',
     syllabusTopic: 'Complete Term 1 & 2 Syllabus Scope',
     status: 'upcoming',
   },

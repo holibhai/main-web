@@ -138,10 +138,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200/90 dark:border-amber-900/60 rounded-xl p-3 text-xs text-amber-900 dark:text-amber-200 space-y-1">
                   <div className="flex items-center gap-1.5 font-bold">
                     <ShieldCheck className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0" />
-                    <span>Server-Authoritative Commerce Protected</span>
+                    <span>Secure Verified Learning Materials</span>
                   </div>
                   <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-relaxed">
-                    Downloads are securely bound to your verified Keycloak student identity via AWS S3 signed URLs upon gateway webhook confirmation.
+                    Downloads are saved directly to your student account with lifetime access upon payment confirmation.
                   </p>
                 </div>
               </>
@@ -182,7 +182,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
               <p className="text-[11px] text-slate-400 dark:text-slate-500 text-center flex items-center justify-center gap-1">
                 <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                256-bit Encrypted Checkout Pipeline
+                256-bit Encrypted Secure Checkout
               </p>
             </div>
           )}

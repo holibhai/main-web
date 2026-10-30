@@ -13,11 +13,11 @@ import {
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
-export interface LiveCampusTickerProps {
+export interface LiveTuitionTickerProps {
   onNavigate: (path: string) => void;
 }
 
-export const LiveCampusTicker: React.FC<LiveCampusTickerProps> = ({ onNavigate }) => {
+export const LiveTuitionTicker: React.FC<LiveTuitionTickerProps> = ({ onNavigate }) => {
   const liveSessions = [
     {
       title: 'Combined Maths: Integration Reduction Formulas',
@@ -61,7 +61,7 @@ export const LiveCampusTicker: React.FC<LiveCampusTickerProps> = ({ onNavigate }
             </span>
           </div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-            2,480+ Students Currently Active Across Campus Rooms
+            2,480+ Students Currently Active in Live Tuition Sessions
           </h3>
           <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
             Real-time HD lecture broadcasting, mentor doubt resolution, and synchronized study groups powering Sri Lankan exam preparation.
@@ -76,7 +76,7 @@ export const LiveCampusTicker: React.FC<LiveCampusTickerProps> = ({ onNavigate }
             className="rounded-xl text-xs bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/30"
             rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
           >
-            Launch Interactive LMS
+            Explore Platform Features
           </Button>
         </div>
       </div>

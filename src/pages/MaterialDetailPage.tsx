@@ -215,7 +215,7 @@ export const MaterialDetailPage: React.FC<MaterialDetailPageProps> = ({
                 <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 space-y-1">
                   <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
                     <Lock className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
-                    <span>Server-authoritative secure checkout</span>
+                    <span>Safe and verified secure checkout</span>
                   </div>
                   <p>Includes immediate digital PDF access and automatic portal archive sync.</p>
                 </div>

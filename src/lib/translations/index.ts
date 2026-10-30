@@ -18,30 +18,30 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'Cart',
 
     // Hero
-    'hero.badge': 'TiT Online Education · titjaffna.lk · Alaveddy, Jaffna',
-    'hero.headline': 'Online Tuition Platform for Grades 1 to 13',
+    'hero.badge': 'TiT Online Education · Alaveddy, Jaffna',
+    'hero.headline': 'Empowering Academic Excellence Through Modern Online Learning',
     'hero.subheadline':
-      'Headquartered in Alaveddy, Jaffna, TiT empowers school students across Sri Lanka with live interactive Zoom classes, 500+ recorded lessons, past papers, and instant exam result tracking.',
-    'hero.cta.courses': 'Explore Grades 1–13 Courses',
-    'hero.cta.resources': 'Try 5 LMS Features Live',
-    'hero.stat.courses': 'Grades 1 to 13',
+      'Headquartered in Alaveddy, Jaffna, TiT connects students and dedicated educators across Sri Lanka with live interactive classes, comprehensive study materials, past paper discussions, and personal academic guidance.',
+    'hero.cta.courses': 'Explore Academic Programs',
+    'hero.cta.resources': 'Explore Platform Features',
+    'hero.stat.courses': 'Complete Curriculum',
     'hero.stat.materials': '500+ Videos & Notes',
     'hero.stat.teachers': 'Verified Tutors',
     'hero.stat.curriculum': 'Jaffna & Islandwide',
 
     // Features Highlights
-    'features.title': 'Intelligent Learning Infrastructure',
+    'features.title': 'Modern Learning for Every Student',
     'features.subtitle':
-      'Engineered for academic excellence with AI-powered study assistance, structured evaluations, and transparent performance insights.',
+      'Designed for academic success with personal study assistance, structured evaluations, and clear progress tracking.',
     'features.ai.title': 'AI-Assisted Learning & Study Coach',
     'features.ai.desc':
-      'Instant academic explanations, past paper step-by-step guidance, and personalized revision schedules aligned with the local and international syllabus.',
+      'Instant academic explanations, past paper step-by-step guidance, and personalized revision schedules aligned with the local syllabus.',
     'features.materials.title': 'Curated Educational Marketplace',
     'features.materials.desc':
       'Verified model papers, marking schemes, summaries, and revision notes reviewed by veteran educators.',
     'features.lms.title': 'Interactive Academic Courses',
     'features.lms.desc':
-      'Live interactive video lessons, attendance recording, structured quizzes, and term examination pipelines.',
+      'Live interactive video lessons, attendance recording, structured quizzes, and term examination papers.',
     'features.progress.title': 'Real-Time Progress & Analytics',
     'features.progress.desc':
       'Comprehensive performance dashboards for students and parents tracking topic mastery and assignment submissions.',
@@ -134,13 +134,13 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.cart': 'கூடை',
 
     // Hero
-    'hero.badge': 'TiT Online Education · titjaffna.lk · அளவெட்டி, யாழ்ப்பாணம்',
-    'hero.headline': 'தரம் 1 முதல் தரம் 13 வரையிலான முன்னணி இணையக் கல்வி தளம்',
+    'hero.badge': 'TiT Online Education · அளவெட்டி, யாழ்ப்பாணம்',
+    'hero.headline': 'நவீன கற்றல் மூலம் கல்விச் சிறப்பை மேம்படுத்துதல்',
     'hero.subheadline':
-      'யாழ்ப்பாணம் அளவெட்டியை தலைமையகமாகக் கொண்டு, இலங்கை முழுவதுமுள்ள மாணவர்களுக்கு நேரலை Zoom வகுப்புகள், 500+ வீடியோ பாடங்கள், மாதிரி வினாத்தாள்கள் மற்றும் உடனடி பரீட்சை பெறுபேறுகளை வழங்கும் தளம்.',
-    'hero.cta.courses': 'தரம் 1-13 பாடநெறிகள்',
-    'hero.cta.resources': '5 நேரலை அம்சங்களை சோதிக்க',
-    'hero.stat.courses': 'தரம் 1 முதல் 13',
+      'யாழ்ப்பாணம் அளவெட்டியை தலைமையகமாகக் கொண்டு, இலங்கை முழுவதுமுள்ள மாணவர்களுக்கும் ஆசிரியர்களுக்கும் நேரலை Zoom வகுப்புகள், விரிவான பாடக் குறிப்புகள், மாதிரி வினாத்தாள்கள் மற்றும் தனிப்பட்ட வழிகாட்டலை இணைக்கும் முழுமையான கல்வித் தளம்.',
+    'hero.cta.courses': 'கல்வித் திட்டங்களை ஆராய்க',
+    'hero.cta.resources': 'நேரலை அம்சங்களை சோதிக்க',
+    'hero.stat.courses': 'முழுமையான பாடத்திட்டம்',
     'hero.stat.materials': '500+ வீடியோ & குறிப்புகள்',
     'hero.stat.teachers': 'சிறந்த ஆசிரியர்கள்',
     'hero.stat.curriculum': 'யாழ்ப்பாணம் & நாடளாவிய ரீதியில்',
@@ -242,15 +242,15 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // Hero
     'hero.badge': 'TiT Education නිල ඉගෙනුම් වේදිකාව',
-    'hero.headline': 'ශ්‍රී ලාංකික සිසුන් සඳහා වන එකම පරිපූර්ණ ඉගෙනුම් යෙදුම',
+    'hero.headline': 'නූතන මාර්ගගත ඉගෙනුම තුළින් විශිෂ්ට අධ්‍යාපනික අනාගතයක්',
     'hero.subheadline':
-      'ඔබේ ගුරුවරුන් සහ මිතුරන් සමඟ පන්ති කාමරයේ කතාබස් කරන්න, 24/7 AI සහාය, දින දර්ශනය සහ ආදර්ශ ප්‍රශ්න පත්‍ර සියල්ල එකම තැනකින් ලබා ගන්න.',
-    'hero.cta.courses': 'පාඨමාලා ගවේෂණය කරන්න',
+      'යාපනය අලවෙඩ්ඩි මූලස්ථානය කරගනිමින්, සිසුන්ට සහ දක්ෂ ගුරුවරුන්ට සජීවී Zoom පන්ති, සවිස්තර අධ්‍යයන සටහන්, පසුගිය ප්‍රශ්න පත්‍ර සහ පෞද්ගලික අධ්‍යයන මඟපෙන්වීම් සපයන පුළුල් අධ්‍යාපන වේදිකාව.',
+    'hero.cta.courses': 'අධ්‍යයන වැඩසටහන් ගවේෂණය කරන්න',
     'hero.cta.resources': 'සජීවී විශේෂාංග අත්හදා බලන්න',
     'hero.stat.courses': 'සවිස්තර විෂය නිර්දේශ',
     'hero.stat.materials': 'ප්‍රශ්න පත්‍ර සහ සටහන්',
-    'hero.stat.teachers': 'විශිෂ්ට ගුරුවරුන්',
-    'hero.stat.curriculum': 'G.C.E. A/L සහ O/L',
+    'hero.stat.teachers': 'ප්‍රවීණ ගුරුවරුන්',
+    'hero.stat.curriculum': 'මුළු දිවයිනටම',
 
     // Features Highlights
     'features.title': 'බුද්ධිමත් අධ්‍යාපන පද්ධතිය',

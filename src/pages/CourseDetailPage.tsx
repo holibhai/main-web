@@ -221,7 +221,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-600 dark:text-slate-300">
                     <MapPin className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                    <span><strong>Campus:</strong> TiT Education Main Auditorium & Online Stream</span>
+                    <span><strong>Center:</strong> TiT Education Main Auditorium & Online Stream</span>
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-600 dark:text-slate-300">
                     <Users className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />

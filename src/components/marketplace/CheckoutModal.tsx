@@ -129,14 +129,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 </p>
               </div>
 
-              {/* Strict Backend Commerce Notice */}
+              {/* Safe Payment Notice */}
               <div className="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-xs text-blue-900 dark:text-blue-200 space-y-1.5">
                 <div className="flex items-center gap-1.5 font-bold">
                   <Shield className="w-4 h-4 text-blue-700 dark:text-blue-400" />
-                  <span>Production Commerce Specification</span>
+                  <span>Safe & Instant Access</span>
                 </div>
                 <p className="text-[11px] leading-relaxed text-blue-800 dark:text-blue-300">
-                  Per TiT security policy, payment capture relies on server-authoritative Stripe webhooks. Unverified client-side downloads are disallowed.
+                  Your payment is processed through a safe, encrypted checkout. Once confirmed, digital downloads and study notes are unlocked immediately in your account.
                 </p>
               </div>
             </div>

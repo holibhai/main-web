@@ -7,7 +7,7 @@ import { Button } from '../ui/Button';
 export interface CourseCardProps {
   course: CourseItem;
   onViewDetails: (course: CourseItem) => void;
-  onApply: (course: CourseItem) => void;
+  onApply?: (course: CourseItem) => void;
 }
 
 export const CourseCard: React.FC<CourseCardProps> = ({ course, onViewDetails, onApply }) => {
@@ -89,36 +89,21 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, onViewDetails, o
           </div>
         </div>
 
-        {/* Pricing and Actions */}
+        {/* Batch Info and Action */}
         <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
-          <div>
-            <span className="text-[11px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-semibold block">Tuition</span>
-            <div className="flex items-baseline gap-1">
-              <span className="text-lg font-bold text-slate-900 dark:text-white">
-                {course.fee.currency} {course.fee.amount.toLocaleString()}
-              </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400">/{course.fee.period}</span>
-            </div>
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+            <span>Tuition Batch</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => onViewDetails(course)}
-              className="text-xs px-3"
-            >
-              Details
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => onApply(course)}
-              className="text-xs px-3.5"
-            >
-              Apply
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onViewDetails(course)}
+            className="text-xs px-3.5 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400"
+          >
+            View Details
+          </Button>
         </div>
       </div>
     </div>

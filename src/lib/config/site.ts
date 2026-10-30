@@ -9,8 +9,8 @@ export const SITE_CONFIG = {
   description:
     'Empowering school students from Grade 1 to Grade 13 across Sri Lanka with live Zoom tuition, 500+ recorded video lessons, past papers, and instant exam result tracking.',
   contact: {
-    email: 'admin@titeducation.org',
-    supportEmail: 'info@titeducation.org',
+    email: 'titeducation86@gmail.com',
+    supportEmail: 'titeducation86@gmail.com',
     phone: '+94 77 015 8446',
     whatsapp: '+94 77 015 8446',
     address: 'TiT Online Education, Alaveddy, Jaffna, Sri Lanka',

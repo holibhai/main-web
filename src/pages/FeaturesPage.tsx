@@ -93,38 +93,8 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({ onNavigate, onOpenAd
   ];
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* 1. Page Header */}
-      <section className="pt-12 sm:pt-16 bg-slate-100/60 dark:bg-slate-900/60 border-b border-slate-200/80 dark:border-slate-800 pb-12 transition-colors">
-        <Container size="md" className="text-center">
-          <Badge variant="primary" size="md" className="mb-4">
-            All-In-One School Platform
-          </Badge>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-            Everything Students & Teachers Need to Excel
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            Explore our integrated student features: <strong>School Assistant</strong>,{' '}
-            <strong>Class Discussions</strong>, <strong>Class Timetable</strong>, and{' '}
-            <strong>Practice Tests</strong>.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button variant="primary" size="md" onClick={onOpenAdmissions}>
-              Enroll in Batch
-            </Button>
-            <Button
-              variant="outline"
-              size="md"
-              onClick={() => {
-                const el = document.getElementById('platform-features');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Explore Features
-            </Button>
-          </div>
-        </Container>
-      </section>
+    <div className="space-y-16 sm:space-y-24 pt-8 sm:pt-12 pb-20">
+      {/* Platform Features Showcase */}
 
       {/* 2. THE PLATFORM FEATURES SHOWCASE (PRIMARY SECTION WITH USER SCREENSHOTS) */}
       <section id="platform-features" className="scroll-mt-20">

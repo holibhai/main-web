@@ -1,5 +1,16 @@
 import React, { useState, useMemo } from 'react';
-import { Filter, GraduationCap, RotateCcw, Search, SlidersHorizontal, Sparkles } from 'lucide-react';
+import {
+  Bell,
+  BookOpen,
+  CheckCircle2,
+  Filter,
+  GraduationCap,
+  RotateCcw,
+  Search,
+  SlidersHorizontal,
+  Sparkles,
+  Video,
+} from 'lucide-react';
 import { CourseItem, Language } from '../types';
 import { SITE_CONFIG } from '../lib/config/site';
 import { getTranslation } from '../lib/translations';
@@ -32,10 +43,15 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
   const [selectedGrade, setSelectedGrade] = useState('all');
   const [selectedFormat, setSelectedFormat] = useState('all');
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [notifiedList, setNotifiedList] = useState<Record<string, boolean>>({});
 
   const formats = ['Online Live', 'Physical Classroom', 'Hybrid'];
 
   const [selectedStage, setSelectedStage] = useState('all');
+
+  const handleNotifyToggle = (id: string) => {
+    setNotifiedList((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
@@ -92,13 +108,13 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
       <section className="pt-12 sm:pt-16 bg-slate-100/50 dark:bg-slate-900/50 border-b border-slate-200/80 dark:border-slate-800 pb-12 transition-colors">
         <Container size="md" className="text-center">
           <Badge variant="primary" size="md" className="mb-3">
-            Academic Programs & Batches
+            Academic Tuition Batches
           </Badge>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Academic Courses & Batches
+            Curriculum Batches & Syllabus
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
-            Discover syllabus-aligned programs for Primary, Junior Secondary, G.C.E. Ordinary Level (O/L), and Advanced Level (A/L) streams.
+            These are the academic curriculum batches conducted inside our tuition center. Explore syllabus outlines and timetable details below.
           </p>
         </Container>
       </section>
@@ -309,6 +325,210 @@ export const CoursesPage: React.FC<CoursesPageProps> = ({
           />
         )}
       </Container>
+
+      {/* Dedicated Paid Courses Section - COMING SOON */}
+      <section className="bg-gradient-to-b from-slate-100/70 via-indigo-50/30 to-white dark:from-slate-900/60 dark:via-indigo-950/20 dark:to-slate-950 border-t border-slate-200/80 dark:border-slate-800 py-16 transition-colors">
+        <Container>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Coming Soon · Paid Online Courses</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Paid Online Courses & Special Masterclasses
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+                Self-paced video modules, advanced past-paper revision sprints, and on-demand subject masterclasses will be available for online purchase soon.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 shrink-0">
+              <span className="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+              <span>In Development for Next Release</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Masterclass 1 */}
+            <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between shadow-xs hover:border-amber-500/40 hover:shadow-lg transition-all group">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 px-2.5 py-0.5 rounded-full">
+                    G.C.E. A/L
+                  </span>
+                  <span className="text-xs font-bold bg-amber-400/15 text-amber-600 dark:text-amber-400 border border-amber-400/30 px-2.5 py-0.5 rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-lg group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                    Combined Mathematics Masterclass
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                    100+ worked video solutions for Pure & Applied Mathematics, structured unit tests, and rapid IQ problem-solving frameworks.
+                  </p>
+                </div>
+
+                <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-2 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <Video className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                    <span>30+ Hours of 4K Recorded Lessons</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                    <span>Comprehensive PDF Practice Handbooks</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-xs text-slate-400 font-medium">Self-Paced Course</span>
+                <button
+                  type="button"
+                  onClick={() => handleNotifyToggle('al-maths')}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    notifiedList['al-maths']
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-amber-400 hover:text-amber-500'
+                  }`}
+                >
+                  {notifiedList['al-maths'] ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Notified</span>
+                    </>
+                  ) : (
+                    <>
+                      <Bell className="w-3.5 h-3.5" />
+                      <span>Notify Me</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Masterclass 2 */}
+            <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between shadow-xs hover:border-amber-500/40 hover:shadow-lg transition-all group">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 px-2.5 py-0.5 rounded-full">
+                    Grade 5 Scholarship
+                  </span>
+                  <span className="text-xs font-bold bg-amber-400/15 text-amber-600 dark:text-amber-400 border border-amber-400/30 px-2.5 py-0.5 rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-lg group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                    Scholarship IQ & Speed Drills Booster
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                    Interactive speed tests, pattern recognition mastery, and model paper explanations designed specifically for Grade 5 aspirants.
+                  </p>
+                </div>
+
+                <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-2 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <Video className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <span>Timed Mock Exams & Video Answers</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <span>Parent Progress Dashboard</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-xs text-slate-400 font-medium">Self-Paced Course</span>
+                <button
+                  type="button"
+                  onClick={() => handleNotifyToggle('g5-iq')}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    notifiedList['g5-iq']
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-amber-400 hover:text-amber-500'
+                  }`}
+                >
+                  {notifiedList['g5-iq'] ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Notified</span>
+                    </>
+                  ) : (
+                    <>
+                      <Bell className="w-3.5 h-3.5" />
+                      <span>Notify Me</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Masterclass 3 */}
+            <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between shadow-xs hover:border-amber-500/40 hover:shadow-lg transition-all group">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 px-2.5 py-0.5 rounded-full">
+                    G.C.E. O/L
+                  </span>
+                  <span className="text-xs font-bold bg-amber-400/15 text-amber-600 dark:text-amber-400 border border-amber-400/30 px-2.5 py-0.5 rounded-full">
+                    Coming Soon
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-lg group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                    Science & Maths Revision Vault
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                    Complete syllabus review videos, formula cheat sheets, past 10-year paper breakdowns, and exam tip sheets.
+                  </p>
+                </div>
+
+                <div className="pt-2 text-xs text-slate-500 dark:text-slate-400 space-y-2 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <Video className="w-3.5 h-3.5 text-purple-500 shrink-0" />
+                    <span>Full Syllabus Video Archive</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-3.5 h-3.5 text-purple-500 shrink-0" />
+                    <span>Downloadable Marking Keys</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span className="text-xs text-slate-400 font-medium">Self-Paced Course</span>
+                <button
+                  type="button"
+                  onClick={() => handleNotifyToggle('ol-vault')}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all flex items-center gap-1.5 cursor-pointer ${
+                    notifiedList['ol-vault']
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-amber-400 hover:text-amber-500'
+                  }`}
+                >
+                  {notifiedList['ol-vault'] ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Notified</span>
+                    </>
+                  ) : (
+                    <>
+                      <Bell className="w-3.5 h-3.5" />
+                      <span>Notify Me</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Mobile Filter Drawer */}
       <Drawer

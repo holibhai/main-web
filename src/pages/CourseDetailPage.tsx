@@ -195,17 +195,16 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
               </div>
 
               <div className="p-6 space-y-5">
-                {/* Tuition Details */}
+                {/* Tuition Program Details */}
                 <div>
-                  <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Tuition Fee</span>
-                  <div className="flex items-baseline gap-1 mt-0.5">
-                    <span className="text-3xl font-extrabold text-slate-900 dark:text-white">
-                      {course.fee.currency} {course.fee.amount.toLocaleString()}
+                  <span className="text-xs uppercase font-bold text-slate-400 tracking-wider">Program Type</span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+                      Internal Academic Batch
                     </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">/{course.fee.period}</span>
                   </div>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                    Includes monthly lecture packs, online portal recordings & live AI tutor access.
+                    Conducted within our tuition institute with classroom guidance, live Zoom lectures, and comprehensive syllabus notes.
                   </p>
                 </div>
 
@@ -221,11 +220,11 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-600 dark:text-slate-300">
                     <MapPin className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                    <span><strong>Center:</strong> TiT Education Main Auditorium & Online Stream</span>
+                    <span><strong>Location:</strong> Alaveddy Center & Islandwide Online</span>
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-600 dark:text-slate-300">
                     <Users className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
-                    <span><strong>Capacity:</strong> {course.availability}</span>
+                    <span><strong>Status:</strong> {course.availability}</span>
                   </div>
                 </div>
 
@@ -237,7 +236,7 @@ export const CourseDetailPage: React.FC<CourseDetailPageProps> = ({
                     onClick={() => onApply(course)}
                     className="w-full justify-center shadow-md shadow-indigo-500/20"
                   >
-                    Enquire / Apply for Intake
+                    Admissions Inquiry
                   </Button>
                 </div>
 

@@ -332,7 +332,7 @@ export const ContactLegalPage: React.FC<ContactLegalPageProps> = ({
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">4. Parental Rights</h3>
               <p>
                 Parents and legal guardians may request inspection, correction, or deletion of their child's pre-registration
-                records by contacting admissions@tit.edu.lk.
+                records by contacting {SITE_CONFIG.contact.email}.
               </p>
             </section>
           </div>
